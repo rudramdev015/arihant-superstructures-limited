@@ -3,23 +3,24 @@ import React, { useEffect, useState } from 'react';
 import arihantLogo from './arihant-logo.png'; 
 
 /**
- * ELITE NAVIGATION SYSTEM
- * Features: Anti-stretch logo, Glassmorphism, and Minimalist Mobile Overlay
+ * ELITE DYNAMIC NAVIGATION SYSTEM
+ * Features: Post-Scroll Logo Reveal, Glassmorphism, and Ultra-Responsive Layout
  */
 const Navbar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // High-performance scroll listener for dynamic UI
+  // High-performance scroll listener
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 40);
+      // Trigger reveal after 50px of scrolling
+      setIsScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Body lock to prevent scrolling when mobile menu is active
+  // Body lock for mobile menu
   useEffect(() => {
     document.body.style.overflow = showMobileMenu ? 'hidden' : 'auto';
   }, [showMobileMenu]);
@@ -45,19 +46,23 @@ const Navbar = () => {
             : 'bg-transparent'}`}
         >
           
-          {/* LOGO SECTION: Fixed container to prevent stretching */}
+          {/* LOGO SECTION: Only visible AFTER SCROLL */}
           <div className="flex-shrink-0">
-            <div className={`transition-all duration-500 ${isScrolled ? 'h-8 md:h-9' : 'h-10 md:h-14'} flex items-center`}>
+            <div className={`transition-all duration-700 ease-in-out transform ${
+              isScrolled 
+                ? 'opacity-100 translate-x-0 h-8 md:h-9' 
+                : 'opacity-0 -translate-x-10 h-10 md:h-14 pointer-events-none'
+            } flex items-center`}>
               <img 
                 src={arihantLogo} 
                 alt="Arihant Logo" 
-                className="h-full w-auto object-contain block" // Ensures zero stretching
+                className="h-full w-auto object-contain block"
               />
             </div>
           </div>
 
-          {/* DESKTOP MENU: Elite Typography */}
-          <ul className={`hidden lg:flex items-center gap-12 font-black text-[11px] uppercase tracking-[0.25em] transition-colors duration-500 
+          {/* DESKTOP MENU: Modern Typography */}
+          <ul className={`hidden lg:flex items-center gap-10 font-black text-[11px] uppercase tracking-[0.25em] transition-colors duration-500 
             ${isScrolled ? 'text-zinc-900' : 'text-white'}`}>
             {['Home', 'About', 'Projects', 'Testimonials', 'Contact'].map((item) => (
               <li key={item} className="relative group overflow-hidden">
@@ -67,7 +72,7 @@ const Navbar = () => {
             ))}
           </ul>
 
-          {/* ACTION BUTTONS (Desktop/Tablet) */}
+          {/* ACTION BUTTONS (Desktop/PC) */}
           <div className="hidden md:flex items-center gap-5">
             <a href="https://wa.me/917728888553" target="_blank" rel="noreferrer" className={`px-7 py-2.5 rounded-full font-black text-[10px] uppercase tracking-widest border transition-all ${isScrolled ? 'border-zinc-200 text-zinc-900 hover:bg-zinc-900 hover:text-white' : 'border-white/20 text-white bg-white/5 hover:bg-white hover:text-black'}`}>
               Whatsapp
@@ -77,7 +82,7 @@ const Navbar = () => {
             </button>
           </div>
 
-          {/* MOBILE TOGGLE: Responsive and Modern */}
+          {/* MOBILE TOGGLE: Responsive UI */}
           <button 
             onClick={() => setShowMobileMenu(true)}
             className={`lg:hidden p-4 rounded-2xl transition-all ${isScrolled ? 'bg-zinc-100 text-zinc-900' : 'bg-white/10 text-white backdrop-blur-md border border-white/20'}`}
@@ -87,33 +92,31 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* --- MINIMALIST MOBILE OVERLAY (Logo Removed as requested) --- */}
+      {/* --- FULL SCREEN MOBILE OVERLAY --- */}
       <div className={`fixed inset-0 z-[110] bg-zinc-950 transition-all duration-700 ease-[cubic-bezier(0.85,0,0.15,1)] 
         ${showMobileMenu ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}>
         
-        {/* Header without logo for ultra-clean focus */}
         <div className="flex justify-end items-center p-10">
           <button onClick={() => setShowMobileMenu(false)} className="p-5 bg-white/5 rounded-full text-white hover:bg-white/10 transition-all active:scale-90">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
           </button>
         </div>
         
-        {/* Navigation centered vertically */}
-        <nav className="flex flex-col items-center justify-center h-[70vh] gap-12">
+        <nav className="flex flex-col items-center justify-center h-[70vh] gap-10">
           {['Home', 'About', 'Projects', 'Testimonials', 'Contact'].map((item, index) => (
             <a 
               key={item}
               onClick={() => setShowMobileMenu(false)} 
               href={`#${item}`} 
-              className="text-white text-5xl font-black uppercase tracking-tighter hover:text-orange-600 transition-all transform active:scale-95"
+              className="text-white text-4xl font-black uppercase tracking-tighter hover:text-orange-600 transition-all transform active:scale-95"
               style={{ transitionDelay: `${index * 50}ms` }}
             >
               {item}
             </a>
           ))}
-          <div className="flex flex-col gap-4 w-full px-12 mt-6">
-             <button className="bg-orange-600 text-white py-5 rounded-3xl font-black text-sm uppercase tracking-[0.2em] shadow-2xl shadow-orange-600/20">
-              Book Visit
+          <div className="w-full px-12 mt-6">
+             <button className="w-full bg-orange-600 text-white py-5 rounded-3xl font-black text-sm uppercase tracking-[0.2em] shadow-2xl shadow-orange-600/20">
+               Book Visit
             </button>
           </div>
         </nav>

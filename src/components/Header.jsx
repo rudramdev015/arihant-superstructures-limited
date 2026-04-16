@@ -1,81 +1,121 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-import Navbar from './Navbar'
-// Direct import of your local high-quality asset
-import arihantVideo from '../components/arihant .mp4' 
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { MessageSquare, Bot } from 'lucide-react';
+import Navbar from './Navbar';
+import Preloader from './Preloader';
+import arihantVideo from '../components/arihant .mp4'; 
 
-/**
- * ELITE CINEMATIC HEADER
- * Optimized for: Mobile (100dvh), Tablet, and 4K Displays
- * Focus: Pure Visual Storytelling
- */
 const Header = () => {
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        // High-end delay to allow the brand identity to settle
+        const timer = setTimeout(() => setIsLoading(false), 4000); 
+        return () => clearTimeout(timer);
+    }, []);
+
+    const brandOrange = '#f15a24';
+
     return (
-        <header className='relative w-full h-[100dvh] flex items-center justify-center overflow-hidden bg-black' id='Header'>
-            
-            {/* --- 1. THE CINEMATIC VIDEO ENGINE --- */}
-            {/* 'object-cover' is the secret for responsiveness. 
-                It ensures the video fills the screen like a movie frame on any device.
-            */}
-            <div className="absolute inset-0 w-full h-full z-0">
-                <video 
-                    autoPlay 
-                    loop 
-                    muted 
-                    playsInline 
-                    className="w-full h-full object-cover scale-[1.02] transition-opacity duration-1000"
-                >
-                    <source src={arihantVideo} type="video/mp4" />
-                </video>
-            </div>
+        <>
+            <AnimatePresence>
+                {isLoading && <Preloader />}
+            </AnimatePresence>
 
-            {/* --- 2. PREMIUM OVERLAYS --- */}
-            {/* Soft dark vignettes to keep the UI clean and high-end */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80 z-10 pointer-events-none"></div>
-            
-            {/* Subtle grain/noise overlay for a "Film" texture (Optional but Pro) */}
-            <div className="absolute inset-0 opacity-[0.03] pointer-events-none z-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
-
-            {/* --- 3. NAVIGATION LAYER --- */}
-            <div className="absolute top-0 w-full z-50">
-                <Navbar />
-            </div>
-
-            {/* --- 4. THE ONLY VISUAL ELEMENT: SCROLL CUE --- */}
-            {/* Keeps the focus on the video but guides the user to explore */}
-            <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1, duration: 2 }}
-                className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-6 z-20"
-            >
-                {/* Minimalist Line Animation */}
-                <div className="relative w-[1px] h-24 bg-white/10 overflow-hidden">
-                    <motion.div 
-                        animate={{ 
-                            y: ["-100%", "100%"],
-                            opacity: [0, 1, 0] 
-                        }}
-                        transition={{ 
-                            repeat: Infinity, 
-                            duration: 2.5, 
-                            ease: "linear" 
-                        }}
-                        className="w-full h-1/2 bg-gradient-to-b from-transparent via-blue-500 to-transparent"
-                    ></motion.div>
-                </div>
+            <header className='relative w-full h-[100dvh] bg-[#030303] overflow-hidden' id='Header'>
                 
-                <motion.span 
-                    animate={{ opacity: [0.3, 0.6, 0.3] }}
-                    transition={{ repeat: Infinity, duration: 3 }}
-                    className="text-[8px] font-black tracking-[1.2em] text-white/40 uppercase ml-3"
-                >
-                    Explore
-                </motion.span>
-            </motion.div>
+                {/* --- CINEMATIC BACKGROUND --- */}
+                <div className="absolute inset-0 w-full h-full z-0">
+                    <video autoPlay loop muted playsInline className="w-full h-full object-cover opacity-40 md:opacity-60">
+                        <source src={arihantVideo} type="video/mp4" />
+                    </video>
+                    {/* Deep shadow overlay for premium aesthetic */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-transparent to-black" />
+                </div>
 
-        </header>
-    )
-}
+                {/* --- NAVIGATION --- */}
+                <div className="absolute top-0 w-full z-50">
+                    <Navbar />
+                </div>
 
-export default Header
+                {/* --- MOBILE-ONLY CONTENT (HIDDEN ON BIG SCREENS) --- */}
+                <div className="md:hidden relative z-20 w-full h-full flex flex-col items-center justify-center px-6">
+                    
+                    {/* Mobile Branding */}
+                    <motion.div 
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={!isLoading ? { opacity: 1, y: 0 } : {}}
+                        className="text-center mb-8"
+                    >
+                        <h1 className="text-4xl font-black text-white uppercase tracking-[0.4em] pl-[0.4em]">
+                            ARIHANT
+                        </h1>
+                        <p className={`text-[10px] tracking-[1.5em] text-[${brandOrange}] uppercase mt-3 ml-[1.5em] font-bold`}>
+                            Superstructures
+                        </p>
+                    </motion.div>
+
+                    {/* Mobile Floating Video Frame */}
+                    <motion.div 
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={!isLoading ? { opacity: 1, scale: 1 } : {}}
+                        className="relative w-full max-w-[340px] aspect-video rounded-3xl border-[1px] border-white/20 bg-black overflow-hidden shadow-[0_40px_80px_rgba(0,0,0,0.8)]"
+                    >
+                        <video autoPlay loop muted playsInline className="w-full h-full object-cover">
+                            <source src={arihantVideo} type="video/mp4" />
+                        </video>
+                    </motion.div>
+
+                    {/* Mobile Action Buttons */}
+                    <motion.div 
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={!isLoading ? { opacity: 1, y: 0 } : {}}
+                        className="mt-10 w-full max-w-sm flex flex-col gap-3"
+                    >
+                        <button className="bg-white text-black py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest">
+                            Enquire Now
+                        </button>
+                        <button className={`bg-[${brandOrange}] text-white py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest`}>
+                            Book Visit
+                        </button>
+                    </motion.div>
+                </div>
+
+                {/* --- BIG SCREEN / PC VIEW (CLEAN & MINIMAL) --- 
+                    All buttons and central text are removed here to create a "Top Class" 
+                    architectural showcase feel. */}
+                <div className="hidden md:flex absolute inset-0 z-20 items-end p-20 pointer-events-none">
+                    <motion.div 
+                        initial={{ opacity: 0, x: -50 }}
+                        animate={!isLoading ? { opacity: 1, x: 0 } : {}}
+                        className="border-l-2 border-[#f15a24] pl-6"
+                    >
+                        <h2 className="text-white text-xs tracking-[1em] uppercase opacity-50">Perspective</h2>
+                        <h3 className="text-white text-4xl font-light tracking-widest mt-2 uppercase">Jodhpur Prime</h3>
+                    </motion.div>
+                </div>
+
+                {/* --- PERSISTENT FLOATING CONTACT (TOP CLASS UX) --- */}
+                <div className="absolute bottom-10 right-8 flex flex-col gap-4 z-40">
+                    <motion.button 
+                        whileHover={{ scale: 1.1 }}
+                        className="w-14 h-14 rounded-full bg-[#25D366] flex items-center justify-center shadow-2xl"
+                    >
+                        <MessageSquare className="text-white w-6 h-6" />
+                    </motion.button>
+                    <motion.button 
+                        whileHover={{ scale: 1.1 }}
+                        className="w-14 h-14 rounded-full bg-black/60 backdrop-blur-2xl border border-white/10 flex items-center justify-center"
+                    >
+                        <Bot className={`text-[${brandOrange}] w-6 h-6`} />
+                    </motion.button>
+                </div>
+
+                {/* HUD FRAME */}
+                <div className="absolute inset-0 border-[15px] md:border-[40px] border-black pointer-events-none z-30" />
+            </header>
+        </>
+    );
+};
+
+export default Header;
