@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Contact = () => {
-  // YOUR DEPLOYED GOOGLE SCRIPT URL
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxBtFFZ1ub_P2HAGMbxu04t7GJzzAsvkYTR0yVYRW5XkdniOu56iwW7-pSxEckInDVwFg/exec";
 
   const [formData, setFormData] = useState({
@@ -79,7 +78,6 @@ const Contact = () => {
               >
                 <form onSubmit={handleDataSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10">
                   
-                  {/* Row 1 */}
                   <div className="relative group md:col-span-2">
                     <input type="text" required onChange={(e) => setFormData({...formData, Name: e.target.value})}
                       className="peer w-full bg-transparent border-b border-white/10 py-4 text-white font-bold text-2xl outline-none focus:border-orange-600 transition-all placeholder-transparent"
@@ -87,7 +85,6 @@ const Contact = () => {
                     <label className="absolute left-0 top-0 text-[10px] font-black text-zinc-600 uppercase tracking-widest transition-all peer-placeholder-shown:text-xl peer-placeholder-shown:top-4 peer-focus:top-[-15px] peer-focus:text-orange-500">Full Name *</label>
                   </div>
 
-                  {/* Row 2 */}
                   <div className="relative group">
                     <input type="tel" required onChange={(e) => setFormData({...formData, Phone: e.target.value})}
                       className="peer w-full bg-transparent border-b border-white/10 py-4 text-white font-bold text-xl outline-none focus:border-orange-600 transition-all placeholder-transparent"
@@ -102,7 +99,6 @@ const Contact = () => {
                     <label className="absolute left-0 top-0 text-[10px] font-black text-zinc-600 uppercase tracking-widest transition-all peer-placeholder-shown:text-xl peer-placeholder-shown:top-4 peer-focus:top-[-15px] peer-focus:text-orange-500">City / Residence *</label>
                   </div>
 
-                  {/* Row 3 - Dropdowns */}
                   <div className="relative">
                     <select onChange={(e) => setFormData({...formData, Interest: e.target.value})}
                       className="w-full bg-[#020408] border border-white/10 p-4 rounded-xl text-white font-bold outline-none focus:border-orange-600 appearance-none"
@@ -126,21 +122,13 @@ const Contact = () => {
                     <label className="absolute top-[-22px] left-0 text-[9px] font-black text-orange-500 uppercase">Investment Bracket</label>
                   </div>
 
-                  {/* REFINED BUTTON - NO WRAPPING */}
                   <div className="md:col-span-2 pt-6">
                     <motion.button 
                       whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}
                       type="submit" disabled={status === 'loading'}
-                      className="group w-full h-[80px] md:h-[95px] bg-[#ea580c] hover:bg-white text-white hover:text-black rounded-full font-black uppercase text-xs md:text-sm tracking-[0.4em] transition-all duration-300 shadow-2xl overflow-hidden relative"
+                      className="group w-full h-[80px] md:h-[95px] bg-[#ea580c] hover:bg-white text-white hover:text-black rounded-full font-black uppercase text-xs md:text-sm tracking-[0.4em] transition-all duration-300 shadow-2xl relative"
                     >
-                      {status === 'loading' ? (
-                        <span className="flex items-center justify-center gap-4">
-                          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                          Verifying Profile...
-                        </span>
-                      ) : (
-                        "Verify & Submit Your Profile"
-                      )}
+                      {status === 'loading' ? "Verifying Profile..." : "Verify & Submit Your Profile"}
                     </motion.button>
                   </div>
 
@@ -148,7 +136,6 @@ const Contact = () => {
 
                 </form>
               </motion.div>
-
             </div>
           )}
         </AnimatePresence>
