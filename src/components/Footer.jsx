@@ -48,7 +48,7 @@ const Footer = () => {
               Jodhpur, Rajasthan 342014
             </p>
             <p className="hover:text-white transition-colors cursor-pointer">
-              <strong>Phone:</strong> 077288 88553
+              <strong>Phone:</strong> 9001233545
             </p>
             <p><strong>Hours:</strong> Open until 6:00 PM</p>
           </div>
