@@ -9,47 +9,55 @@ import Projects from './components/Projects'
 import Testimonials from './components/Testimonials'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
-
-// 1. IMPORT THE NEW CHATBOT COMPONENT
 import Chatbot from './components/Chatbot' 
 
-/**
- * ARIHANT 2 - TOP CLASS REAL ESTATE LANDING PAGE
- * Optimized for Jodhpur High-End Residential Market
- * Features: AI Chatbot, WhatsApp Integration, and 4K Design
- */
 const App = () => {
   return (
-    <div className='w-full min-h-screen overflow-hidden bg-white selection:bg-[#1a73e8] selection:text-white scroll-smooth'>
+    <div className='w-full min-h-screen overflow-hidden bg-white selection:bg-orange-600 selection:text-white scroll-smooth'>
       
-      {/* 1. Global Navigation */}
+      {/* Fixed Navigation */}
       <Navbar />
 
-      {/* 2. Hero Section - First Impression */}
-      <Header />
+      {/* 1. Hero Section */}
+      <section id="home">
+        <Header />
+      </section>
 
-      {/* 3. High-Conversion Details (Connectivity & Bank Loans) */}
+      {/* 2. Property Details (No ID needed unless linked) */}
       <PropertyDetails />
 
-      {/* 4. Interactive 1BHK/2BHK Floor Plans */}
-      <PropertyShowcase />
+      {/* 3. Interactive Showcase */}
+      <section id="showcase">
+        <PropertyShowcase />
+      </section>
      
-      {/* 6. Viral Moments Section */}
+      {/* 4. Viral Reels */}
       <ViralReelsSection />
 
-      {/* 7. Brand Identity & Heritage */}
-      <About />
+      {/* 5. Brand Identity */}
+      <section id="about">
+        <About />
+      </section>
 
-      {/* 8. Portfolio & Trust Building */}
-      <Projects />
-      <Testimonials />
+      {/* 6. Portfolio */}
+      <section id="projects">
+        <Projects />
+      </section>
 
-      {/* 9. Lead Generation & Site Footer */}
-      <Contact />
+      {/* 7. Trust Building */}
+      <section id="testimonials">
+        <Testimonials />
+      </section>
+
+      {/* 8. Lead Generation */}
+      <section id="contact">
+        <Contact />
+      </section>
+
+      {/* 9. Footer */}
       <Footer />
 
-      {/* 10. FLOATING AI CHATBOT & WHATSAPP */}
-      {/* This component stays fixed in the bottom right corner */}
+      {/* 10. AI Chatbot Component */}
       <Chatbot />
       
     </div>
