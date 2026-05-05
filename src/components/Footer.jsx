@@ -1,124 +1,242 @@
-import React from 'react';
-// Importing the logo from the same folder as per your VS Code screenshot
+import React, { useState } from 'react';
 import arihantLogo from './arihant-logo.png';
 
-const Footer = () => {
-  return (
-    <footer className="relative bg-[#0f0f0f] text-gray-400 pt-16 overflow-hidden" id="Footer">
-      
-      {/* Top Branding Section */}
-      <div className="container mx-auto px-6 md:px-20 lg:px-32 mb-12 border-b border-zinc-800 pb-10">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-          
-          {/* Main Logo from your project */}
-          <div className="flex flex-col items-center md:items-start">
-            <img 
-              src={arihantLogo} 
-              alt="Arihant Superstructures Ltd." 
-              className="h-16 md:h-20 w-auto object-contain brightness-110" 
-            />
-            <div className="h-0.5 w-full bg-orange-500 mt-2"></div>
-            <p className="text-[10px] tracking-[0.4em] text-gray-500 mt-2 font-medium uppercase">
-              Continuing Stability
-            </p>
-          </div>
+const LINKS = {
+  Navigate: [
+    { label: 'Home', href: '#home' },
+    { label: 'Floor Plans', href: '#floorplans' },
+    { label: 'Gallery', href: '#projects' },
+    { label: 'About Us', href: '#about' },
+    { label: 'Testimonials', href: '#testimonials' },
+    { label: 'Contact', href: '#Contact' },
+  ],
+  Projects: [
+    { label: 'Arihant Anchal', href: '#home' },
+    { label: 'Arihant Adita', href: '#' },
+    { label: 'Arihant Ayati', href: '#' },
+    { label: 'Sky Penthouses', href: '#floorplans' },
+  ],
+};
 
-          {/* Social Presence */}
-          <div className="flex gap-8 items-center">
-            <a href="#" className="text-sm hover:text-orange-500 transition-all font-medium">Facebook</a>
-            <a href="#" className="text-sm hover:text-orange-500 transition-all font-medium">Instagram</a>
-            <a href="#" className="text-sm hover:text-orange-500 transition-all font-medium">YouTube</a>
+const SocialIcon = ({ href, label, children }) => (
+  <a
+    href={href}
+    target="_blank"
+    rel="noreferrer"
+    aria-label={label}
+    className="w-10 h-10 bg-white/6 hover:bg-orange-600 border border-white/10 hover:border-orange-600 rounded-xl flex items-center justify-center text-zinc-400 hover:text-white transition-all duration-300"
+  >
+    {children}
+  </a>
+);
+
+const Footer = () => {
+  const [email, setEmail] = useState('');
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubscribe = (e) => {
+    e.preventDefault();
+    if (email.trim()) {
+      setSubscribed(true);
+      setEmail('');
+    }
+  };
+
+  const scrollToContact = () => {
+    const el = document.getElementById('Contact');
+    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+  };
+
+  return (
+    <footer className="relative bg-[#080808] text-zinc-400 overflow-hidden" id="Footer">
+
+      {/* Ambient glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-orange-600/4 blur-[120px] rounded-full pointer-events-none" />
+
+      {/* ── PRE-FOOTER CTA BAND ── */}
+      <div className="relative border-b border-zinc-800/60">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-16 lg:px-24 py-14 flex flex-col md:flex-row items-center justify-between gap-8">
+          <div>
+            <p className="text-orange-500 font-black text-[10px] uppercase tracking-[0.5em] mb-3">Limited Units Remaining</p>
+            <h3 className="text-white font-black text-3xl md:text-4xl tracking-tighter leading-tight">
+              Ready to secure your<br className="hidden md:block" /> dream home in Jodhpur?
+            </h3>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+            <button
+              onClick={scrollToContact}
+              className="px-8 py-4 bg-orange-600 hover:bg-orange-500 text-white rounded-2xl font-black text-[11px] uppercase tracking-widest transition-all shadow-xl shadow-orange-600/20 active:scale-95 whitespace-nowrap"
+            >
+              Book Site Visit
+            </button>
+            <a
+              href="https://wa.me/919001233545"
+              target="_blank"
+              rel="noreferrer"
+              className="px-8 py-4 bg-[#25D366]/15 hover:bg-[#25D366] border border-[#25D366]/30 hover:border-[#25D366] text-[#25D366] hover:text-white rounded-2xl font-black text-[11px] uppercase tracking-widest transition-all active:scale-95 whitespace-nowrap text-center"
+            >
+              WhatsApp Now
+            </a>
           </div>
         </div>
       </div>
 
-      {/* Grid Content: Info, Links, Newsletter */}
-      <div className="container mx-auto px-6 md:px-20 lg:px-32 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 relative z-10">
-        
-        {/* Contact Info */}
-        <div>
-          <h3 className="text-white text-sm font-bold tracking-widest uppercase mb-6 flex items-center gap-2">
-            <span className="w-2 h-2 bg-orange-600 rounded-full"></span>
-            Contact Details
-          </h3>
-          <div className="space-y-4 text-sm leading-relaxed border-l border-zinc-800 pl-4">
-            <p>
-              <strong className="text-white">Arihant Anchal</strong><br />
-              Near Dali Bai Circle, Jaisalmer Bypass Road, <br />
-              Jodhpur, Rajasthan 342014
-            </p>
-            <p className="hover:text-white transition-colors cursor-pointer">
-              <strong>Phone:</strong> 9001233545
-            </p>
-            <p><strong>Hours:</strong> Open until 6:00 PM</p>
+      {/* ── MAIN FOOTER GRID ── */}
+      <div className="max-w-[1400px] mx-auto px-6 md:px-16 lg:px-24 pt-16 pb-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 relative z-10">
+
+        {/* Brand column */}
+        <div className="sm:col-span-2 lg:col-span-1">
+          <img src={arihantLogo} alt="Arihant Superstructures" className="h-14 w-auto brightness-110 mb-4" />
+          <div className="w-12 h-0.5 bg-orange-500 mb-5" />
+          <p className="text-zinc-500 text-sm leading-relaxed mb-6 max-w-xs">
+            Building dreams into reality since 1994. Jodhpur's most trusted luxury real estate developer.
+          </p>
+          {/* Socials */}
+          <div className="flex gap-2 mb-6">
+            <SocialIcon href="#" label="Facebook">
+              <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </SocialIcon>
+            <SocialIcon href="#" label="Instagram">
+              <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </SocialIcon>
+            <SocialIcon href="#" label="YouTube">
+              <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+            </SocialIcon>
+          </div>
+          {/* Certifications */}
+          <div className="flex gap-2 flex-wrap">
+            {['ISO', 'JDA', 'RERA'].map((cert) => (
+              <span key={cert} className="px-3 py-1 bg-orange-600/10 border border-orange-600/20 rounded-lg text-orange-500 text-[10px] font-black uppercase tracking-wider">
+                {cert}
+              </span>
+            ))}
           </div>
         </div>
 
-        {/* Quick Links */}
+        {/* Navigate */}
         <div>
-          <h3 className="text-white text-sm font-bold tracking-widest uppercase mb-6 flex items-center gap-2">
-            <span className="w-2 h-2 bg-orange-600 rounded-full"></span>
-            Navigation
-          </h3>
-          <ul className="space-y-3 text-sm border-l border-zinc-800 pl-4">
-            <li><a href="#Header" className="hover:text-orange-500 transition-all">Home</a></li>
-            <li><a href="#About" className="hover:text-orange-500 transition-all">About Us</a></li>
-            <li><a href="#" className="hover:text-orange-500 transition-all">Arihant Adita</a></li>
-            <li><a href="#" className="hover:text-orange-500 transition-all">Arihant Ayati</a></li>
+          <h4 className="text-white text-xs font-black tracking-[0.3em] uppercase mb-6 flex items-center gap-2">
+            <span className="w-3 h-0.5 bg-orange-600" />
+            Navigate
+          </h4>
+          <ul className="space-y-3">
+            {LINKS.Navigate.map(({ label, href }) => (
+              <li key={label}>
+                <a href={href} className="text-sm text-zinc-500 hover:text-orange-500 hover:translate-x-1 inline-block transition-all duration-200 font-medium">
+                  {label}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
 
-        {/* Newsletter */}
-        <div className="lg:col-span-1">
-          <h3 className="text-white text-sm font-bold tracking-widest uppercase mb-6 flex items-center gap-2">
-            <span className="w-2 h-2 bg-orange-600 rounded-full"></span>
-            Newsletter
-          </h3>
-          <div className="flex flex-col gap-3">
-            <p className="text-xs">Subscribe for the latest property updates in Jodhpur.</p>
-            <input 
-              type="email" 
-              placeholder="Enter Email" 
-              className="bg-zinc-900 border border-zinc-800 rounded px-4 py-3 text-sm focus:outline-none focus:border-orange-500 transition-all text-white"
-            />
-            <button className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 rounded text-[10px] uppercase tracking-[0.2em] transition-all">
-              Submit
-            </button>
+        {/* Projects */}
+        <div>
+          <h4 className="text-white text-xs font-black tracking-[0.3em] uppercase mb-6 flex items-center gap-2">
+            <span className="w-3 h-0.5 bg-orange-600" />
+            Our Projects
+          </h4>
+          <ul className="space-y-3">
+            {LINKS.Projects.map(({ label, href }) => (
+              <li key={label}>
+                <a href={href} className="text-sm text-zinc-500 hover:text-orange-500 hover:translate-x-1 inline-block transition-all duration-200 font-medium">
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          {/* Contact snippet */}
+          <div className="mt-8 space-y-3">
+            <h4 className="text-white text-xs font-black tracking-[0.3em] uppercase flex items-center gap-2">
+              <span className="w-3 h-0.5 bg-orange-600" />
+              Contact
+            </h4>
+            <a href="tel:+919001233545" className="flex items-center gap-2 text-sm text-zinc-500 hover:text-orange-500 transition-colors font-medium">
+              <svg className="w-3.5 h-3.5 text-orange-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              +91 90012 33545
+            </a>
+            <p className="text-xs text-zinc-600 leading-relaxed pl-5">
+              Near Dali Bai Circle,<br />
+              Jaisalmer Bypass Road,<br />
+              Jodhpur, Rajasthan 342014
+            </p>
+            <a
+              href="https://maps.google.com/?q=Arihant+Anchal+Jodhpur"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 text-[10px] text-orange-500 hover:text-orange-400 font-black uppercase tracking-wider transition-colors pl-5"
+            >
+              Open in Maps
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
           </div>
         </div>
 
-        {/* RERA Section */}
+        {/* Newsletter */}
         <div>
-          <h3 className="text-white text-sm font-bold tracking-widest uppercase mb-6 flex items-center gap-2">
-            <span className="w-2 h-2 bg-orange-600 rounded-full"></span>
-            Certified
-          </h3>
-          <div className="p-4 bg-zinc-900/30 rounded border border-zinc-800/50">
-            <p className="text-[11px] leading-relaxed italic text-gray-500">
+          <h4 className="text-white text-xs font-black tracking-[0.3em] uppercase mb-6 flex items-center gap-2">
+            <span className="w-3 h-0.5 bg-orange-600" />
+            Stay Updated
+          </h4>
+          <p className="text-zinc-500 text-sm mb-5 leading-relaxed">
+            Get exclusive launch prices and property updates directly in your inbox.
+          </p>
+          {subscribed ? (
+            <div className="bg-orange-600/10 border border-orange-600/20 rounded-2xl p-5 text-center">
+              <p className="text-orange-500 font-black text-sm uppercase tracking-wider">You're on the list!</p>
+              <p className="text-zinc-500 text-xs mt-1">We'll be in touch soon.</p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubscribe} className="flex flex-col gap-3">
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="your@email.com"
+                className="bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-orange-500 transition-colors"
+              />
+              <button
+                type="submit"
+                className="bg-orange-600 hover:bg-orange-500 text-white font-black py-3 rounded-xl text-[10px] uppercase tracking-[0.3em] transition-colors active:scale-95"
+              >
+                Subscribe
+              </button>
+            </form>
+          )}
+
+          {/* RERA notice */}
+          <div className="mt-6 p-4 bg-zinc-900/40 border border-zinc-800/50 rounded-2xl">
+            <p className="text-zinc-600 text-[10px] leading-relaxed italic">
               Arihant Anchal offers supreme lifestyle at an affordable price in Jodhpur.
             </p>
-            <p className="text-orange-500 text-[10px] mt-4 font-bold tracking-tight">
+            <p className="text-orange-500 text-[10px] mt-3 font-black tracking-wide">
               RERA: RAJ/P/2017/322
             </p>
           </div>
         </div>
       </div>
 
-      {/* Visual Building Silhouette (The 'Wow' Factor) */}
-      <div className="mt-16 opacity-[0.05] pointer-events-none select-none">
-        <svg viewBox="0 0 1200 120" className="w-full h-auto fill-current text-white">
-          <path d="M0,120 L0,100 L30,100 L30,60 L60,60 L60,110 L90,110 L90,40 L120,40 L120,120 L150,120 L150,20 L220,20 L220,120 L300,120 L300,70 L350,70 L350,40 L400,40 L400,120 L500,120 L500,10 L580,10 L580,120 L700,120 L700,50 L750,50 L750,120 L900,120 L900,30 L1000,30 L1000,120 L1100,120 L1100,60 L1200,60 L1200,120 Z" />
+      {/* Building silhouette */}
+      <div className="opacity-[0.04] pointer-events-none select-none -mb-1">
+        <svg viewBox="0 0 1200 100" className="w-full fill-white">
+          <path d="M0,100 L0,80 L40,80 L40,50 L80,50 L80,90 L120,90 L120,30 L160,30 L160,100 L200,100 L200,15 L280,15 L280,100 L360,100 L360,55 L420,55 L420,30 L480,30 L480,100 L600,100 L600,8 L690,8 L690,100 L800,100 L800,40 L870,40 L870,100 L1000,100 L1000,25 L1100,25 L1100,100 L1150,100 L1150,50 L1200,50 L1200,100 Z" />
         </svg>
       </div>
 
-      {/* Bottom Bar */}
-      <div className="bg-[#050505] py-8 relative z-20">
-        <div className="container mx-auto px-6 text-center">
-          <p className="text-[10px] text-gray-600 tracking-[0.3em] uppercase mb-2">
-            Copyright 2026 © Arihant Superstructures Ltd. | All Rights Reserved.
+      {/* Bottom bar */}
+      <div className="bg-[#040404] border-t border-zinc-900/80">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-16 lg:px-24 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-[10px] text-zinc-700 tracking-[0.25em] uppercase text-center sm:text-left">
+            Copyright 2026 © Arihant Superstructures Ltd. All Rights Reserved.
           </p>
-          <p className="text-[9px] text-zinc-800 tracking-[0.1em]">
-            Developed by <span className="text-zinc-700">Bawra Digital</span>
+          <p className="text-[9px] text-zinc-800 tracking-wider">
+            Developed by <span className="text-zinc-700 font-bold">Bawra Digital</span>
           </p>
         </div>
       </div>

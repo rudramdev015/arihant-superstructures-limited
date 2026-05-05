@@ -2,54 +2,64 @@ import React from 'react'
 import Navbar from './components/Navbar'
 import Header from './components/Header'
 import PropertyDetails from './components/PropertyDetails'
+import FloorPlans from './components/FloorPlans'
 import PropertyShowcase from './components/PropertyShowcase'
 import ViralReelsSection from './components/ViralReelsSection'
 import About from './components/About'
 import Projects from './components/Projects'
 import Testimonials from './components/Testimonials'
+import SiteVisit from './components/SiteVisit'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
-import Chatbot from './components/Chatbot' 
+import Chatbot from './components/Chatbot'
 
 const App = () => {
   return (
-    <div className='w-full min-h-screen overflow-hidden bg-white selection:bg-orange-600 selection:text-white scroll-smooth'>
-      
+    <div className='w-full min-h-screen overflow-hidden bg-white scroll-smooth'>
+
       {/* Fixed Navigation */}
       <Navbar />
 
-      {/* 1. Hero Section */}
+      {/* 1. Hero */}
       <section id="home">
         <Header />
       </section>
 
-      {/* 2. Property Details (No ID needed unless linked) */}
+      {/* 2. Property Overview */}
       <PropertyDetails />
 
-      {/* 3. Interactive Showcase */}
+      {/* 3. Floor Plans */}
+      <section id="floorplans">
+        <FloorPlans />
+      </section>
+
+      {/* 4. Interactive Layout Showcase */}
       <section id="showcase">
         <PropertyShowcase />
       </section>
-     
-      {/* 4. Viral Reels */}
+
+      {/* 4. Social Reels */}
       <ViralReelsSection />
 
-      {/* 5. Brand Identity */}
+      {/* 5. Brand & CMD */}
       <section id="about">
         <About />
       </section>
 
-      {/* 6. Portfolio */}
+      {/* 6. Gallery */}
       <section id="projects">
         <Projects />
       </section>
 
-      {/* 7. Trust Building */}
+      {/* 7. Testimonials */}
       <section id="testimonials">
         <Testimonials />
       </section>
 
-      {/* 8. Lead Generation */}
+      {/* 8. Free Site Visit CTA */}
+      <SiteVisit />
+
+      {/* 9. Contact */}
       <section id="contact">
         <Contact />
       </section>
@@ -57,9 +67,9 @@ const App = () => {
       {/* 9. Footer */}
       <Footer />
 
-      {/* 10. AI Chatbot Component */}
+      {/* Floating AI Chatbot */}
       <Chatbot />
-      
+
     </div>
   )
 }

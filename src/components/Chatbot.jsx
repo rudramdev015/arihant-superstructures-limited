@@ -1,223 +1,361 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  FaWhatsapp, FaRobot, FaTimes, FaPaperPlane, 
-  FaGem, FaMapMarkerAlt, FaHome, FaShieldAlt, 
-  FaUserTie, FaBuilding, FaWallet, FaCheckCircle 
-} from 'react-icons/fa';
+import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { MessageSquare, X, Send, Users, Crown, ShieldCheck, Layout, Phone, MapPin, Calculator, Home, Star } from "lucide-react";
 
-/**
- * ARIHANT ANCHAL - ELITE CONCIERGE SYSTEM (VERSION 5.0)
- * Top-Class Design | Human-Like Logic | Fully Responsive
- */
+const CONFIG = {
+  PHONE: "+91 9001233545",
+  WA_LINK: `https://wa.me/919001233545?text=Ram%20Ram!%20I%20am%20interested%20in%20Arihant%20Anchal.%20Please%20share%20details.`,
+  CALL_LINK: "tel:+919001233545",
+};
+
+const QUICK_CHIPS = [
+  { label: "💰 Price List", query: "price list" },
+  { label: "🏠 2 BHK Plans", query: "2 bhk plans" },
+  { label: "👑 4 BHK Luxury", query: "4 bhk luxury" },
+  { label: "📍 Location", query: "location" },
+  { label: "🏊 Amenities", query: "amenities" },
+  { label: "📅 Book Visit", query: "book visit" },
+  { label: "🧮 EMI Calc", query: "emi calculator" },
+  { label: "🤝 Offer", query: "current offer" },
+];
+
+const KB = [
+  {
+    patterns: /(hi|hello|hey|ram|namaste|hii|helo)/i,
+    reply: () => {
+      const h = new Date().getHours();
+      const greet = h < 12 ? "Shubh Prabhat 🌅" : h < 17 ? "Shubh Dopahar ☀️" : "Shubh Sandhya 🌆";
+      return `Ram Ram! 🙏 ${greet}\n\nWelcome to **Arihant Anchal** – Jodhpur's most awaited luxury residential township.\n\n✨ Luxury 2 BHK & 4 BHK homes\n📍 Dali Bai Circle, Jodhpur\n💰 Starting ₹45 Lakhs*\n\nHow can I assist you today?`;
+    },
+  },
+  {
+    patterns: /(price|cost|budget|rate|lakh|pricing|kitna|kitne)/i,
+    reply: () =>
+      `💰 **PRICING (2026 Launch)**\n\n🏠 2 BHK Premium — ₹45L – ₹55L*\n👑 4 BHK Luxury — ₹90L – ₹1.2Cr*\n🌟 Sky Penthouse — On Request\n\n✅ No Hidden Charges\n✅ JDA Approved\n✅ Flexi Payment Plans\n\nWould you like a **detailed brochure** on WhatsApp?`,
+  },
+  {
+    patterns: /(2 ?bhk|two bhk|2bhk)/i,
+    reply: () =>
+      `🏠 **2 BHK PREMIUM RESIDENCES**\n\n📐 Carpet Area: 750 – 900 sq.ft\n🪟 Cross-Ventilated Rooms\n🏗 Premium Flooring & Fittings\n🔑 Vastu Compliant\n💰 Price: ₹45L – ₹55L*\n\n📋 Available in A, B & C wing.\nShall I WhatsApp you the floor plans?`,
+  },
+  {
+    patterns: /(4 ?bhk|four bhk|4bhk|penthouse|luxury)/i,
+    reply: () =>
+      `👑 **4 BHK LUXURY RESIDENCES**\n\n📐 Carpet Area: 1500 – 1800 sq.ft\n🛁 3 Premium Bathrooms\n🍳 Designer Modular Kitchen\n🌆 Panoramic City Views\n💰 Price: ₹90L – ₹1.2Cr*\n\nOnly **LIMITED UNITS** remaining!\nBook a private viewing today.`,
+  },
+  {
+    patterns: /(visit|appointment|book|schedule|dekna|dekhna)/i,
+    reply: () =>
+      `📅 **BOOK A FREE SITE VISIT**\n\n🚗 FREE Car Pickup from your location\n🎁 Special gift on visit\n⏰ Timings: 10 AM – 6 PM\n📍 Dali Bai Circle, Jodhpur\n\nWould you prefer **Today** or **Tomorrow**?\nOr call us directly: +91 90012 33545`,
+  },
+  {
+    patterns: /(location|map|address|where|kahan|dali|jaisalmer bypass)/i,
+    reply: () =>
+      `📍 **ARIHANT ANCHAL LOCATION**\n\nNear Dali Bai Circle,\nJaisalmer Bypass Road,\nJodhpur, Rajasthan 342014\n\n🚗 10 min from Jodhpur Airport\n🏥 5 min from AIIMS Jodhpur\n🛒 3 min from City Mall\n🚉 Close to Jodhpur Railway Station\n\nGoogle Maps link sent on WhatsApp!`,
+  },
+  {
+    patterns: /(ameniti|gym|pool|park|club|facility|facilities|swimming)/i,
+    reply: () =>
+      `🏊 **WORLD-CLASS AMENITIES**\n\n🏋️ Indoor Gym & Yoga Studio\n🏊 Rooftop Swimming Pool\n🎮 Kids Play Zone\n🌿 Landscaped Gardens\n🔒 24/7 CCTV Security\n🅿️ Dedicated Parking\n🏸 Badminton & Indoor Games\n☕ Community Clubhouse\n\n600+ Happy Families already call this home!`,
+  },
+  {
+    patterns: /(emi|loan|finance|bank|installment|pay)/i,
+    reply: () =>
+      `🧮 **EMI CALCULATOR (Approx)**\n\n💰 For ₹45 Lakh @ 8.5% / 20 Yrs\n→ EMI: ~₹39,000/month\n\n💰 For ₹60 Lakh @ 8.5% / 20 Yrs\n→ EMI: ~₹52,000/month\n\n🏦 Tie-ups with SBI, HDFC, ICICI\n✅ Home Loan assistance included\n\nShall I connect you with our finance team?`,
+  },
+  {
+    patterns: /(offer|discount|deal|scheme|launch price|early bird|prebook)/i,
+    reply: () =>
+      `🎁 **EXCLUSIVE LAUNCH OFFER**\n\n⭐ Pre-Launch Price — LIVE NOW\n🎀 FREE Modular Kitchen (limited)\n💎 Guaranteed Returns on Rental\n🚗 FREE Parking Space\n📜 Zero Stamp Duty on Select Units\n⏳ Offer Valid for **FEW UNITS ONLY**\n\nBook NOW to lock your price! 🔒`,
+  },
+  {
+    patterns: /(rera|approved|legal|jda|certificate)/i,
+    reply: () =>
+      `✅ **LEGAL & APPROVALS**\n\n🏛 RERA Registered: RAJ/P/2017/322\n🏛 JDA Approved Layout\n📜 Clear Title & Documentation\n🔍 ISO Certified Quality\n🏗 30+ Years of Trust\n\nArihant Superstructures — Building Trust Since 1994.`,
+  },
+  {
+    patterns: /(contact|call|phone|number|whatsapp)/i,
+    reply: () =>
+      `📞 **CONTACT US**\n\n📱 Call / WhatsApp: +91 90012 33545\n⏰ Hours: 10 AM – 7 PM (Mon–Sun)\n\nOur sales team will call you within **30 minutes** of your inquiry.\n\nWould you like us to call you now?`,
+  },
+];
+
+const processQuery = (q) => {
+  for (const entry of KB) {
+    if (entry.patterns.test(q)) return entry.reply();
+  }
+  return `Thank you for your question! 🙏\n\nI'll connect you with our sales expert immediately.\n\nYou can also:\n1️⃣ Call: +91 90012 33545\n2️⃣ WhatsApp us directly\n3️⃣ Book a free site visit\n\nWhat would you like to do?`;
+};
+
+const BotMessage = ({ text }) => (
+  <div className="flex justify-start">
+    <div className="max-w-[88%] px-4 py-3 rounded-2xl rounded-tl-none text-sm leading-relaxed bg-white text-slate-800 border border-slate-100 shadow-sm">
+      {text.split("\n").map((line, i) => (
+        <p key={i} className={`${i > 0 ? "mt-1" : ""} ${line.startsWith("**") && line.endsWith("**") ? "font-black text-slate-900 text-[13px]" : ""}`}>
+          {line.replace(/\*\*(.*?)\*\*/g, "$1")}
+        </p>
+      ))}
+    </div>
+  </div>
+);
+
+const UserMessage = ({ text }) => (
+  <div className="flex justify-end">
+    <div className="max-w-[80%] px-4 py-3 rounded-2xl rounded-tr-none text-sm leading-relaxed bg-orange-600 text-white shadow-md">
+      <p>{text}</p>
+    </div>
+  </div>
+);
+
+const TypingDots = () => (
+  <div className="flex justify-start">
+    <div className="flex gap-1.5 bg-white border border-slate-100 px-4 py-3 rounded-2xl rounded-tl-none shadow-sm">
+      {[0, 150, 300].map((delay) => (
+        <span
+          key={delay}
+          className="w-2 h-2 bg-orange-400 rounded-full animate-bounce"
+          style={{ animationDelay: `${delay}ms` }}
+        />
+      ))}
+    </div>
+  </div>
+);
+
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
-  const [messages, setMessages] = useState([
-    { 
-      role: 'bot', 
-      text: 'Ram Ram! 🙏 Welcome to Arihant Anchal, Jodhpur. I am your Executive Assistant. How can I help you find your 1BHK or 2BHK signature home today?' 
-    }
-  ]);
-  const [input, setInput] = useState('');
+  const [messages, setMessages] = useState([]);
+  const [input, setInput] = useState("");
+  const [hasUnread, setHasUnread] = useState(true);
   const scrollRef = useRef(null);
+  const inputRef = useRef(null);
 
-  // --- ELITE CONFIGURATION ---
-  const CONFIG = {
-    PHONE: "919001233545",
-    PRICE: "₹45 Lakhs*",
-    LOCATION: "Dali Bai Circle, Jaisalmer Bypass Road, Jodhpur",
-    WHATSAPP_LINK: `https://wa.me/919001233545?text=${encodeURIComponent("Hi! I'm interested in Arihant Anchal. Please send me the brochure and price list for units starting at 45L.")}`
-  };
-
-  // --- ADVANCED AI LOGIC (HUMAN-LIKE ERROR HANDLING) ---
-  const processAIResponse = (userInput) => {
-    const t = userInput.toLowerCase().trim();
-
-    // 1. FUZZY PRICE LOGIC (Handles: price, prce, rate, cost, kitna, budget)
-    if (t.includes("price") || t.includes("prce") || t.includes("rate") || t.includes("cost") || t.includes("kitna") || t.includes("budget") || t.includes("lakh") || t.includes("lac")) {
-      return `Our premium residences at Arihant Anchal start from ${CONFIG.PRICE}. This is an exclusive price for Jodhpur's most connected location. Would you like a detailed payment plan or current availability?`;
-    }
-
-    // 2. FUZZY LOCATION LOGIC (Handles: where, address, map, locatn, kahan)
-    if (t.includes("where") || t.includes("location") || t.includes("address") || t.includes("map") || t.includes("kahan") || t.includes("locatn") || t.includes("rasta")) {
-      return `📍 Arihant Anchal is perfectly situated at Dali Bai Circle on the Jaisalmer Bypass Road. \n\n• AIIMS: 12 Mins \n• Railway Station: 18 Mins \n• DPS School: 5 Mins \n• High Court: 15 Mins. It is the fastest-growing area of Jodhpur!`;
-    }
-
-    // 3. CONFIGURATION (Handles: bhk, flat, size, room, sqft)
-    if (t.includes("bhk") || t.includes("flat") || t.includes("size") || t.includes("room") || t.includes("sqft") || t.includes("square")) {
-      return "We offer ultra-luxury 1BHK and 2BHK units. Every flat is Vastu compliant with premium ventilation and high-end floorings. Which configuration suits your family better?";
-    }
-
-    // 4. POSSESSION & TIME (Handles: ready, move, time, kab, construction)
-    if (t.includes("ready") || t.includes("move") || t.includes("possession") || t.includes("kab") || t.includes("time") || t.includes("construction")) {
-      return "We have 'Ready to Move' units available! Many happy families have already shifted. You can visit today and select your actual flat. 🏠";
-    }
-
-    // 5. AMENITIES (Handles: gym, park, security, water, facility)
-    if (t.includes("gym") || t.includes("park") || t.includes("facility") || t.includes("amenity") || t.includes("security") || t.includes("water")) {
-      return "Arihant Anchal features 5-star facilities: \n✅ Fully Equipped Gym \n✅ Community Temple \n✅ Modern Library \n✅ Kids Play Area \n✅ 24/7 CCTV & Gated Security \n✅ Dedicated Stilt Parking";
-    }
-
-    // 6. LOAN & LEGAL (Handles: bank, loan, emi, rera, jda, legal)
-    if (t.includes("bank") || t.includes("loan") || t.includes("emi") || t.includes("rera") || t.includes("jda") || t.includes("legal") || t.includes("paper")) {
-      return "Yes, we are 100% RERA Registered and JDA Approved. 🛡️ You can get home loans from all leading banks like SBI, HDFC, and ICICI at attractive rates.";
-
-    }
-
-    // 7. CULTURAL GREETINGS (Handles: ram ram, hi, hello, khamma ghani)
-    if (t.includes("ram ram") || t.includes("khamma ghani")) return "Ram Ram! Sa. 🙏 It is an honor to serve you. How can I help you join our premium community?";
-    if (t.includes("hi") || t.includes("hello") || t.includes("hey")) return "Hello! 👋 Welcome to Arihant Anchal. Looking for a premium investment or a new home?";
-
-    // 8. SITE VISIT (Handles: visit, see, meet, appointment)
-    if (t.includes("visit") || t.includes("see") || t.includes("appointment") || t.includes("dekho")) {
-      return "We'd love to host you! 🚗 Our site is open from 10 AM to 7 PM daily. Please click the WhatsApp button below to share your number, and we will book your VIP tour.";
-    }
-
-    // 9. WHY ARIHANT (Handles: why, best, better)
-    if (t.includes("why") || t.includes("best") || t.includes("better")) {
-      return "Arihant is synonymous with trust in Jodhpur. We offer the best price-to-quality ratio, high construction standards, and the most strategic location for appreciation. 📈";
-    }
-
-    // FALLBACK
-    return "I'm sorry, I didn't quite catch that. Would you like to know about the Price (₹45L+), Location (Dali Bai Circle), or schedule a Site Visit? Or you can directly chat with our Sales Head on WhatsApp (+91 9001233545).";
-  };
-
-  const handleSend = (e) => {
-    e.preventDefault();
-    if (!input.trim()) return;
-
-    const userMsg = { role: 'user', text: input };
-    setMessages(prev => [...prev, userMsg]);
-    setInput('');
+  const sendMessage = (text) => {
+    if (!text.trim()) return;
+    setMessages((prev) => [...prev, { role: "user", text }]);
+    setInput("");
     setIsTyping(true);
-
     setTimeout(() => {
       setIsTyping(false);
-      setMessages(prev => [...prev, { role: 'bot', text: processAIResponse(input) }]);
-    }, 800);
+      setMessages((prev) => [...prev, { role: "bot", text: processQuery(text) }]);
+    }, 900 + Math.random() * 400);
   };
 
-  useEffect(() => { scrollRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [messages]);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    sendMessage(input);
+  };
+
+  useEffect(() => {
+    const h = new Date().getHours();
+    const greet = h < 12 ? "Shubh Prabhat 🌅" : h < 17 ? "Shubh Dopahar ☀️" : "Shubh Sandhya 🌆";
+    setMessages([
+      {
+        role: "bot",
+        text: `Ram Ram! 🙏 ${greet}\n\nWelcome to **Arihant Anchal** – Jodhpur's finest luxury residences.\n\n🏠 2 BHK starting ₹45L | 4 BHK from ₹90L\n📍 Dali Bai Circle, Jodhpur\n\nHow can I help you today?`,
+      },
+    ]);
+  }, []);
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, isTyping]);
+
+  useEffect(() => {
+    if (isOpen) {
+      setHasUnread(false);
+      setTimeout(() => inputRef.current?.focus(), 300);
+    }
+  }, [isOpen]);
 
   return (
-    <div className="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-[2000] flex flex-col items-end gap-3 md:gap-4 font-sans">
-      
-      {/* --- ELITE CHAT WINDOW --- */}
+    <div className="fixed bottom-4 right-3 md:bottom-8 md:right-8 z-[9999] pointer-events-none font-sans">
+
+      {/* ── CHAT WINDOW ── */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div 
-            initial={{ opacity: 0, y: 40, scale: 0.9, filter: 'blur(10px)' }}
-            animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
-            exit={{ opacity: 0, y: 40, scale: 0.9, filter: 'blur(10px)' }}
-            className="w-[90vw] sm:w-[400px] md:w-[450px] h-[75vh] md:h-[650px] bg-white rounded-[2.5rem] shadow-[0_30px_100px_rgba(0,0,0,0.25)] border border-slate-100 flex flex-col mb-2 overflow-hidden"
+          <motion.div
+            initial={{ opacity: 0, scale: 0.85, y: 40 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.85, y: 40 }}
+            transition={{ type: "spring", stiffness: 300, damping: 28 }}
+            className="pointer-events-auto flex flex-col bg-white border border-slate-200/80 shadow-[0_30px_80px_rgba(0,0,0,0.18)] rounded-3xl overflow-hidden mb-4
+              w-[calc(100vw-24px)] sm:w-[390px] md:w-[420px]
+              h-[min(640px,82dvh)]"
           >
-            {/* Premium Header */}
-            <div className="bg-[#0f172a] p-6 md:p-8 text-white relative">
-              <div className="flex justify-between items-center">
-                <div className="flex items-center gap-4">
+            {/* ── HEADER ── */}
+            <div className="bg-gradient-to-r from-[#0f172a] to-[#1e293b] px-5 py-4 text-white shrink-0">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
                   <div className="relative">
-                    <div className="w-12 h-12 md:w-14 md:h-14 bg-orange-600 rounded-2xl flex items-center justify-center shadow-lg border border-white/20">
-                      <FaGem size={26} className="text-white" />
+                    <div className="w-11 h-11 bg-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-orange-500/30">
+                      <Crown size={20} className="text-white" />
                     </div>
-                    <span className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 border-4 border-[#0f172a] rounded-full animate-pulse"></span>
+                    <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-green-400 rounded-full border-2 border-[#0f172a]" />
                   </div>
                   <div>
-                    <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-orange-500 mb-1">Executive Concierge</h3>
-                    <p className="text-xl font-bold tracking-tight">Arihant Anchal</p>
+                    <h3 className="font-black text-[15px] leading-tight">Arihant Anchal</h3>
+                    <p className="text-[10px] text-slate-400 font-semibold tracking-widest uppercase">Sales Concierge • Online</p>
                   </div>
                 </div>
-                <button onClick={() => setIsOpen(false)} className="bg-white/10 p-3 rounded-2xl hover:bg-white/20 transition-all"><FaTimes size={18} /></button>
+                <div className="flex items-center gap-2">
+                  <a
+                    href={CONFIG.CALL_LINK}
+                    className="w-9 h-9 bg-white/10 hover:bg-green-500/20 rounded-xl flex items-center justify-center transition-colors"
+                    title="Call Us"
+                  >
+                    <Phone size={16} className="text-white" />
+                  </a>
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className="w-9 h-9 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition-colors"
+                  >
+                    <X size={17} />
+                  </button>
+                </div>
+              </div>
+
+              {/* Stats Strip */}
+              <div className="mt-4 grid grid-cols-3 gap-2">
+                {[
+                  { icon: <Users size={12} />, label: "600+ Residents" },
+                  { icon: <ShieldCheck size={12} />, label: "JDA Approved" },
+                  { icon: <Layout size={12} />, label: "2 & 4 BHK" },
+                ].map(({ icon, label }) => (
+                  <div key={label} className="bg-white/8 border border-white/10 rounded-xl py-1.5 px-2 flex items-center gap-1.5">
+                    <span className="text-orange-400">{icon}</span>
+                    <span className="text-[9px] font-black uppercase tracking-wide text-slate-300">{label}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* Message Area */}
-            <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-6 bg-[#fcfdfe] no-scrollbar">
-              {messages.map((msg, i) => (
-                <motion.div initial={{ opacity: 0, x: msg.role === 'user' ? 20 : -20 }} animate={{ opacity: 1, x: 0 }} key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`max-w-[85%] p-5 rounded-[2rem] text-[15px] font-medium leading-relaxed shadow-sm ${
-                    msg.role === 'user' ? 'bg-orange-600 text-white rounded-tr-none' : 'bg-white text-slate-700 rounded-tl-none border border-slate-100'
-                  }`}>
-                    {msg.text}
-                  </div>
-                </motion.div>
-              ))}
-              {isTyping && (
-                <div className="flex justify-start">
-                  <div className="bg-slate-100 px-6 py-4 rounded-full flex gap-1 items-center">
-                    <div className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce"></div>
-                    <div className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce [animation-delay:0.2s]"></div>
-                    <div className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce [animation-delay:0.4s]"></div>
-                  </div>
-                </div>
+            {/* ── MESSAGES ── */}
+            <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3 bg-slate-50/60 no-scrollbar">
+              {messages.map((msg, i) =>
+                msg.role === "bot" ? <BotMessage key={i} text={msg.text} /> : <UserMessage key={i} text={msg.text} />
               )}
+              {isTyping && <TypingDots />}
               <div ref={scrollRef} />
             </div>
 
-            {/* Smart Action Chips */}
-            <div className="px-6 py-4 flex gap-3 overflow-x-auto no-scrollbar bg-white border-t border-slate-50">
-               {['Starting Price?', 'Location?', 'Ready units?', 'Book Visit'].map(q => (
-                 <button key={q} onClick={() => setInput(q)} className="whitespace-nowrap bg-white border border-slate-200 px-5 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-orange-600 hover:border-orange-500 transition-all shadow-sm">
-                   {q}
-                 </button>
-               ))}
+            {/* ── QUICK CHIPS ── */}
+            <div className="px-4 pt-3 pb-2 flex gap-2 overflow-x-auto no-scrollbar bg-white border-t border-slate-100 shrink-0">
+              {QUICK_CHIPS.map(({ label, query }) => (
+                <button
+                  key={label}
+                  onClick={() => sendMessage(query)}
+                  className="whitespace-nowrap px-3 py-1.5 bg-slate-100 hover:bg-orange-600 hover:text-white text-slate-700 rounded-full text-[10px] font-black uppercase tracking-wide transition-all border border-slate-200 hover:border-orange-600 shrink-0"
+                >
+                  {label}
+                </button>
+              ))}
             </div>
 
-            {/* Elite Input Box */}
-            <form onSubmit={handleSend} className="p-6 md:p-8 bg-white flex gap-4 items-center border-t border-slate-100">
-              <input 
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask about 45L flats, Location..."
-                className="flex-1 bg-slate-50 border-none rounded-2xl px-6 py-5 text-sm font-bold text-slate-800 focus:ring-1 focus:ring-orange-600 outline-none"
-              />
-              <button type="submit" className="bg-orange-600 text-white p-5 rounded-2xl shadow-xl shadow-orange-600/20 hover:scale-105 active:scale-95 transition-all">
-                <FaPaperPlane size={20} />
-              </button>
+            {/* ── INPUT ── */}
+            <form onSubmit={handleSubmit} className="px-4 pb-4 pt-2 bg-white shrink-0">
+              <div className="flex items-center gap-2 bg-slate-100 rounded-2xl px-4 py-1 border border-slate-200 focus-within:border-orange-400 focus-within:bg-white transition-all">
+                <input
+                  ref={inputRef}
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder="Ask about price, plans, location..."
+                  className="flex-1 bg-transparent py-2.5 text-sm text-slate-800 focus:outline-none placeholder-slate-400"
+                />
+                <button
+                  type="submit"
+                  disabled={!input.trim()}
+                  className="w-8 h-8 bg-orange-600 rounded-xl flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed transition-opacity shrink-0"
+                >
+                  <Send size={14} className="text-white" />
+                </button>
+              </div>
+
+              {/* CTA row */}
+              <div className="flex gap-2 mt-2.5">
+                <a
+                  href={CONFIG.WA_LINK}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-[#25D366] hover:bg-[#1db954] text-white rounded-xl text-[10px] font-black uppercase tracking-wide transition-colors"
+                >
+                  <svg className="w-3.5 h-3.5 fill-white" viewBox="0 0 448 512">
+                    <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.1 0-65.6-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.6-2.8-23.6-8.7-45-27.7-16.6-14.8-27.8-33.1-31.1-38.6-3.2-5.6-.3-8.6 2.5-11.4 2.5-2.5 5.5-6.5 8.3-9.7 2.8-3.3 3.7-5.6 5.6-9.3 1.9-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.6 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+                  </svg>
+                  WhatsApp
+                </a>
+                <a
+                  href={CONFIG.CALL_LINK}
+                  className="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-slate-900 hover:bg-orange-600 text-white rounded-xl text-[10px] font-black uppercase tracking-wide transition-colors"
+                >
+                  <Phone size={12} />
+                  Call Now
+                </a>
+              </div>
             </form>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* --- TOP-CLASS FLOATING TRIGGERS --- */}
-      <div className="flex flex-col gap-4">
-        
-        {/* Responsive WhatsApp FAB */}
-        <motion.a 
-          whileHover={{ scale: 1.1, rotate: 5 }} whileTap={{ scale: 0.9 }}
-          href={CONFIG.WHATSAPP_LINK} target="_blank" rel="noreferrer"
-          className="w-14 h-14 md:w-16 md:h-16 bg-[#25D366] text-white rounded-2xl md:rounded-[1.8rem] shadow-[0_15px_40px_rgba(37,211,102,0.4)] flex items-center justify-center relative group"
+      {/* ── FLOATING BUTTONS ── */}
+      <div className="flex flex-col gap-3 pointer-events-auto items-end">
+
+        {/* WhatsApp */}
+        <motion.a
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.92 }}
+          href={CONFIG.WA_LINK}
+          target="_blank"
+          rel="noreferrer"
+          className="w-13 h-13 md:w-14 md:h-14 bg-[#25D366] rounded-2xl shadow-xl shadow-green-500/30 flex items-center justify-center border-2 border-white"
+          style={{ width: 52, height: 52 }}
         >
-          <FaWhatsapp className="text-[28px] md:text-[34px]" />
-          <span className="absolute right-[120%] bg-zinc-900 text-white text-[10px] font-black uppercase tracking-widest px-5 py-3 rounded-2xl opacity-0 group-hover:opacity-100 transition-all pointer-events-none whitespace-nowrap shadow-2xl">
-            Direct Sales Head
-          </span>
+          <svg className="w-6 h-6 fill-white" viewBox="0 0 448 512">
+            <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.1 0-65.6-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.6-2.8-23.6-8.7-45-27.7-16.6-14.8-27.8-33.1-31.1-38.6-3.2-5.6-.3-8.6 2.5-11.4 2.5-2.5 5.5-6.5 8.3-9.7 2.8-3.3 3.7-5.6 5.6-9.3 1.9-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.6 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+          </svg>
         </motion.a>
 
-        {/* Responsive AI Toggle FAB */}
-        <motion.button 
-          whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}
+        {/* Chat Toggle */}
+        <motion.button
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.92 }}
           onClick={() => setIsOpen(!isOpen)}
-          className="w-14 h-14 md:w-16 md:h-16 bg-[#0f172a] text-white rounded-2xl md:rounded-[1.8rem] shadow-[0_15px_40px_rgba(0,0,0,0.3)] flex items-center justify-center relative border border-white/10"
+          className="relative w-14 h-14 md:w-16 md:h-16 rounded-2xl shadow-2xl shadow-slate-900/40 flex items-center justify-center border-4 border-white bg-[#0f172a]"
         >
-          {isOpen ? <FaTimes size={24} /> : <FaRobot size={28} />}
+          <AnimatePresence mode="wait">
+            {isOpen ? (
+              <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                <X size={26} className="text-white" />
+              </motion.span>
+            ) : (
+              <motion.span key="chat" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                <MessageSquare size={26} className="text-white" />
+              </motion.span>
+            )}
+          </AnimatePresence>
+
+          {/* Unread badge */}
+          {hasUnread && !isOpen && (
+            <motion.span
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-orange-500 rounded-full flex items-center justify-center border-2 border-white"
+            >
+              <span className="text-white text-[8px] font-black">1</span>
+            </motion.span>
+          )}
+
+          {/* Pulse ring */}
           {!isOpen && (
-            <span className="absolute -top-1 -right-1 flex h-6 w-6 md:h-7 md:w-7">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-6 w-6 md:h-7 md:w-7 bg-orange-600 text-[10px] md:text-[11px] font-black items-center justify-center border-2 border-[#0f172a]">1</span>
-            </span>
+            <span className="absolute inset-0 rounded-2xl animate-ping bg-orange-500/20 pointer-events-none" />
           )}
         </motion.button>
-
       </div>
 
-      {/* Global Responsive Fix for Mobile No-Scroll */}
       <style>{`
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        ${isOpen ? 'body { overflow: hidden !important; } @media (min-width: 768px) { body { overflow: auto !important; } }' : ''}
       `}</style>
-
     </div>
   );
 };

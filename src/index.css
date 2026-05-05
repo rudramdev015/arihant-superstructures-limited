@@ -1,10 +1,128 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-*{
-    font-family: Outfit;
+/* ── GLOBAL BASE ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Outfit', sans-serif;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevent horizontal overflow on all screens */
+body, #root {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* ── SCROLLBAR HIDE ── */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ── GLOBAL KEYFRAMES ── */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes marquee-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 10px rgba(241,90,36,0.3); }
+  50%       { box-shadow: 0 0 28px rgba(241,90,36,0.65); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── ANIMATION UTILITIES ── */
+.animate-fade-in-up   { animation: fade-in-up 0.6s ease both; }
+.animate-fade-in      { animation: fade-in 0.5s ease both; }
+.animate-slide-left   { animation: slide-in-left 0.6s ease both; }
+.animate-scale-in     { animation: scale-in 0.5s ease both; }
+.animate-marquee-left  { animation: marquee-left 35s linear infinite; }
+.animate-marquee-right { animation: marquee-right 38s linear infinite; }
+.animate-pulse-glow   { animation: pulse-glow 2.5s ease-in-out infinite; }
+.animate-spin-slow    { animation: spin-slow 8s linear infinite; }
+
+/* Pause marquees on hover */
+.animate-marquee-left:hover,
+.animate-marquee-right:hover {
+  animation-play-state: paused;
+}
+
+/* ── STROKE TEXT (used in gallery) ── */
+.stroke-text {
+  -webkit-text-stroke: 1px #0f172a;
+  color: transparent;
+}
+.stroke-white {
+  -webkit-text-stroke: 2px rgba(255,255,255,0.2);
+  color: transparent;
+}
+@media (min-width: 768px) {
+  .stroke-text { -webkit-text-stroke: 2px #0f172a; }
+}
+
+/* ── MOBILE SAFE AREA ── */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .safe-pb { padding-bottom: env(safe-area-inset-bottom); }
+}
+
+/* ── SMOOTH IMAGE LOADING ── */
+img {
+  image-rendering: auto;
+  backface-visibility: hidden;
+}
+
+/* ── SELECTION COLOUR ── */
+::selection {
+  background: #f15a24;
+  color: #fff;
+}
+
+/* ── FOCUS VISIBLE RING ── */
+:focus-visible {
+  outline: 2px solid #f15a24;
+  outline-offset: 2px;
 }

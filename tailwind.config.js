@@ -5,7 +5,18 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        xs: '480px',
+      },
+      transitionDuration: {
+        800: '800ms',
+        900: '900ms',
+      },
+      borderWidth: {
+        3: '3px',
+      },
+    },
   },
   plugins: [],
 }
