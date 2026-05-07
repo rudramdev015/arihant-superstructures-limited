@@ -35,7 +35,7 @@ const UNITS = [
     type: '4 BHK',
     badge: 'Luxury Series',
     area: '1750 sq.ft',
-    price: '₹81L',
+    price: '₹82L',
     oldPrice: '₹90L',
     tag: 'Ultra Luxury',
     tagColor: 'bg-amber-600',

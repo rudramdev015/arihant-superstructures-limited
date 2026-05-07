@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import Preloader from './Preloader';
 
@@ -7,6 +7,8 @@ const YT_ID = 'lIBxyEhoalc';
 const Header = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [revealed, setRevealed]   = useState(false);
+  const [isMuted, setIsMuted]     = useState(true);
+  const iframeRef = useRef(null);
 
   useEffect(() => {
     const t = setTimeout(() => {
@@ -15,6 +17,18 @@ const Header = () => {
     }, 3200);
     return () => clearTimeout(t);
   }, []);
+
+  const toggleSound = () => {
+    const iframe = iframeRef.current;
+    if (!iframe?.contentWindow) return;
+    if (isMuted) {
+      iframe.contentWindow.postMessage('{"event":"command","func":"unMute","args":""}', '*');
+      iframe.contentWindow.postMessage('{"event":"command","func":"setVolume","args":[80]}', '*');
+    } else {
+      iframe.contentWindow.postMessage('{"event":"command","func":"mute","args":""}', '*');
+    }
+    setIsMuted((m) => !m);
+  };
 
   const scrollTo = (id) => {
     const el = document.getElementById(id);
@@ -30,7 +44,8 @@ const Header = () => {
         {/* ── YOUTUBE BACKGROUND VIDEO ── */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <iframe
-            src={`https://www.youtube.com/embed/${YT_ID}?autoplay=1&mute=1&loop=1&playlist=${YT_ID}&controls=0&showinfo=0&rel=0&playsinline=1&modestbranding=1&iv_load_policy=3&fs=0&disablekb=1`}
+            ref={iframeRef}
+            src={`https://www.youtube.com/embed/${YT_ID}?autoplay=1&mute=1&loop=1&playlist=${YT_ID}&controls=0&showinfo=0&rel=0&playsinline=1&modestbranding=1&iv_load_policy=3&fs=0&disablekb=1&enablejsapi=1`}
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
             style={{
               width:  'max(100vw, 177.78vh)',
@@ -79,20 +94,37 @@ const Header = () => {
             </button>
           </div>
 
-          {/* Right: scroll cue + YouTube link */}
+          {/* Right: sound toggle + scroll cue */}
           <div className="flex flex-col items-end gap-3">
-            <a
-              href={`https://www.youtube.com/watch?v=${YT_ID}`}
-              target="_blank"
-              rel="noreferrer"
+
+            {/* Sound toggle */}
+            <button
+              onClick={toggleSound}
               style={{ width: 42, height: 42 }}
-              className="rounded-full bg-black/60 backdrop-blur-xl border border-orange-500/40 flex items-center justify-center hover:scale-110 active:scale-90 transition-transform duration-200"
-              aria-label="Watch on YouTube"
+              className={`rounded-full backdrop-blur-xl flex items-center justify-center hover:scale-110 active:scale-90 transition-all duration-200 border ${
+                isMuted
+                  ? 'bg-black/60 border-white/20'
+                  : 'bg-orange-600/80 border-orange-400/60 shadow-lg shadow-orange-600/30'
+              }`}
+              aria-label={isMuted ? 'Turn sound on' : 'Turn sound off'}
+              title={isMuted ? 'Turn sound on' : 'Turn sound off'}
             >
-              <svg className="w-4 h-4 fill-red-500" viewBox="0 0 24 24">
-                <path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/>
-              </svg>
-            </a>
+              {isMuted ? (
+                <svg className="w-[15px] h-[15px]" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                  <line x1="23" y1="9" x2="17" y2="15"/>
+                  <line x1="17" y1="9" x2="23" y2="15"/>
+                </svg>
+              ) : (
+                <svg className="w-[15px] h-[15px]" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+                  <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                </svg>
+              )}
+            </button>
+
+            {/* Scroll cue */}
             <div className="hidden sm:flex flex-col items-center gap-2 opacity-40">
               <div className="w-[1px] h-12 bg-white/50 relative overflow-hidden rounded-full">
                 <div className="w-full bg-white absolute top-0 left-0 rounded-full animate-scroll-line" style={{ height: '40%' }} />

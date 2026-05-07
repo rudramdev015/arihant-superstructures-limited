@@ -20,7 +20,7 @@ const LAYOUTS = {
   '4BHK': {
     label:    'Luxury Series',
     title:    '4 BHK',
-    price:    '₹81L',
+    price:    '₹82L',
     oldPrice: '₹90L',
     accent:   'from-amber-500 to-orange-600',
     lifestyle: lifestyle4BHK,

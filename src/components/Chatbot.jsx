@@ -23,7 +23,7 @@ const KB = [
   {
     patterns: /(good morning|\bgm\b|subh prabhat|shubh prabhat)/i,
     reply: () =>
-      `🌅 Good Morning! Ram Ram Ji! 🙏\n\nShubh Prabhat! Wishing you a wonderful day!\n\nI'm here to help you find your dream home at **Arihant Anchal**, Jodhpur.\n🏠 2 BHK ₹41L* | 👑 4 BHK ₹81L*\n\nHow can I assist you today?`,
+      `🌅 Good Morning! Ram Ram Ji! 🙏\n\nShubh Prabhat! Wishing you a wonderful day!\n\nI'm here to help you find your dream home at **Arihant Anchal**, Jodhpur.\n🏠 2 BHK ₹41L* | 👑 4 BHK ₹82L*\n\nHow can I assist you today?`,
   },
   {
     patterns: /(good night|\bgn\b|shubh ratri|good nite)/i,
@@ -33,7 +33,7 @@ const KB = [
   {
     patterns: /(jai (shri )?krishna|jay krishna|radhe radhe|hare krishna|jai krishn)/i,
     reply: () =>
-      `🙏 Jai Shri Krishna! Radhe Radhe!\n\nKrishna Ji ki kripa se aapka swagat hai **Arihant Anchal** mein!\n\n🏠 2 BHK — ₹41 Lakhs*\n👑 4 BHK — ₹81 Lakhs*\n\n📞 For details: +91 90012 33545`,
+      `🙏 Jai Shri Krishna! Radhe Radhe!\n\nKrishna Ji ki kripa se aapka swagat hai **Arihant Anchal** mein!\n\n🏠 2 BHK — ₹41 Lakhs*\n👑 4 BHK — ₹82 Lakhs*\n\n📞 For details: +91 90012 33545`,
   },
   {
     patterns: /(om namah|om shanti|har har mahadev|jai mahadev|bhole|shiv ji)/i,
@@ -43,7 +43,7 @@ const KB = [
   {
     patterns: /^om$/i,
     reply: () =>
-      `🕉️ Om! Namaste Ji! 🙏\n\nSweet greetings! Welcome to **Arihant Anchal** — Jodhpur's finest luxury homes.\n\n🏠 2 BHK ₹41L* | 👑 4 BHK ₹81L*\n\nHow may I help you today?`,
+      `🕉️ Om! Namaste Ji! 🙏\n\nSweet greetings! Welcome to **Arihant Anchal** — Jodhpur's finest luxury homes.\n\n🏠 2 BHK ₹41L* | 👑 4 BHK ₹82L*\n\nHow may I help you today?`,
   },
   {
     patterns: /(hi|hello|hey|ram ram|namaste|hii|helo|namaskar|jai ram|ram|radha swami)/i,
@@ -56,7 +56,7 @@ const KB = [
   {
     patterns: /(price|cost|budget|rate|lakh|pricing|kitna|kitne)/i,
     reply: () =>
-      `💰 **PRICING**\n\n🏠 2 BHK — ₹41 Lakhs*\n👑 4 BHK — ₹81 Lakhs*\n\n📞 For complete details:\n+91 90012 33545\n\nCall or WhatsApp — our team will help! 🙏`,
+      `💰 **PRICING**\n\n🏠 2 BHK — ₹41 Lakhs*\n👑 4 BHK — ₹82 Lakhs*\n\n📞 For complete details:\n+91 90012 33545\n\nCall or WhatsApp — our team will help! 🙏`,
   },
   {
     patterns: /(2 ?bhk|two bhk|2bhk)/i,
@@ -66,7 +66,7 @@ const KB = [
   {
     patterns: /(4 ?bhk|four bhk|4bhk|penthouse|luxury)/i,
     reply: () =>
-      `👑 **4 BHK** — Starting ₹81 Lakhs* 🎉\n\nFor more details, please call or WhatsApp:\n📞 **+91 90012 33545**\n\nOnly **LIMITED UNITS** remaining! 🙏`,
+      `👑 **4 BHK** — Starting ₹82 Lakhs* 🎉\n\nFor more details, please call or WhatsApp:\n📞 **+91 90012 33545**\n\nOnly **LIMITED UNITS** remaining! 🙏`,
   },
   {
     patterns: /(visit|appointment|book|schedule|dekna|dekhna)/i,
@@ -184,7 +184,7 @@ const Chatbot = () => {
     setMessages([
       {
         role: "bot",
-        text: `Ram Ram! 🙏 ${greet}\n\nWelcome to **Arihant Anchal** – Jodhpur's finest luxury residences.\n\n🏠 2 BHK ₹41L* | 👑 4 BHK ₹81L*\n📍 Dali Bai Circle, Jodhpur\n\nHow can I help you today?`,
+        text: `Ram Ram! 🙏 ${greet}\n\nWelcome to **Arihant Anchal** – Jodhpur's finest luxury residences.\n\n🏠 2 BHK ₹41L* | 👑 4 BHK ₹82L*\n📍 Dali Bai Circle, Jodhpur\n\nHow can I help you today?`,
       },
     ]);
   }, []);
