@@ -11,11 +11,6 @@ import right_arrow from './right_arrow.svg'
 import header_img from './header_img.png'
 import brand_img from './brand_img.png'
 
-// --- FIXED FLOOR PLANS (Based on your Sidebar) ---
-// These are located in src/components/
-import plan1BHK from '../components/Arihant-Anngan-1-BHK-Flat-Plan.jpg'
-import plan2BHK from '../components/pop1.jpg'
-
 // --- CHAIRMAN & PROFILE ASSETS ---
 // Found in src/assets/images/ per your screenshot
 import chairman_img from './images/chairman.png' 
@@ -41,8 +36,6 @@ export const assets = {
     right_arrow,
     header_img,
     brand_img,
-    plan1BHK,
-    plan2BHK,
     chairman_img
 }
 

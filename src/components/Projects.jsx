@@ -29,6 +29,14 @@ import G24 from './Gallery/111122222.jpeg';
 import G25 from './Gallery/2222323221.jpeg';
 import G26 from './Gallery/22121 (2).jpeg';
 
+/* ── NEW IMAGES from assets/images ── */
+import G27 from '../assets/images/000A0DA SE.jpeg';
+import G28 from '../assets/images/000AVAE1.jpeg';
+import G29 from '../assets/images/0100DR.jpeg';
+import G30 from '../assets/images/OAOSOOA11.jpeg';
+import G31 from '../assets/images/OOOA.jpeg';
+import G32 from '../assets/images/OOOAA1.jpeg';
+
 /* spans for the bento hero grid (first 9) */
 const BENTO = [
   { span: 'col-span-2 row-span-2' },
@@ -46,6 +54,7 @@ const ALL_IMAGES = [
   G1, G2, G3, G4, G5, G6, G7, G8, G9,
   G10, G11, G12, G13, G14, G15, G16,
   G17, G18, G19, G20, G21, G22, G23, G24, G25, G26,
+  G27, G28, G29, G30, G31, G32,
 ];
 
 const LABELS = [
@@ -56,6 +65,8 @@ const LABELS = [
   'Interior Detail', 'Premium Finish', 'Modern Kitchen', 'Spa Suite',
   'Private Study', 'Kids Zone', 'Dining Space', 'Master Bath',
   'City View', 'Entry Foyer',
+  'Luxury Interior', 'Modern Design', 'Premium Space',
+  'Elite Living', 'Grand View', 'Signature Style',
 ];
 
 /* ── LAZY IMAGE with blur-up ── */
@@ -240,7 +251,7 @@ const Gallery = () => {
         </div>
 
         {/* ── HERO BENTO GRID (first 9) ── */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 md:gap-3 auto-rows-[180px] md:auto-rows-[260px]">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-2.5 md:gap-3 auto-rows-[200px] sm:auto-rows-[220px] md:auto-rows-[260px]">
           {heroImages.map((src, i) => (
             <Motion.div
               key={i}
@@ -285,7 +296,7 @@ const Gallery = () => {
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               className="overflow-hidden"
             >
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5 md:gap-3 mt-3 auto-rows-[200px] md:auto-rows-[240px]">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-2.5 md:gap-3 mt-3 auto-rows-[180px] sm:auto-rows-[210px] md:auto-rows-[240px]">
                 {extraImages.map((src, i) => (
                   <Motion.div
                     key={i + 9}

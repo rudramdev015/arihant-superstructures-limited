@@ -18,7 +18,7 @@ const BUDGET_OPTIONS = [
 
 const TRUST_STATS = [
   { value: '30+', label: 'Years of Trust' },
-  { value: '600+', label: 'Happy Families' },
+  { value: '500+', label: 'Families Already Living' },
   { value: 'JDA', label: 'Approved' },
 ];
 
@@ -99,7 +99,20 @@ const Contact = () => {
         method: 'GET',
         mode: 'no-cors',
       });
-      setTimeout(() => setStatus('success'), 1200);
+
+      // Forward lead to WhatsApp
+      const msg = `🏠 *NEW LEAD — ARIHANT ANCHAL*\n\n` +
+        `👤 *Name:* ${formData.Name}\n` +
+        `📞 *Phone:* ${formData.Phone}\n` +
+        `📧 *Email:* ${formData.Email || '—'}\n` +
+        `🏙 *City:* ${formData.Location}\n` +
+        `🏢 *Interest:* ${formData.Interest}\n` +
+        `💰 *Budget:* ${formData.Budget}\n` +
+        `🕐 *Time:* ${new Date().toLocaleString('en-IN')}`;
+      setTimeout(() => {
+        window.open(`https://wa.me/919001233545?text=${encodeURIComponent(msg)}`, '_blank');
+        setStatus('success');
+      }, 1200);
     } catch {
       setStatus('idle');
       alert('Something went wrong. Please call us directly at +91 90012 33545');
@@ -208,7 +221,7 @@ const Contact = () => {
                 </motion.p>
 
                 {/* Trust stats */}
-                <motion.div variants={fadeUp} custom={3} className="mt-10 grid grid-cols-3 gap-3 max-w-xs mx-auto lg:mx-0">
+                <motion.div variants={fadeUp} custom={3} className="mt-10 grid grid-cols-3 gap-2 sm:gap-3 max-w-xs mx-auto lg:mx-0">
                   {TRUST_STATS.map(({ value, label }) => (
                     <div key={label} className="bg-white/[0.04] border border-white/[0.07] rounded-2xl p-4 text-center hover:border-orange-500/20 transition-colors">
                       <p className="text-2xl font-black text-white">{value}</p>

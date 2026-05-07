@@ -1,21 +1,20 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-  Download, Maximize, TreePine, Layers, ChevronRight,
-  Eye, Box, Compass, ShieldCheck, Zap
-} from 'lucide-react';
+import { Download, Maximize, ChevronRight, Eye, Box, ShieldCheck, Zap, TreePine } from 'lucide-react';
 
-import blueprintImg from '../assets/images/MAP.jpg';
-import render2BHK from '../assets/images/r1 (1).png';
-import render3BHK from '../assets/images/r1 (5).png';
-import render4BHK from '../assets/images/r1 (7).png';
+import lifestyle2BHK from '../assets/images/r1 (2).png';
+import lifestyle4BHK from '../assets/images/r1 (6).png';
+import siteMap2BHK   from './site mam 2 bhk.jpeg';
+import siteMap4BHK   from './site map 4 bhk.jpeg';
 
-const layouts = {
+const LAYOUTS = {
   '2BHK': {
-    label: 'Executive Series',
-    title: '2 BHK',
-    subtitle: 'Luxury Residence',
-    area: '950 sq.ft',
+    label:     'Executive Series',
+    title:     '2 BHK',
+    area:      '950 sq.ft',
+    price:     '₹41L',
+    oldPrice:  '₹45L',
+    accent:    'from-orange-500 to-red-600',
     details: [
       'Vastu Compliant Design',
       '2 Grand Master Bedrooms',
@@ -23,31 +22,16 @@ const layouts = {
       'Modular Kitchen Space',
       'Premium Vitrified Flooring',
     ],
-    blueprint: blueprintImg,
-    lifestyle: render2BHK,
-    accent: 'from-orange-500 to-red-600',
-  },
-  '3BHK': {
-    label: 'Signature Series',
-    title: '3 BHK',
-    subtitle: 'Elite Family Suite',
-    area: '1450 sq.ft',
-    details: [
-      '3 Master Suites',
-      'Spacious Living & Dining',
-      'Wrap-around Sundeck',
-      'Designer Bathrooms',
-      'Servant Room Attached',
-    ],
-    blueprint: blueprintImg,
-    lifestyle: render3BHK,
-    accent: 'from-amber-500 to-orange-600',
+    lifestyle:  lifestyle2BHK,
+    blueprint:  siteMap2BHK,
   },
   '4BHK': {
-    label: 'Presidential Series',
-    title: '4 BHK',
-    subtitle: 'Ultra-Premium Penthouse',
-    area: '2100 sq.ft',
+    label:     'Luxury Series',
+    title:     '4 BHK',
+    area:      '1750 sq.ft',
+    price:     '₹81L',
+    oldPrice:  '₹90L',
+    accent:    'from-amber-500 to-orange-600',
     details: [
       '4 Ultra-Luxury Suites',
       'Private Entry Lobby',
@@ -55,41 +39,34 @@ const layouts = {
       'Grand Deck with Views',
       'Smart Home Automation',
     ],
-    blueprint: blueprintImg,
-    lifestyle: render4BHK,
-    accent: 'from-blue-600 to-indigo-600',
+    lifestyle:  lifestyle4BHK,
+    blueprint:  siteMap4BHK,
   },
 };
 
 const STATS = [
-  { icon: TreePine, val: '18.5', label: 'Acres' },
-  { icon: ShieldCheck, val: 'Vastu', label: 'Compliant' },
-  { icon: Zap, val: '24/7', label: 'Power Backup' },
+  { icon: TreePine,    val: '4.4',   label: 'Acres'        },
+  { icon: ShieldCheck, val: 'Vastu', label: 'Compliant'    },
+  { icon: Zap,         val: '24/7',  label: 'Power Backup' },
 ];
 
 const PropertyShowcase = () => {
   const [activeTab, setActiveTab] = useState('2BHK');
-  const [viewMode, setViewMode] = useState('lifestyle');
-
-  const current = layouts[activeTab];
-
-  const scrollToContact = () => {
-    const el = document.getElementById('Contact');
-    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
-  };
+  const [viewMode,  setViewMode]  = useState('lifestyle');
+  const current = LAYOUTS[activeTab];
 
   return (
     <section
-      className="relative w-full bg-[#050505] py-16 sm:py-24 px-4 sm:px-8 md:px-12 lg:px-20 flex flex-col items-center justify-center overflow-hidden"
       id="Layouts"
+      className="relative w-full bg-[#050505] py-16 sm:py-24 px-4 sm:px-8 md:px-12 lg:px-20 overflow-hidden"
     >
-      {/* Ambient lighting */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      {/* Ambient glow */}
+      <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-orange-600/8 blur-[160px] rounded-full" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-blue-600/5 blur-[160px] rounded-full" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[55%] h-[55%] bg-amber-600/5 blur-[160px] rounded-full" />
       </div>
 
-      <div className="relative z-10 w-full max-w-[1800px]">
+      <div className="relative z-10 w-full max-w-[1800px] mx-auto">
 
         {/* ── HEADER ── */}
         <div className="flex flex-col xl:flex-row justify-between items-start xl:items-end mb-12 sm:mb-20 gap-8">
@@ -100,49 +77,46 @@ const PropertyShowcase = () => {
             </div>
             <h2 className="text-5xl sm:text-6xl md:text-8xl font-black text-white tracking-tighter leading-[0.82] uppercase">
               MASTER{' '}
-              <span className="stroke-white italic font-light">PLAN</span>
+              <span className="italic font-light" style={{ WebkitTextStroke: '2px rgba(255,255,255,0.25)', color: 'transparent' }}>PLAN</span>
               <br />
               <span className="text-orange-600">LAYOUTS</span>
             </h2>
           </div>
 
-          {/* Stats bar */}
-          <div className="grid grid-cols-3 gap-3 w-full xl:w-auto">
+          {/* Stats */}
+          <div className="grid grid-cols-3 gap-2 sm:gap-3 w-full xl:w-auto">
             {STATS.map((stat) => {
               const StatIcon = stat.icon;
               return (
-                <div
-                  key={stat.label}
-                  className="bg-white/5 backdrop-blur-xl border border-white/10 p-4 sm:p-6 rounded-[1.8rem] sm:rounded-[2.5rem] flex flex-col items-center text-center"
-                >
-                  <StatIcon className="text-orange-500 mb-2" size={20} />
-                  <p className="text-xl sm:text-2xl font-black text-white leading-none">{stat.val}</p>
-                  <p className="text-[9px] font-black uppercase tracking-widest text-white/30 mt-1.5">{stat.label}</p>
+                <div key={stat.label} className="bg-white/5 backdrop-blur-xl border border-white/10 p-3 sm:p-6 rounded-[1.5rem] sm:rounded-[2.5rem] flex flex-col items-center text-center min-w-0">
+                  <StatIcon className="text-orange-500 mb-1.5 sm:mb-2 flex-shrink-0" size={18} />
+                  <p className="text-lg sm:text-2xl font-black text-white leading-none">{stat.val}</p>
+                  <p className="text-[8px] sm:text-[9px] font-black uppercase tracking-wider sm:tracking-widest text-white/30 mt-1 sm:mt-1.5 break-words leading-tight">{stat.label}</p>
                 </div>
               );
             })}
           </div>
         </div>
 
-        {/* ── INTERACTIVE GRID ── */}
+        {/* ── GRID ── */}
         <div className="grid xl:grid-cols-12 gap-6 sm:gap-10 items-stretch">
 
-          {/* LEFT: INFO SUITE */}
+          {/* LEFT — info */}
           <div className="xl:col-span-5 flex flex-col gap-5 sm:gap-8 order-2 xl:order-1">
 
-            {/* Tab selector */}
+            {/* Tab selector — only 2 tabs */}
             <div className="flex p-1.5 bg-white/5 backdrop-blur-xl rounded-[1.8rem] border border-white/10">
-              {Object.keys(layouts).map((tab) => (
+              {Object.keys(LAYOUTS).map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`relative flex-1 py-4 sm:py-5 rounded-2xl font-black text-[11px] sm:text-[12px] tracking-[0.2em] sm:tracking-[0.3em] uppercase transition-all duration-400 z-10 ${
+                  className={`relative flex-1 py-4 sm:py-5 rounded-2xl font-black text-[11px] sm:text-[12px] tracking-[0.25em] uppercase transition-all duration-300 z-10 ${
                     activeTab === tab ? 'text-white' : 'text-white/30 hover:text-white/60'
                   }`}
                 >
                   {activeTab === tab && (
                     <motion.div
-                      layoutId="activeTabGlow"
+                      layoutId="tabGlow"
                       className={`absolute inset-0 bg-gradient-to-r ${current.accent} rounded-2xl -z-10 shadow-xl`}
                     />
                   )}
@@ -159,107 +133,112 @@ const PropertyShowcase = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 20 }}
                 transition={{ duration: 0.35 }}
-                className="bg-white/5 border border-white/10 rounded-[2.5rem] sm:rounded-[3.5rem] p-7 sm:p-12 backdrop-blur-xl"
+                className="bg-white/5 border border-white/10 rounded-[2.5rem] sm:rounded-[3.5rem] p-7 sm:p-12 backdrop-blur-xl flex flex-col gap-6"
               >
-                <div className="flex items-center gap-3 mb-5">
-                  <Compass size={14} className="text-orange-600 animate-spin-slow" />
-                  <span className="text-orange-600 font-black text-[10px] uppercase tracking-[0.5em]">{current.label}</span>
+                <div>
+                  <p className="text-orange-500 font-black text-[10px] uppercase tracking-[0.5em] mb-2">{current.label}</p>
+                  <h3 className="text-6xl sm:text-7xl font-black text-white tracking-tighter leading-none uppercase">{current.title}</h3>
                 </div>
 
-                <h3 className="text-6xl sm:text-7xl font-black text-white tracking-tighter leading-none uppercase mb-8">
-                  {current.title}
-                </h3>
-
-                {/* Area badge */}
-                <div className="bg-white/5 border border-white/5 p-5 sm:p-7 rounded-2xl sm:rounded-3xl flex justify-between items-center mb-8">
+                {/* Area + price */}
+                <div className="bg-white/5 border border-white/[0.07] p-5 sm:p-7 rounded-2xl sm:rounded-3xl flex justify-between items-center">
                   <div>
                     <p className="text-[10px] font-black text-white/30 uppercase tracking-[0.3em] mb-1">Floor Space</p>
-                    <p className="text-2xl sm:text-3xl font-medium text-white tracking-tighter">{current.area}</p>
+                    <p className="text-2xl sm:text-3xl font-black text-white tracking-tighter">{current.area}</p>
+                    <div className="flex items-center gap-2 mt-1 flex-wrap">
+                      <span className="text-white/40 text-xs line-through">{current.oldPrice}</span>
+                      <span className="text-orange-400 text-lg font-black">{current.price}</span>
+                      <span className="text-[9px] font-black text-white bg-orange-600 px-2 py-0.5 rounded-full">SPECIAL PRICE</span>
+                    </div>
                   </div>
                   <Maximize size={24} className="text-orange-600 opacity-50" />
                 </div>
 
                 {/* Features */}
-                <div className="space-y-4 mb-8 sm:mb-10">
-                  {current.details.map((detail) => (
-                    <div key={detail} className="flex items-center gap-4 group">
+                <div className="space-y-3">
+                  {current.details.map((d) => (
+                    <div key={d} className="flex items-center gap-4 group">
                       <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 group-hover:border-orange-600 group-hover:bg-orange-600 transition-all">
-                        <ChevronRight size={14} className="text-orange-600 group-hover:text-white" />
+                        <ChevronRight size={14} className="text-orange-500 group-hover:text-white" />
                       </div>
-                      <p className="text-[12px] font-bold text-white/70 uppercase tracking-[0.12em]">{detail}</p>
+                      <p className="text-[12px] font-bold text-white/70 uppercase tracking-[0.12em]">{d}</p>
                     </div>
                   ))}
                 </div>
 
-                <button
-                  onClick={scrollToContact}
+                <a
+                  href="/Arihant Anchal .pdf"
+                  download="Arihant-Anchal-Brochure.pdf"
+                  target="_blank"
+                  rel="noreferrer"
                   className="w-full h-16 sm:h-[72px] bg-white text-black rounded-2xl sm:rounded-[2rem] font-black uppercase tracking-[0.3em] text-[11px] hover:bg-orange-600 hover:text-white transition-all shadow-2xl flex items-center justify-center gap-3 group"
                 >
-                  <Download size={20} className="group-hover:translate-y-0.5 transition-transform" />
+                  <Download size={18} className="group-hover:translate-y-0.5 transition-transform" />
                   Download Brochure
-                </button>
+                </a>
               </motion.div>
             </AnimatePresence>
           </div>
 
-          {/* RIGHT: VISUALIZER */}
+          {/* RIGHT — visualizer */}
           <div className="xl:col-span-7 relative order-1 xl:order-2">
-            <div className="relative h-[300px] sm:h-[440px] xl:h-full min-h-0 xl:min-h-[600px] bg-white/5 rounded-[2.5rem] sm:rounded-[4rem] border border-white/10 overflow-hidden group shadow-2xl">
+            <div className="relative h-[360px] sm:h-[500px] xl:h-full xl:min-h-[640px] bg-white/5 rounded-[2.5rem] sm:rounded-[4rem] border border-white/10 overflow-hidden group shadow-2xl">
 
-              {/* HUD toggle — compact on mobile */}
-              <div className="absolute top-4 sm:top-8 left-4 sm:left-10 z-30 flex gap-1.5 p-1.5 bg-black/50 backdrop-blur-2xl rounded-2xl border border-white/10">
+              {/* View toggle */}
+              <div className="absolute top-4 sm:top-8 left-4 sm:left-10 z-30 flex gap-1.5 p-1.5 bg-black/60 backdrop-blur-2xl rounded-2xl border border-white/10">
                 <button
                   onClick={() => setViewMode('lifestyle')}
-                  className={`flex items-center gap-1.5 sm:gap-2.5 px-3 sm:px-6 py-2 sm:py-3.5 rounded-xl text-[10px] sm:text-[11px] font-black uppercase tracking-widest transition-all ${
-                    viewMode === 'lifestyle' ? 'bg-orange-600 text-white' : 'text-white/40 hover:text-white'
+                  className={`flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 rounded-xl text-[10px] sm:text-[11px] font-black uppercase tracking-widest transition-all ${
+                    viewMode === 'lifestyle' ? 'bg-orange-600 text-white' : 'text-white/40 hover:text-white/70'
                   }`}
                 >
                   <Eye size={13} />
-                  <span className="hidden xs:inline sm:inline">Lifestyle</span>
+                  Lifestyle
                 </button>
                 <button
                   onClick={() => setViewMode('blueprint')}
-                  className={`flex items-center gap-1.5 sm:gap-2.5 px-3 sm:px-6 py-2 sm:py-3.5 rounded-xl text-[10px] sm:text-[11px] font-black uppercase tracking-widest transition-all ${
-                    viewMode === 'blueprint' ? 'bg-orange-600 text-white' : 'text-white/40 hover:text-white'
+                  className={`flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 rounded-xl text-[10px] sm:text-[11px] font-black uppercase tracking-widest transition-all ${
+                    viewMode === 'blueprint' ? 'bg-orange-600 text-white' : 'text-white/40 hover:text-white/70'
                   }`}
                 >
                   <Box size={13} />
-                  <span className="hidden xs:inline sm:inline">Blueprint</span>
+                  Site Map
                 </button>
               </div>
 
-              {/* Image engine */}
+              {/* Image */}
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`${activeTab}-${viewMode}`}
                   initial={{ opacity: 0, scale: 1.06 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.96 }}
-                  transition={{ duration: 0.9, ease: [0.19, 1, 0.22, 1] }}
-                  className="w-full h-full absolute inset-0"
+                  transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
+                  className="absolute inset-0"
                 >
                   <img
                     src={viewMode === 'blueprint' ? current.blueprint : current.lifestyle}
-                    alt="Property Preview"
-                    className={`w-full h-full object-cover transition-all duration-1000 ${
+                    alt={viewMode === 'blueprint' ? `${current.title} Site Map` : `${current.title} Lifestyle`}
+                    className={`w-full h-full transition-all duration-700 ${
                       viewMode === 'blueprint'
-                        ? 'invert opacity-40 brightness-150'
-                        : 'opacity-80 group-hover:scale-105'
+                        ? 'object-contain bg-white/5 p-4'
+                        : 'object-cover opacity-85 group-hover:scale-105'
                     }`}
+                    loading="lazy"
+                    decoding="async"
                   />
                 </motion.div>
               </AnimatePresence>
 
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-70 pointer-events-none" />
+              {/* Bottom fade for lifestyle only */}
+              {viewMode === 'lifestyle' && (
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-70 pointer-events-none" />
+              )}
 
-              {/* Bottom label */}
-              <div className="absolute bottom-6 sm:bottom-12 right-5 sm:right-12 text-right">
-                <p className="text-[10px] sm:text-[12px] font-black text-white uppercase tracking-[0.3em] mb-1">
-                  {current.label}
-                </p>
-                <p className="text-[9px] font-medium text-white/30 uppercase tracking-[0.15em]">
-                  Arihant Anchal · Jodhpur
-                </p>
+              {/* Label */}
+              <div className="absolute bottom-6 sm:bottom-10 right-5 sm:right-10 text-right z-10">
+                <p className="text-[10px] sm:text-[12px] font-black text-white uppercase tracking-[0.3em] mb-1">{current.label}</p>
+                <p className="text-[9px] font-medium text-white/30 uppercase tracking-[0.15em]">Arihant Anchal · Jodhpur</p>
               </div>
             </div>
           </div>

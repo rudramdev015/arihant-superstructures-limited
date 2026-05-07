@@ -88,17 +88,17 @@ const About = () => {
               </p>
             </div>
 
-            <div className="mt-12 flex items-center gap-8">
+            <div className="mt-12 flex flex-wrap items-center gap-6 sm:gap-8">
               <div className="text-center">
                 <p className="text-2xl font-black text-white">ISO</p>
                 <p className="text-[9px] text-slate-500 uppercase font-black tracking-widest">Certified Quality</p>
               </div>
-              <div className="h-10 w-px bg-white/10" />
+              <div className="hidden sm:block h-10 w-px bg-white/10" />
               <div className="text-center">
                 <p className="text-2xl font-black text-white italic font-serif">Trust</p>
                 <p className="text-[9px] text-slate-500 uppercase font-black tracking-widest">Unmatched Legacy</p>
               </div>
-              <div className="h-10 w-px bg-white/10" />
+              <div className="hidden sm:block h-10 w-px bg-white/10" />
               <div className="text-center">
                 <p className="text-2xl font-black text-orange-500">30+</p>
                 <p className="text-[9px] text-slate-500 uppercase font-black tracking-widest">Years</p>
@@ -116,6 +116,8 @@ const About = () => {
                   src={assets.chairman_img}
                   alt="CMD Ashok Chhajer"
                   className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 scale-105 hover:scale-100"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>

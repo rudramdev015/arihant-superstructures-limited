@@ -9,11 +9,6 @@ const PERKS = [
   { icon: '💰', title: 'Best Price Lock', desc: 'On-site visits qualify for launch-day pricing benefits.' },
 ];
 
-const COUNTER_TARGETS = [
-  { value: 600, suffix: '+', label: 'Families Visited' },
-  { value: 98, suffix: '%', label: 'Satisfaction Rate' },
-  { value: 30, suffix: '+', label: 'Years of Trust' },
-];
 
 const useCountUp = (target, duration = 1800, start = false) => {
   const [count, setCount] = useState(0);
@@ -151,12 +146,12 @@ const SiteVisit = () => {
 
         {/* ── COUNTERS STRIP ── */}
         <div
-          className="flex flex-wrap justify-center gap-10 sm:gap-16 md:gap-24 mb-16 sm:mb-20 transition-all duration-700"
+          className="flex justify-center mb-16 sm:mb-20 transition-all duration-700"
           style={{ opacity: visible ? 1 : 0, transitionDelay: '0.3s' }}
         >
-          {COUNTER_TARGETS.map(({ value, suffix, label }) => (
-            <CounterItem key={label} value={value} suffix={suffix} label={label} animate={visible} />
-          ))}
+          <div className="bg-white/5 border border-orange-500/30 rounded-3xl px-16 sm:px-24 py-10 backdrop-blur-md text-center">
+            <CounterItem value={500} suffix="+" label="Families Already Living" animate={visible} />
+          </div>
         </div>
 
         {/* ── BOOKING PANEL ── */}
@@ -209,7 +204,7 @@ const SiteVisit = () => {
                   </div>
 
                   {/* Toggle: form vs direct contact */}
-                  <div className="flex p-1 bg-white/5 border border-white/8 rounded-2xl mb-8 w-max">
+                  <div className="flex p-1 bg-white/5 border border-white/8 rounded-2xl mb-8 w-full sm:w-max">
                     <button
                       onClick={() => setFormVisible(false)}
                       className={`px-5 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all ${!formVisible ? 'bg-orange-600 text-white' : 'text-white/30 hover:text-white/60'}`}

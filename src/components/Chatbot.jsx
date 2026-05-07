@@ -21,62 +21,87 @@ const QUICK_CHIPS = [
 
 const KB = [
   {
-    patterns: /(hi|hello|hey|ram|namaste|hii|helo)/i,
+    patterns: /(good morning|\bgm\b|subh prabhat|shubh prabhat)/i,
+    reply: () =>
+      `🌅 Good Morning! Ram Ram Ji! 🙏\n\nShubh Prabhat! Wishing you a wonderful day!\n\nI'm here to help you find your dream home at **Arihant Anchal**, Jodhpur.\n🏠 2 BHK ₹41L* | 👑 4 BHK ₹81L*\n\nHow can I assist you today?`,
+  },
+  {
+    patterns: /(good night|\bgn\b|shubh ratri|good nite)/i,
+    reply: () =>
+      `🌙 Good Night! Shubh Ratri! Ram Ram Ji! 🙏\n\nMay your dreams lead you to your perfect home!\n\n✨ Arihant Anchal awaits you...\n📞 Call us anytime: +91 90012 33545\n\nSweet dreams! 🌟`,
+  },
+  {
+    patterns: /(jai (shri )?krishna|jay krishna|radhe radhe|hare krishna|jai krishn)/i,
+    reply: () =>
+      `🙏 Jai Shri Krishna! Radhe Radhe!\n\nKrishna Ji ki kripa se aapka swagat hai **Arihant Anchal** mein!\n\n🏠 2 BHK — ₹41 Lakhs*\n👑 4 BHK — ₹81 Lakhs*\n\n📞 For details: +91 90012 33545`,
+  },
+  {
+    patterns: /(om namah|om shanti|har har mahadev|jai mahadev|bhole|shiv ji)/i,
+    reply: () =>
+      `🕉️ Om Namah Shivay! Har Har Mahadev! 🙏\n\nBhagwan Shiv Ji ki kripa aap par sadaa bani rahe!\n\nArihant Anchal is **Vastu Compliant** — a truly auspicious home.\n\n📞 +91 90012 33545`,
+  },
+  {
+    patterns: /^om$/i,
+    reply: () =>
+      `🕉️ Om! Namaste Ji! 🙏\n\nSweet greetings! Welcome to **Arihant Anchal** — Jodhpur's finest luxury homes.\n\n🏠 2 BHK ₹41L* | 👑 4 BHK ₹81L*\n\nHow may I help you today?`,
+  },
+  {
+    patterns: /(hi|hello|hey|ram ram|namaste|hii|helo|namaskar|jai ram|ram|radha swami)/i,
     reply: () => {
       const h = new Date().getHours();
-      const greet = h < 12 ? "Shubh Prabhat 🌅" : h < 17 ? "Shubh Dopahar ☀️" : "Shubh Sandhya 🌆";
-      return `Ram Ram! 🙏 ${greet}\n\nWelcome to **Arihant Anchal** – Jodhpur's most awaited luxury residential township.\n\n✨ Luxury 2 BHK & 4 BHK homes\n📍 Dali Bai Circle, Jodhpur\n💰 Starting ₹45 Lakhs*\n\nHow can I assist you today?`;
+      const greet = h < 12 ? "Shubh Prabhat! 🌅" : h < 17 ? "Ram Ram Ji! ☀️" : "Shubh Sandhya! 🌆";
+      return `Ram Ram! 🙏 ${greet}\n\nWelcome to **Arihant Anchal** – Jodhpur's most awaited luxury township.\n\n✨ Luxury 2 BHK & 4 BHK homes\n📍 Dali Bai Circle, Jodhpur\n\nHow can I assist you today?`;
     },
   },
   {
     patterns: /(price|cost|budget|rate|lakh|pricing|kitna|kitne)/i,
     reply: () =>
-      `💰 **PRICING (2026 Launch)**\n\n🏠 2 BHK Premium — ₹45L – ₹55L*\n👑 4 BHK Luxury — ₹90L – ₹1.2Cr*\n🌟 Sky Penthouse — On Request\n\n✅ No Hidden Charges\n✅ JDA Approved\n✅ Flexi Payment Plans\n\nWould you like a **detailed brochure** on WhatsApp?`,
+      `💰 **PRICING**\n\n🏠 2 BHK — ₹41 Lakhs*\n👑 4 BHK — ₹81 Lakhs*\n\n📞 For complete details:\n+91 90012 33545\n\nCall or WhatsApp — our team will help! 🙏`,
   },
   {
     patterns: /(2 ?bhk|two bhk|2bhk)/i,
     reply: () =>
-      `🏠 **2 BHK PREMIUM RESIDENCES**\n\n📐 Carpet Area: 750 – 900 sq.ft\n🪟 Cross-Ventilated Rooms\n🏗 Premium Flooring & Fittings\n🔑 Vastu Compliant\n💰 Price: ₹45L – ₹55L*\n\n📋 Available in A, B & C wing.\nShall I WhatsApp you the floor plans?`,
+      `🏠 **2 BHK** — Starting ₹41 Lakhs* 🎉\n\nFor more details, please call or WhatsApp:\n📞 **+91 90012 33545**\n\nOur team will share full details immediately! 🙏`,
   },
   {
     patterns: /(4 ?bhk|four bhk|4bhk|penthouse|luxury)/i,
     reply: () =>
-      `👑 **4 BHK LUXURY RESIDENCES**\n\n📐 Carpet Area: 1500 – 1800 sq.ft\n🛁 3 Premium Bathrooms\n🍳 Designer Modular Kitchen\n🌆 Panoramic City Views\n💰 Price: ₹90L – ₹1.2Cr*\n\nOnly **LIMITED UNITS** remaining!\nBook a private viewing today.`,
+      `👑 **4 BHK** — Starting ₹81 Lakhs* 🎉\n\nFor more details, please call or WhatsApp:\n📞 **+91 90012 33545**\n\nOnly **LIMITED UNITS** remaining! 🙏`,
   },
   {
     patterns: /(visit|appointment|book|schedule|dekna|dekhna)/i,
     reply: () =>
-      `📅 **BOOK A FREE SITE VISIT**\n\n🚗 FREE Car Pickup from your location\n🎁 Special gift on visit\n⏰ Timings: 10 AM – 6 PM\n📍 Dali Bai Circle, Jodhpur\n\nWould you prefer **Today** or **Tomorrow**?\nOr call us directly: +91 90012 33545`,
+      `📅 **BOOK A FREE SITE VISIT**\n\n🚗 FREE Car Pickup from your location\n🎁 Special gift on visit\n⏰ Timings: 10 AM – 6 PM\n\n📞 Call or WhatsApp: +91 90012 33545\n\nWould you prefer Today or Tomorrow? 🙏`,
   },
   {
     patterns: /(location|map|address|where|kahan|dali|jaisalmer bypass)/i,
     reply: () =>
-      `📍 **ARIHANT ANCHAL LOCATION**\n\nNear Dali Bai Circle,\nJaisalmer Bypass Road,\nJodhpur, Rajasthan 342014\n\n🚗 10 min from Jodhpur Airport\n🏥 5 min from AIIMS Jodhpur\n🛒 3 min from City Mall\n🚉 Close to Jodhpur Railway Station\n\nGoogle Maps link sent on WhatsApp!`,
+      `📍 **ARIHANT ANCHAL**\n\nNear Dali Bai Circle,\nJaisalmer Bypass Road,\nJodhpur, Rajasthan 342014\n\n🚗 10 min from Airport\n🏥 5 min from AIIMS Jodhpur\n🛒 3 min from City Mall\n\n📞 +91 90012 33545`,
   },
   {
     patterns: /(ameniti|gym|pool|park|club|facility|facilities|swimming)/i,
     reply: () =>
-      `🏊 **WORLD-CLASS AMENITIES**\n\n🏋️ Indoor Gym & Yoga Studio\n🏊 Rooftop Swimming Pool\n🎮 Kids Play Zone\n🌿 Landscaped Gardens\n🔒 24/7 CCTV Security\n🅿️ Dedicated Parking\n🏸 Badminton & Indoor Games\n☕ Community Clubhouse\n\n600+ Happy Families already call this home!`,
+      `🏊 **WORLD-CLASS AMENITIES**\n\n🏋️ Indoor Gym & Yoga Studio\n🏊 Rooftop Swimming Pool\n🎮 Kids Play Zone\n🌿 Landscaped Gardens\n🔒 24/7 CCTV Security\n🅿️ Dedicated Parking\n\n🏠 500+ Families Already Living Here!\n\n📞 +91 90012 33545`,
   },
   {
     patterns: /(emi|loan|finance|bank|installment|pay)/i,
     reply: () =>
-      `🧮 **EMI CALCULATOR (Approx)**\n\n💰 For ₹45 Lakh @ 8.5% / 20 Yrs\n→ EMI: ~₹39,000/month\n\n💰 For ₹60 Lakh @ 8.5% / 20 Yrs\n→ EMI: ~₹52,000/month\n\n🏦 Tie-ups with SBI, HDFC, ICICI\n✅ Home Loan assistance included\n\nShall I connect you with our finance team?`,
+      `🧮 **HOME LOAN ASSISTANCE**\n\n🏦 Tie-ups with SBI, HDFC, ICICI\n✅ Easy EMI options available\n✅ Home Loan assistance included\n\n📞 For EMI details & calculations:\n+91 90012 33545\n\nOur finance team will guide you! 🙏`,
   },
   {
     patterns: /(offer|discount|deal|scheme|launch price|early bird|prebook)/i,
     reply: () =>
-      `🎁 **EXCLUSIVE LAUNCH OFFER**\n\n⭐ Pre-Launch Price — LIVE NOW\n🎀 FREE Modular Kitchen (limited)\n💎 Guaranteed Returns on Rental\n🚗 FREE Parking Space\n📜 Zero Stamp Duty on Select Units\n⏳ Offer Valid for **FEW UNITS ONLY**\n\nBook NOW to lock your price! 🔒`,
+      `🎁 **EXCLUSIVE LAUNCH OFFER**\n\n⭐ Pre-Launch Price — LIVE NOW\n🎀 FREE Modular Kitchen (limited)\n🚗 FREE Parking Space\n⏳ Offer Valid for **FEW UNITS ONLY**\n\n📞 Call NOW to lock your price:\n+91 90012 33545 🔒`,
   },
   {
     patterns: /(rera|approved|legal|jda|certificate)/i,
     reply: () =>
-      `✅ **LEGAL & APPROVALS**\n\n🏛 RERA Registered: RAJ/P/2017/322\n🏛 JDA Approved Layout\n📜 Clear Title & Documentation\n🔍 ISO Certified Quality\n🏗 30+ Years of Trust\n\nArihant Superstructures — Building Trust Since 1994.`,
+      `✅ **LEGAL & APPROVALS**\n\n🏛 RERA: RAJ/P/2017/322\n🏛 JDA Approved Layout\n📜 Clear Title & Documentation\n🔍 ISO Certified Quality\n\n📞 +91 90012 33545\n\nBuilding Trust Since 1994 🙏`,
   },
   {
     patterns: /(contact|call|phone|number|whatsapp)/i,
     reply: () =>
-      `📞 **CONTACT US**\n\n📱 Call / WhatsApp: +91 90012 33545\n⏰ Hours: 10 AM – 7 PM (Mon–Sun)\n\nOur sales team will call you within **30 minutes** of your inquiry.\n\nWould you like us to call you now?`,
+      `📞 **CONTACT US**\n\n📱 Call / WhatsApp: +91 90012 33545\n⏰ Hours: 10 AM – 7 PM (Mon–Sun)\n\nOur team will respond within **30 minutes**! 🙏`,
   },
 ];
 
@@ -84,7 +109,7 @@ const processQuery = (q) => {
   for (const entry of KB) {
     if (entry.patterns.test(q)) return entry.reply();
   }
-  return `Thank you for your question! 🙏\n\nI'll connect you with our sales expert immediately.\n\nYou can also:\n1️⃣ Call: +91 90012 33545\n2️⃣ WhatsApp us directly\n3️⃣ Book a free site visit\n\nWhat would you like to do?`;
+  return `Ram Ram! 🙏\n\nFor any query, our team is always ready to help!\n\n📞 Call / WhatsApp: +91 90012 33545\n⏰ 10 AM – 7 PM (Mon–Sun)\n\nShall I book a FREE site visit for you? 🏠`;
 };
 
 const BotMessage = ({ text }) => (
@@ -152,7 +177,7 @@ const Chatbot = () => {
     setMessages([
       {
         role: "bot",
-        text: `Ram Ram! 🙏 ${greet}\n\nWelcome to **Arihant Anchal** – Jodhpur's finest luxury residences.\n\n🏠 2 BHK starting ₹45L | 4 BHK from ₹90L\n📍 Dali Bai Circle, Jodhpur\n\nHow can I help you today?`,
+        text: `Ram Ram! 🙏 ${greet}\n\nWelcome to **Arihant Anchal** – Jodhpur's finest luxury residences.\n\n🏠 2 BHK ₹41L* | 👑 4 BHK ₹81L*\n📍 Dali Bai Circle, Jodhpur\n\nHow can I help you today?`,
       },
     ]);
   }, []);
@@ -218,7 +243,7 @@ const Chatbot = () => {
               {/* Stats Strip */}
               <div className="mt-4 grid grid-cols-3 gap-2">
                 {[
-                  { icon: <Users size={12} />, label: "600+ Residents" },
+                  { icon: <Users size={12} />, label: "500+ Families Living" },
                   { icon: <ShieldCheck size={12} />, label: "JDA Approved" },
                   { icon: <Layout size={12} />, label: "2 & 4 BHK" },
                 ].map(({ icon, label }) => (

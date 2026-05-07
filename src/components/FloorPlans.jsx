@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import siteMap2BHK from './site mam 2 bhk.jpeg';
+import siteMap4BHK from './site map 4 bhk.jpeg';
 
 const UNITS = [
   {
     type: '2 BHK',
     badge: 'Executive Series',
     area: '950 sq.ft',
-    price: '₹45L – ₹55L',
+    price: '₹41L',
+    oldPrice: '₹45L',
     tag: 'Best Seller',
     tagColor: 'bg-orange-600',
     features: [
@@ -16,6 +19,7 @@ const UNITS = [
       'Cross Ventilation Design',
       'Vastu Compliant Layout',
     ],
+    siteMap: siteMap2BHK,
     color: 'from-orange-600/20 to-orange-800/5',
     accent: 'text-orange-500',
     border: 'border-orange-500/30',
@@ -31,7 +35,8 @@ const UNITS = [
     type: '4 BHK',
     badge: 'Luxury Series',
     area: '1750 sq.ft',
-    price: '₹90L – ₹1.2Cr',
+    price: '₹81L',
+    oldPrice: '₹90L',
     tag: 'Ultra Luxury',
     tagColor: 'bg-amber-600',
     features: [
@@ -42,6 +47,7 @@ const UNITS = [
       'Private Terrace Access',
       'Vastu Compliant Layout',
     ],
+    siteMap: siteMap4BHK,
     color: 'from-amber-600/20 to-amber-800/5',
     accent: 'text-amber-400',
     border: 'border-amber-500/30',
@@ -91,8 +97,15 @@ const FloorPlanSVG = ({ planLines }) => (
 );
 
 const FloorPlans = () => {
-  const [active, setActive] = useState(0);
+  const [active, setActive]   = useState(0);
+  const [lightbox, setLightbox] = useState(null);
   const unit = UNITS[active];
+
+  useEffect(() => {
+    const close = (e) => { if (e.key === 'Escape') setLightbox(null); };
+    window.addEventListener('keydown', close);
+    return () => window.removeEventListener('keydown', close);
+  }, []);
 
   const scrollToContact = () => {
     const el = document.getElementById('Contact');
@@ -118,9 +131,9 @@ const FloorPlans = () => {
           </p>
         </div>
 
-        <div className="mt-10 flex flex-wrap gap-3">
+        <div className="mt-10 flex flex-wrap gap-2 sm:gap-3">
           {['Master Plan Ready', 'Vastu Compliant', 'Power Backup', 'JDA Approved', 'RERA Registered'].map((b) => (
-            <span key={b} className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-[10px] font-black uppercase tracking-widest text-zinc-400">
+            <span key={b} className="px-3 sm:px-4 py-1.5 sm:py-2 bg-white/5 border border-white/10 rounded-full text-[9px] sm:text-[10px] font-black uppercase tracking-wider sm:tracking-widest text-zinc-400">
               ✓ {b}
             </span>
           ))}
@@ -153,7 +166,11 @@ const FloorPlans = () => {
                 <span className="text-white font-black text-2xl">{u.type}</span>
                 <span className={`text-sm font-bold ${active === i ? u.accent : 'text-zinc-600'}`}>{u.area}</span>
               </div>
-              <p className={`text-xs font-bold mt-1 ${active === i ? 'text-zinc-300' : 'text-zinc-600'}`}>{u.price}</p>
+              <p className="mt-1 flex items-center gap-2">
+                <span className="text-xs line-through text-zinc-600">{u.oldPrice}</span>
+                <span className={`text-sm font-black ${active === i ? 'text-orange-400' : 'text-zinc-500'}`}>{u.price}</span>
+                <span className="text-[9px] font-black text-white bg-orange-600 px-1.5 py-0.5 rounded-full">OFFER</span>
+              </p>
             </button>
           ))}
 
@@ -173,19 +190,63 @@ const FloorPlans = () => {
 
         {/* Right — plan detail */}
         <div className="lg:col-span-8 flex flex-col gap-6">
-          <div className={`bg-gradient-to-br ${unit.color} border ${unit.border} rounded-3xl p-4 md:p-6`}>
-            <div className="flex items-center justify-between mb-4">
+          <div className={`bg-gradient-to-br ${unit.color} border ${unit.border} rounded-3xl p-4 md:p-6 shadow-2xl`}>
+            <div className="flex items-center justify-between mb-5">
               <div>
                 <span className={`text-[9px] font-black uppercase tracking-[0.4em] ${unit.accent}`}>{unit.badge}</span>
-                <h3 className="text-white font-black text-3xl mt-0.5">{unit.type} Layout</h3>
+                <h3 className="text-white font-black text-3xl mt-1">{unit.type} <span className={unit.accent}>Layout</span></h3>
               </div>
-              <div className="text-right">
-                <p className="text-zinc-500 text-[10px] uppercase font-bold">Carpet Area</p>
-                <p className={`font-black text-xl ${unit.accent}`}>{unit.area}</p>
+              <div className="flex items-center gap-4">
+                <div className="text-right">
+                  <p className="text-zinc-500 text-[10px] uppercase font-bold tracking-wider">Carpet Area</p>
+                  <p className={`font-black text-2xl ${unit.accent}`}>{unit.area}</p>
+                  <p className="flex items-center gap-2 mt-0.5">
+                    <span className="text-zinc-600 text-xs line-through">{unit.oldPrice}</span>
+                    <span className="text-orange-400 text-base font-black">{unit.price}</span>
+                  </p>
+                </div>
+                {unit.siteMap && (
+                  <button
+                    onClick={() => setLightbox(unit.siteMap)}
+                    className={`w-10 h-10 rounded-xl border ${unit.border} bg-white/5 hover:bg-white/15 flex items-center justify-center transition-all group`}
+                    title="View Full Plan"
+                  >
+                    <svg className={`w-4 h-4 ${unit.accent} group-hover:scale-110 transition-transform`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                    </svg>
+                  </button>
+                )}
               </div>
             </div>
-            <FloorPlanSVG planLines={unit.planLines} />
-            <p className="text-zinc-600 text-[9px] text-center mt-3 uppercase tracking-widest font-bold">
+
+            {/* Site map image with zoom hover */}
+            {unit.siteMap ? (
+              <div
+                className="relative overflow-hidden rounded-2xl cursor-zoom-in group"
+                onClick={() => setLightbox(unit.siteMap)}
+              >
+                <img
+                  src={unit.siteMap}
+                  alt={`${unit.type} Site Map`}
+                  className="w-full object-contain bg-black/30 transition-transform duration-700 group-hover:scale-105"
+                  style={{ maxHeight: 360 }}
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
+                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/70 backdrop-blur-sm rounded-full px-5 py-2.5 flex items-center gap-2">
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                    </svg>
+                    <span className="text-white text-[10px] font-black uppercase tracking-widest">View Full Plan</span>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <FloorPlanSVG planLines={unit.planLines} />
+            )}
+
+            <p className="text-zinc-600 text-[9px] text-center mt-4 uppercase tracking-widest font-bold">
               Indicative layout · Not to scale · Actual may vary
             </p>
           </div>
@@ -200,12 +261,15 @@ const FloorPlans = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3">
-            <button
-              onClick={scrollToContact}
-              className="flex-1 py-4 bg-orange-600 hover:bg-orange-500 active:scale-[0.98] text-white rounded-2xl font-black text-[11px] uppercase tracking-[0.3em] transition-all shadow-xl shadow-orange-600/25"
+            <a
+              href="/Arihant Anchal .pdf"
+              download="Arihant-Anchal-Brochure.pdf"
+              target="_blank"
+              rel="noreferrer"
+              className="flex-1 py-4 bg-orange-600 hover:bg-orange-500 active:scale-[0.98] text-white rounded-2xl font-black text-[11px] uppercase tracking-[0.3em] transition-all shadow-xl shadow-orange-600/25 text-center flex items-center justify-center gap-2"
             >
-              Download Brochure & Layouts
-            </button>
+              📋 Download Brochure
+            </a>
             <button
               onClick={scrollToContact}
               className="flex-1 py-4 bg-white/[0.08] hover:bg-white/[0.14] border border-white/10 text-white rounded-2xl font-black text-[11px] uppercase tracking-[0.3em] transition-all"
@@ -215,6 +279,31 @@ const FloorPlans = () => {
           </div>
         </div>
       </div>
+      {/* ── FULLSCREEN LIGHTBOX ── */}
+      {lightbox && (
+        <div
+          className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex items-center justify-center p-4"
+          onClick={() => setLightbox(null)}
+        >
+          <button
+            onClick={() => setLightbox(null)}
+            className="absolute top-5 right-5 w-11 h-11 bg-white/10 hover:bg-orange-600 rounded-full flex items-center justify-center text-white transition-colors"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <img
+            src={lightbox}
+            alt="Site Map Full View"
+            className="max-w-4xl max-h-[90vh] w-full object-contain rounded-2xl shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          />
+          <p className="absolute bottom-6 left-1/2 -translate-x-1/2 text-zinc-600 text-[9px] uppercase tracking-widest font-bold">
+            Press ESC or click outside to close
+          </p>
+        </div>
+      )}
     </section>
   );
 };

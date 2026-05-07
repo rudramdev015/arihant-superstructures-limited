@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import arihantLogo from './arihant-logo.png';
+
+const arihantLogo = '/LOGO.jpeg';
 
 const NAV_LINKS = ['Home', 'About', 'Projects', 'Testimonials'];
 
@@ -55,8 +56,14 @@ const Navbar = () => {
             }`}
         >
           {/* Logo */}
-          <div className={`transition-all duration-500 ${isScrolled ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
-            <img src={arihantLogo} alt="Arihant Logo" className="h-8 md:h-9 w-auto" />
+          <div className="transition-all duration-500">
+            <div className={`transition-all duration-500 rounded-xl overflow-hidden ${!isScrolled ? 'bg-white/90 backdrop-blur-sm shadow-lg px-2 py-1' : ''}`}>
+              <img
+                src={arihantLogo}
+                alt="Arihant Logo"
+                className={`w-auto object-contain transition-all duration-500 ${isScrolled ? 'h-10 md:h-12' : 'h-10 md:h-12'}`}
+              />
+            </div>
           </div>
 
           {/* Desktop links */}
@@ -118,7 +125,9 @@ const Navbar = () => {
       >
         {/* Close */}
         <div className="flex justify-between items-center p-7 pb-4">
-          <img src={arihantLogo} alt="Arihant Logo" className="h-9 opacity-70" />
+          <div className="bg-white/95 rounded-xl px-2 py-1">
+            <img src={arihantLogo} alt="Arihant Logo" className="h-12 md:h-14 w-auto object-contain" />
+          </div>
           <button
             onClick={() => setShowMobileMenu(false)}
             className="w-13 h-13 bg-white/8 rounded-2xl text-white flex items-center justify-center hover:bg-white/15 transition-colors p-3"
