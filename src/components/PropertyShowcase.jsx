@@ -1,46 +1,30 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Download, Maximize, ChevronRight, Eye, Box, ShieldCheck, Zap, TreePine } from 'lucide-react';
+import { Download, Eye, Box, ShieldCheck, Zap, TreePine } from 'lucide-react';
 
-import lifestyle2BHK from '../assets/images/r1 (2).png';
-import lifestyle4BHK from '../assets/images/r1 (6).png';
+import lifestyle2BHK from '../assets/images/000AVAE1.jpeg';
+import lifestyle4BHK from '../assets/images/OAOSOOA11.jpeg';
 import siteMap2BHK   from './site mam 2 bhk.jpeg';
 import siteMap4BHK   from './site map 4 bhk.jpeg';
 
 const LAYOUTS = {
   '2BHK': {
-    label:     'Executive Series',
-    title:     '2 BHK',
-    area:      '950 sq.ft',
-    price:     '₹41L',
-    oldPrice:  '₹45L',
-    accent:    'from-orange-500 to-red-600',
-    details: [
-      'Vastu Compliant Design',
-      '2 Grand Master Bedrooms',
-      'Dual Wide Balconies',
-      'Modular Kitchen Space',
-      'Premium Vitrified Flooring',
-    ],
-    lifestyle:  lifestyle2BHK,
-    blueprint:  siteMap2BHK,
+    label:    'Executive Series',
+    title:    '2 BHK',
+    price:    '₹41L',
+    oldPrice: '₹45L',
+    accent:   'from-orange-500 to-red-600',
+    lifestyle: lifestyle2BHK,
+    blueprint: siteMap2BHK,
   },
   '4BHK': {
-    label:     'Luxury Series',
-    title:     '4 BHK',
-    area:      '1750 sq.ft',
-    price:     '₹81L',
-    oldPrice:  '₹90L',
-    accent:    'from-amber-500 to-orange-600',
-    details: [
-      '4 Ultra-Luxury Suites',
-      'Private Entry Lobby',
-      "Chef's Grade Kitchen",
-      'Grand Deck with Views',
-      'Smart Home Automation',
-    ],
-    lifestyle:  lifestyle4BHK,
-    blueprint:  siteMap4BHK,
+    label:    'Luxury Series',
+    title:    '4 BHK',
+    price:    '₹81L',
+    oldPrice: '₹90L',
+    accent:   'from-amber-500 to-orange-600',
+    lifestyle: lifestyle4BHK,
+    blueprint: siteMap4BHK,
   },
 };
 
@@ -104,12 +88,12 @@ const PropertyShowcase = () => {
           {/* LEFT — info */}
           <div className="xl:col-span-5 flex flex-col gap-5 sm:gap-8 order-2 xl:order-1">
 
-            {/* Tab selector — only 2 tabs */}
+            {/* Tab selector */}
             <div className="flex p-1.5 bg-white/5 backdrop-blur-xl rounded-[1.8rem] border border-white/10">
               {Object.keys(LAYOUTS).map((tab) => (
                 <button
                   key={tab}
-                  onClick={() => setActiveTab(tab)}
+                  onClick={() => { setActiveTab(tab); setViewMode('lifestyle'); }}
                   className={`relative flex-1 py-4 sm:py-5 rounded-2xl font-black text-[11px] sm:text-[12px] tracking-[0.25em] uppercase transition-all duration-300 z-10 ${
                     activeTab === tab ? 'text-white' : 'text-white/30 hover:text-white/60'
                   }`}
@@ -133,39 +117,34 @@ const PropertyShowcase = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 20 }}
                 transition={{ duration: 0.35 }}
-                className="bg-white/5 border border-white/10 rounded-[2.5rem] sm:rounded-[3.5rem] p-7 sm:p-12 backdrop-blur-xl flex flex-col gap-6"
+                className="bg-white/5 border border-white/10 rounded-[2.5rem] sm:rounded-[3.5rem] p-7 sm:p-12 backdrop-blur-xl flex flex-col gap-8 flex-1"
               >
+                {/* Label + Title */}
                 <div>
-                  <p className="text-orange-500 font-black text-[10px] uppercase tracking-[0.5em] mb-2">{current.label}</p>
-                  <h3 className="text-6xl sm:text-7xl font-black text-white tracking-tighter leading-none uppercase">{current.title}</h3>
+                  <p className="text-orange-500 font-black text-[10px] uppercase tracking-[0.5em] mb-3">{current.label}</p>
+                  <h3 className="text-7xl sm:text-8xl font-black text-white tracking-tighter leading-none uppercase">{current.title}</h3>
                 </div>
 
-                {/* Area + price */}
-                <div className="bg-white/5 border border-white/[0.07] p-5 sm:p-7 rounded-2xl sm:rounded-3xl flex justify-between items-center">
-                  <div>
-                    <p className="text-[10px] font-black text-white/30 uppercase tracking-[0.3em] mb-1">Floor Space</p>
-                    <p className="text-2xl sm:text-3xl font-black text-white tracking-tighter">{current.area}</p>
-                    <div className="flex items-center gap-2 mt-1 flex-wrap">
-                      <span className="text-white/40 text-xs line-through">{current.oldPrice}</span>
-                      <span className="text-orange-400 text-lg font-black">{current.price}</span>
-                      <span className="text-[9px] font-black text-white bg-orange-600 px-2 py-0.5 rounded-full">SPECIAL PRICE</span>
-                    </div>
+                {/* Price block */}
+                <div className="flex flex-col gap-3">
+                  <p className="text-[9px] font-black text-white/30 uppercase tracking-[0.45em]">Special Launch Price</p>
+                  <div className="flex items-baseline gap-3 flex-wrap">
+                    <span className="text-white/30 text-2xl line-through font-black">{current.oldPrice}</span>
+                    <span className="text-5xl sm:text-6xl font-black text-orange-400 tracking-tighter leading-none">{current.price}</span>
                   </div>
-                  <Maximize size={24} className="text-orange-600 opacity-50" />
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="inline-flex items-center gap-1.5 text-[9px] font-black text-white bg-orange-600 px-3 py-1.5 rounded-full uppercase tracking-widest">
+                      <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                      Limited Units
+                    </span>
+                    <span className="text-[9px] font-black text-white/30 uppercase tracking-widest">Onwards*</span>
+                  </div>
                 </div>
 
-                {/* Features */}
-                <div className="space-y-3">
-                  {current.details.map((d) => (
-                    <div key={d} className="flex items-center gap-4 group">
-                      <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 group-hover:border-orange-600 group-hover:bg-orange-600 transition-all">
-                        <ChevronRight size={14} className="text-orange-500 group-hover:text-white" />
-                      </div>
-                      <p className="text-[12px] font-bold text-white/70 uppercase tracking-[0.12em]">{d}</p>
-                    </div>
-                  ))}
-                </div>
+                {/* Divider */}
+                <div className="h-px bg-white/8" />
 
+                {/* Download */}
                 <a
                   href="/Arihant Anchal .pdf"
                   download="Arihant-Anchal-Brochure.pdf"
@@ -222,7 +201,7 @@ const PropertyShowcase = () => {
                     className={`w-full h-full transition-all duration-700 ${
                       viewMode === 'blueprint'
                         ? 'object-contain bg-white/5 p-4'
-                        : 'object-cover opacity-85 group-hover:scale-105'
+                        : 'object-cover opacity-90 group-hover:scale-105'
                     }`}
                     loading="lazy"
                     decoding="async"
@@ -232,7 +211,7 @@ const PropertyShowcase = () => {
 
               {/* Bottom fade for lifestyle only */}
               {viewMode === 'lifestyle' && (
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-70 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/80 via-transparent to-transparent pointer-events-none" />
               )}
 
               {/* Label */}

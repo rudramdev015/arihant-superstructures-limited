@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageSquare, X, Send, Users, Crown, ShieldCheck, Layout, Phone, MapPin, Calculator, Home, Star } from "lucide-react";
+import { MessageSquare, X, Send, Users, Crown, ShieldCheck, Layout, Phone } from "lucide-react";
 
 const CONFIG = {
   PHONE: "+91 9001233545",
@@ -9,13 +9,13 @@ const CONFIG = {
 };
 
 const QUICK_CHIPS = [
-  { label: "💰 Price List", query: "price list" },
-  { label: "🏠 2 BHK Plans", query: "2 bhk plans" },
-  { label: "👑 4 BHK Luxury", query: "4 bhk luxury" },
+  { label: "💰 Price", query: "price list" },
+  { label: "🏠 2 BHK", query: "2 bhk plans" },
+  { label: "👑 4 BHK", query: "4 bhk luxury" },
   { label: "📍 Location", query: "location" },
   { label: "🏊 Amenities", query: "amenities" },
   { label: "📅 Book Visit", query: "book visit" },
-  { label: "🧮 EMI Calc", query: "emi calculator" },
+  { label: "🧮 EMI", query: "emi calculator" },
   { label: "🤝 Offer", query: "current offer" },
 ];
 
@@ -86,7 +86,7 @@ const KB = [
   {
     patterns: /(emi|loan|finance|bank|installment|pay)/i,
     reply: () =>
-      `🧮 **HOME LOAN ASSISTANCE**\n\n🏦 Tie-ups with SBI, HDFC, ICICI\n✅ Easy EMI options available\n✅ Home Loan assistance included\n\n📞 For EMI details & calculations:\n+91 90012 33545\n\nOur finance team will guide you! 🙏`,
+      `🧮 **HOME LOAN ASSISTANCE**\n\n🏦 Tie-ups with SBI, HDFC, ICICI\n✅ Easy EMI options available\n✅ Home Loan assistance included\n\n📞 For EMI details:\n+91 90012 33545\n\nOur finance team will guide you! 🙏`,
   },
   {
     patterns: /(offer|discount|deal|scheme|launch price|early bird|prebook)/i,
@@ -116,7 +116,14 @@ const BotMessage = ({ text }) => (
   <div className="flex justify-start">
     <div className="max-w-[88%] px-4 py-3 rounded-2xl rounded-tl-none text-sm leading-relaxed bg-white text-slate-800 border border-slate-100 shadow-sm">
       {text.split("\n").map((line, i) => (
-        <p key={i} className={`${i > 0 ? "mt-1" : ""} ${line.startsWith("**") && line.endsWith("**") ? "font-black text-slate-900 text-[13px]" : ""}`}>
+        <p
+          key={i}
+          className={`${i > 0 && line ? "mt-1" : ""} ${
+            line.startsWith("**") && line.endsWith("**")
+              ? "font-black text-slate-900 text-[13px]"
+              : ""
+          }`}
+        >
           {line.replace(/\*\*(.*?)\*\*/g, "$1")}
         </p>
       ))}
@@ -189,199 +196,229 @@ const Chatbot = () => {
   useEffect(() => {
     if (isOpen) {
       setHasUnread(false);
-      setTimeout(() => inputRef.current?.focus(), 300);
+      setTimeout(() => inputRef.current?.focus(), 350);
     }
   }, [isOpen]);
 
   return (
-    <div className="fixed bottom-4 right-3 md:bottom-8 md:right-8 z-[9999] pointer-events-none font-sans">
-
-      {/* ── CHAT WINDOW ── */}
+    <>
+      {/* ── CHAT WINDOW OVERLAY (mobile full-screen backdrop) ── */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.85, y: 40 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.85, y: 40 }}
-            transition={{ type: "spring", stiffness: 300, damping: 28 }}
-            className="pointer-events-auto flex flex-col bg-white border border-slate-200/80 shadow-[0_30px_80px_rgba(0,0,0,0.18)] rounded-3xl overflow-hidden mb-4
-              w-[calc(100vw-24px)] sm:w-[390px] md:w-[420px]
-              h-[min(640px,82dvh)]"
-          >
-            {/* ── HEADER ── */}
-            <div className="bg-gradient-to-r from-[#0f172a] to-[#1e293b] px-5 py-4 text-white shrink-0">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="relative">
-                    <div className="w-11 h-11 bg-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-orange-500/30">
-                      <Crown size={20} className="text-white" />
-                    </div>
-                    <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-green-400 rounded-full border-2 border-[#0f172a]" />
-                  </div>
-                  <div>
-                    <h3 className="font-black text-[15px] leading-tight">Arihant Anchal</h3>
-                    <p className="text-[10px] text-slate-400 font-semibold tracking-widest uppercase">Sales Concierge • Online</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <a
-                    href={CONFIG.CALL_LINK}
-                    className="w-9 h-9 bg-white/10 hover:bg-green-500/20 rounded-xl flex items-center justify-center transition-colors"
-                    title="Call Us"
-                  >
-                    <Phone size={16} className="text-white" />
-                  </a>
-                  <button
-                    onClick={() => setIsOpen(false)}
-                    className="w-9 h-9 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition-colors"
-                  >
-                    <X size={17} />
-                  </button>
-                </div>
-              </div>
-
-              {/* Stats Strip */}
-              <div className="mt-4 grid grid-cols-3 gap-2">
-                {[
-                  { icon: <Users size={12} />, label: "500+ Families Living" },
-                  { icon: <ShieldCheck size={12} />, label: "JDA Approved" },
-                  { icon: <Layout size={12} />, label: "2 & 4 BHK" },
-                ].map(({ icon, label }) => (
-                  <div key={label} className="bg-white/8 border border-white/10 rounded-xl py-1.5 px-2 flex items-center gap-1.5">
-                    <span className="text-orange-400">{icon}</span>
-                    <span className="text-[9px] font-black uppercase tracking-wide text-slate-300">{label}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* ── MESSAGES ── */}
-            <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3 bg-slate-50/60 no-scrollbar">
-              {messages.map((msg, i) =>
-                msg.role === "bot" ? <BotMessage key={i} text={msg.text} /> : <UserMessage key={i} text={msg.text} />
-              )}
-              {isTyping && <TypingDots />}
-              <div ref={scrollRef} />
-            </div>
-
-            {/* ── QUICK CHIPS ── */}
-            <div className="px-4 pt-3 pb-2 flex gap-2 overflow-x-auto no-scrollbar bg-white border-t border-slate-100 shrink-0">
-              {QUICK_CHIPS.map(({ label, query }) => (
-                <button
-                  key={label}
-                  onClick={() => sendMessage(query)}
-                  className="whitespace-nowrap px-3 py-1.5 bg-slate-100 hover:bg-orange-600 hover:text-white text-slate-700 rounded-full text-[10px] font-black uppercase tracking-wide transition-all border border-slate-200 hover:border-orange-600 shrink-0"
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
-
-            {/* ── INPUT ── */}
-            <form onSubmit={handleSubmit} className="px-4 pb-4 pt-2 bg-white shrink-0">
-              <div className="flex items-center gap-2 bg-slate-100 rounded-2xl px-4 py-1 border border-slate-200 focus-within:border-orange-400 focus-within:bg-white transition-all">
-                <input
-                  ref={inputRef}
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  placeholder="Ask about price, plans, location..."
-                  className="flex-1 bg-transparent py-2.5 text-sm text-slate-800 focus:outline-none placeholder-slate-400"
-                />
-                <button
-                  type="submit"
-                  disabled={!input.trim()}
-                  className="w-8 h-8 bg-orange-600 rounded-xl flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed transition-opacity shrink-0"
-                >
-                  <Send size={14} className="text-white" />
-                </button>
-              </div>
-
-              {/* CTA row */}
-              <div className="flex gap-2 mt-2.5">
-                <a
-                  href={CONFIG.WA_LINK}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-[#25D366] hover:bg-[#1db954] text-white rounded-xl text-[10px] font-black uppercase tracking-wide transition-colors"
-                >
-                  <svg className="w-3.5 h-3.5 fill-white" viewBox="0 0 448 512">
-                    <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.1 0-65.6-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.6-2.8-23.6-8.7-45-27.7-16.6-14.8-27.8-33.1-31.1-38.6-3.2-5.6-.3-8.6 2.5-11.4 2.5-2.5 5.5-6.5 8.3-9.7 2.8-3.3 3.7-5.6 5.6-9.3 1.9-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.6 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
-                  </svg>
-                  WhatsApp
-                </a>
-                <a
-                  href={CONFIG.CALL_LINK}
-                  className="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-slate-900 hover:bg-orange-600 text-white rounded-xl text-[10px] font-black uppercase tracking-wide transition-colors"
-                >
-                  <Phone size={12} />
-                  Call Now
-                </a>
-              </div>
-            </form>
-          </motion.div>
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/40 z-[9998] sm:hidden"
+            onClick={() => setIsOpen(false)}
+          />
         )}
       </AnimatePresence>
 
-      {/* ── FLOATING BUTTONS ── */}
-      <div className="flex flex-col gap-3 pointer-events-auto items-end">
+      <div className="fixed z-[9999] pointer-events-none"
+        style={{
+          bottom: 'calc(1rem + env(safe-area-inset-bottom, 0px))',
+          right: '0.75rem',
+        }}
+      >
 
-        {/* WhatsApp */}
-        <motion.a
-          whileHover={{ scale: 1.08 }}
-          whileTap={{ scale: 0.92 }}
-          href={CONFIG.WA_LINK}
-          target="_blank"
-          rel="noreferrer"
-          className="w-13 h-13 md:w-14 md:h-14 bg-[#25D366] rounded-2xl shadow-xl shadow-green-500/30 flex items-center justify-center border-2 border-white"
-          style={{ width: 52, height: 52 }}
-        >
-          <svg className="w-6 h-6 fill-white" viewBox="0 0 448 512">
-            <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.1 0-65.6-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.6-2.8-23.6-8.7-45-27.7-16.6-14.8-27.8-33.1-31.1-38.6-3.2-5.6-.3-8.6 2.5-11.4 2.5-2.5 5.5-6.5 8.3-9.7 2.8-3.3 3.7-5.6 5.6-9.3 1.9-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.6 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
-          </svg>
-        </motion.a>
+        {/* ── CHAT WINDOW ── */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.88, y: 32 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.88, y: 32 }}
+              transition={{ type: "spring", stiffness: 340, damping: 30 }}
+              className="pointer-events-auto flex flex-col bg-white shadow-[0_24px_80px_rgba(0,0,0,0.22)] rounded-3xl overflow-hidden mb-4 border border-slate-200/60"
+              style={{
+                width: 'min(calc(100vw - 24px), 420px)',
+                height: 'min(620px, calc(100dvh - 96px))',
+                maxHeight: 'calc(100dvh - 96px)',
+              }}
+            >
+              {/* ── HEADER ── */}
+              <div className="bg-gradient-to-r from-[#0a0f1e] to-[#1a2540] px-4 py-3.5 text-white shrink-0">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="relative shrink-0">
+                      <div className="w-10 h-10 bg-orange-500 rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/30">
+                        <Crown size={18} className="text-white" />
+                      </div>
+                      <span className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-green-400 rounded-full border-2 border-[#0a0f1e]" />
+                    </div>
+                    <div>
+                      <h3 className="font-black text-[14px] leading-tight">Arihant Anchal</h3>
+                      <p className="text-[9px] text-slate-400 font-bold tracking-widest uppercase">Sales Concierge • Online</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <a
+                      href={CONFIG.CALL_LINK}
+                      className="w-8 h-8 bg-white/10 hover:bg-green-500/20 rounded-xl flex items-center justify-center transition-colors"
+                      title="Call Us"
+                    >
+                      <Phone size={14} className="text-white" />
+                    </a>
+                    <button
+                      onClick={() => setIsOpen(false)}
+                      className="w-8 h-8 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition-colors"
+                    >
+                      <X size={15} />
+                    </button>
+                  </div>
+                </div>
 
-        {/* Chat Toggle */}
-        <motion.button
-          whileHover={{ scale: 1.08 }}
-          whileTap={{ scale: 0.92 }}
-          onClick={() => setIsOpen(!isOpen)}
-          className="relative w-14 h-14 md:w-16 md:h-16 rounded-2xl shadow-2xl shadow-slate-900/40 flex items-center justify-center border-4 border-white bg-[#0f172a]"
-        >
-          <AnimatePresence mode="wait">
-            {isOpen ? (
-              <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
-                <X size={26} className="text-white" />
-              </motion.span>
-            ) : (
-              <motion.span key="chat" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
-                <MessageSquare size={26} className="text-white" />
+                {/* Stats Strip */}
+                <div className="mt-3 grid grid-cols-3 gap-1.5">
+                  {[
+                    { icon: <Users size={10} />, label: "500+ Families" },
+                    { icon: <ShieldCheck size={10} />, label: "JDA Approved" },
+                    { icon: <Layout size={10} />, label: "2 & 4 BHK" },
+                  ].map(({ icon, label }) => (
+                    <div key={label} className="bg-white/8 border border-white/10 rounded-xl py-1.5 px-2 flex items-center gap-1">
+                      <span className="text-orange-400 shrink-0">{icon}</span>
+                      <span className="text-[8px] font-black uppercase tracking-wide text-slate-300 leading-tight">{label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* ── MESSAGES ── */}
+              <div className="flex-1 overflow-y-auto px-3 py-3 space-y-3 bg-slate-50/70 overscroll-contain">
+                {messages.map((msg, i) =>
+                  msg.role === "bot"
+                    ? <BotMessage key={i} text={msg.text} />
+                    : <UserMessage key={i} text={msg.text} />
+                )}
+                {isTyping && <TypingDots />}
+                <div ref={scrollRef} className="h-1" />
+              </div>
+
+              {/* ── QUICK CHIPS ── */}
+              <div className="px-3 pt-2.5 pb-2 flex gap-1.5 overflow-x-auto bg-white border-t border-slate-100 shrink-0"
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              >
+                {QUICK_CHIPS.map(({ label, query }) => (
+                  <button
+                    key={label}
+                    onClick={() => sendMessage(query)}
+                    className="whitespace-nowrap px-3 py-1.5 bg-slate-100 hover:bg-orange-600 hover:text-white text-slate-600 rounded-full text-[9px] font-black uppercase tracking-wide transition-all border border-slate-200 hover:border-orange-600 shrink-0 active:scale-95"
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+
+              {/* ── INPUT ── */}
+              <form onSubmit={handleSubmit} className="px-3 pb-3 pt-2 bg-white shrink-0">
+                <div className="flex items-center gap-2 bg-slate-100 rounded-2xl px-3.5 py-1 border border-slate-200 focus-within:border-orange-400 focus-within:bg-white transition-all">
+                  <input
+                    ref={inputRef}
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    placeholder="Ask about price, plans, location..."
+                    className="flex-1 bg-transparent py-2.5 text-[13px] text-slate-800 focus:outline-none placeholder-slate-400 min-w-0"
+                  />
+                  <button
+                    type="submit"
+                    disabled={!input.trim()}
+                    className="w-8 h-8 bg-orange-600 rounded-xl flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed transition-opacity shrink-0"
+                  >
+                    <Send size={13} className="text-white" />
+                  </button>
+                </div>
+
+                {/* CTA row */}
+                <div className="flex gap-2 mt-2">
+                  <a
+                    href={CONFIG.WA_LINK}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-[#25D366] hover:bg-[#1db954] text-white rounded-xl text-[10px] font-black uppercase tracking-wide transition-colors active:scale-95"
+                  >
+                    <svg className="w-3.5 h-3.5 fill-white shrink-0" viewBox="0 0 448 512">
+                      <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.1 0-65.6-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.6-2.8-23.6-8.7-45-27.7-16.6-14.8-27.8-33.1-31.1-38.6-3.2-5.6-.3-8.6 2.5-11.4 2.5-2.5 5.5-6.5 8.3-9.7 2.8-3.3 3.7-5.6 5.6-9.3 1.9-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.6 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+                    </svg>
+                    WhatsApp
+                  </a>
+                  <a
+                    href={CONFIG.CALL_LINK}
+                    className="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-slate-900 hover:bg-orange-600 text-white rounded-xl text-[10px] font-black uppercase tracking-wide transition-colors active:scale-95"
+                  >
+                    <Phone size={12} />
+                    Call Now
+                  </a>
+                </div>
+              </form>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* ── FLOATING BUTTONS ── */}
+        <div className="flex flex-col gap-3 pointer-events-auto items-end">
+
+          {/* WhatsApp */}
+          <motion.a
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.92 }}
+            href={CONFIG.WA_LINK}
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center justify-center bg-[#25D366] rounded-2xl shadow-xl shadow-green-500/30 border-2 border-white"
+            style={{ width: 50, height: 50 }}
+            aria-label="WhatsApp"
+          >
+            <svg className="w-6 h-6 fill-white" viewBox="0 0 448 512">
+              <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.1 0-65.6-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.6-2.8-23.6-8.7-45-27.7-16.6-14.8-27.8-33.1-31.1-38.6-3.2-5.6-.3-8.6 2.5-11.4 2.5-2.5 5.5-6.5 8.3-9.7 2.8-3.3 3.7-5.6 5.6-9.3 1.9-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.6 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+            </svg>
+          </motion.a>
+
+          {/* Chat Toggle */}
+          <motion.button
+            whileHover={{ scale: 1.06 }}
+            whileTap={{ scale: 0.92 }}
+            onClick={() => setIsOpen(!isOpen)}
+            className="relative rounded-2xl shadow-2xl shadow-slate-900/40 flex items-center justify-center border-[3px] border-white bg-[#0f172a]"
+            style={{ width: 54, height: 54 }}
+            aria-label="Open chat"
+          >
+            <AnimatePresence mode="wait">
+              {isOpen ? (
+                <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.18 }}>
+                  <X size={22} className="text-white" />
+                </motion.span>
+              ) : (
+                <motion.span key="chat" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.18 }}>
+                  <MessageSquare size={22} className="text-white" />
+                </motion.span>
+              )}
+            </AnimatePresence>
+
+            {/* Unread badge */}
+            {hasUnread && !isOpen && (
+              <motion.span
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                className="absolute -top-1 -right-1 w-5 h-5 bg-orange-500 rounded-full flex items-center justify-center border-2 border-white"
+              >
+                <span className="text-white text-[8px] font-black">1</span>
               </motion.span>
             )}
-          </AnimatePresence>
 
-          {/* Unread badge */}
-          {hasUnread && !isOpen && (
-            <motion.span
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-orange-500 rounded-full flex items-center justify-center border-2 border-white"
-            >
-              <span className="text-white text-[8px] font-black">1</span>
-            </motion.span>
-          )}
-
-          {/* Pulse ring */}
-          {!isOpen && (
-            <span className="absolute inset-0 rounded-2xl animate-ping bg-orange-500/20 pointer-events-none" />
-          )}
-        </motion.button>
+            {/* Pulse ring */}
+            {!isOpen && (
+              <span className="absolute inset-0 rounded-2xl animate-ping bg-orange-500/25 pointer-events-none" />
+            )}
+          </motion.button>
+        </div>
       </div>
 
       <style>{`
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
       `}</style>
-    </div>
+    </>
   );
 };
 
