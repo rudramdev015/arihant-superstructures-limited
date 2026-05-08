@@ -3,7 +3,7 @@ import React from 'react';
 const STATS = [
   { value: '2 & 4', label: 'BHK Flats' },
   { value: '2324', label: 'Total Units' },
-  { value: '4.4', label: 'Acres' },
+  { value: '900', label: 'Sq Ft' },
   { value: '7', label: 'Floors' },
 ];
 
@@ -52,7 +52,7 @@ const PropertyDetails = () => {
               Arihant Anchal offers a{' '}
               <span className="text-slate-900 font-bold">Supreme Lifestyle</span> at an affordable price.
               This Stilt + 7 Storey development spans over{' '}
-              <span className="text-orange-600 font-bold">4.40 acres</span> of lush greenery,
+              <span className="text-orange-600 font-bold">900 sq ft</span> of premium living space,
               offering well-planned roads and 24/7 CCTV security for your peace of mind.
             </p>
 

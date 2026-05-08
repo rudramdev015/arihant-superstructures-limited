@@ -364,7 +364,7 @@ const Gallery = () => {
           {[
             { value: `${ALL_IMAGES.length}+`, label: 'Curated Photos' },
             { value: '3',  label: 'Unit Types' },
-            { value: '2026', label: 'Launch Year' },
+            { value: '18.5', label: 'Total Acres' },
           ].map(({ value, label }) => (
             <div key={label} className="text-center">
               <p className="text-3xl md:text-4xl font-black text-slate-950">{value}</p>
