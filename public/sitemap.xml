@@ -6,7 +6,7 @@
 
   <!-- HOME — Highest priority -->
   <url>
-    <loc>https://arihantanchal.in/</loc>
+    <loc>https://www.arihantanchal.in/</loc>
     <lastmod>2026-05-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -14,7 +14,7 @@
 
   <!-- FLOOR PLANS section -->
   <url>
-    <loc>https://arihantanchal.in/#floorplans</loc>
+    <loc>https://www.arihantanchal.in/#floorplans</loc>
     <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -22,7 +22,7 @@
 
   <!-- GALLERY / PROJECTS section -->
   <url>
-    <loc>https://arihantanchal.in/#projects</loc>
+    <loc>https://www.arihantanchal.in/#projects</loc>
     <lastmod>2026-05-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -30,7 +30,7 @@
 
   <!-- ABOUT section -->
   <url>
-    <loc>https://arihantanchal.in/#about</loc>
+    <loc>https://www.arihantanchal.in/#about</loc>
     <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -38,7 +38,7 @@
 
   <!-- TESTIMONIALS section -->
   <url>
-    <loc>https://arihantanchal.in/#testimonials</loc>
+    <loc>https://www.arihantanchal.in/#testimonials</loc>
     <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -46,7 +46,7 @@
 
   <!-- CONTACT / BOOKING section -->
   <url>
-    <loc>https://arihantanchal.in/#Contact</loc>
+    <loc>https://www.arihantanchal.in/#Contact</loc>
     <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
