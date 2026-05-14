@@ -1,5 +1,8 @@
 # Netlify redirect: non-www → www (301 permanent)
 https://arihantanchal.in/*  https://www.arihantanchal.in/:splat  301!
 
+# Google Search Console verification — must be served as-is, NOT rewritten
+/google28a5fa94b18bdf18.html  /google28a5fa94b18bdf18.html  200!
+
 # SPA fallback: all routes serve index.html
 /*  /index.html  200

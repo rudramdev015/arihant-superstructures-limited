@@ -9,6 +9,13 @@
   status  = 301
   force   = true
 
+# Google Search Console verification file — serve as-is, never rewrite
+[[redirects]]
+  from  = "/google28a5fa94b18bdf18.html"
+  to    = "/google28a5fa94b18bdf18.html"
+  status = 200
+  force  = true
+
 # SPA fallback
 [[redirects]]
   from   = "/*"
