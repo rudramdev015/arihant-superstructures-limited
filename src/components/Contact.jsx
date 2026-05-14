@@ -203,14 +203,14 @@ const Contact = () => {
                   <span className="text-orange-400 font-black text-[10px] uppercase tracking-[0.45em]">Pre-Launch Open Now</span>
                 </motion.div>
 
-                <motion.h1
+                <motion.h2
                   variants={fadeUp}
                   custom={1}
                   className="text-5xl sm:text-7xl xl:text-[5.8rem] font-black text-white uppercase leading-[0.83] tracking-tighter"
                 >
                   RESERVE<br />YOUR<br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-orange-400 to-amber-300 italic">LEGACY.</span>
-                </motion.h1>
+                </motion.h2>
 
                 <motion.p
                   variants={fadeUp}
