@@ -70,12 +70,13 @@ const LABELS = [
 ];
 
 /* ── LAZY IMAGE with blur-up ── */
-const LazyImg = ({ src, alt, className, onClick }) => {
+const LazyImg = ({ src, alt, className, onClick, priority = false }) => {
   const ref = useRef(null);
   const [loaded, setLoaded] = useState(false);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(priority); // priority images start visible immediately
 
   useEffect(() => {
+    if (priority) return; // skip IntersectionObserver — already visible
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
@@ -84,7 +85,7 @@ const LazyImg = ({ src, alt, className, onClick }) => {
     );
     obs.observe(el);
     return () => obs.disconnect();
-  }, []);
+  }, [priority]);
 
   return (
     <div ref={ref} className={`${className} overflow-hidden bg-zinc-900`} onClick={onClick}>
@@ -92,7 +93,8 @@ const LazyImg = ({ src, alt, className, onClick }) => {
         <img
           src={src}
           alt={alt}
-          loading="lazy"
+          loading={priority ? 'eager' : 'lazy'}
+          fetchPriority={priority ? 'high' : 'low'}
           decoding="async"
           onLoad={() => setLoaded(true)}
           className={`w-full h-full object-cover transition-all duration-700 cursor-pointer
@@ -266,6 +268,7 @@ const Gallery = () => {
                 alt={LABELS[i]}
                 className="w-full h-full"
                 onClick={() => openLightbox(i)}
+                priority={i === 0}
               />
               {/* hover overlay */}
               <div
