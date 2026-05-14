@@ -1,0 +1,5 @@
+# Netlify redirect: non-www → www (301 permanent)
+https://arihantanchal.in/*  https://www.arihantanchal.in/:splat  301!
+
+# SPA fallback: all routes serve index.html
+/*  /index.html  200
