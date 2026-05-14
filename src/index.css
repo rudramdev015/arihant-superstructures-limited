@@ -109,6 +109,39 @@ body, #root {
   .safe-pb { padding-bottom: env(safe-area-inset-bottom); }
 }
 
+/* ── MOBILE TOUCH OPTIMISATION ── */
+button, a, [role="button"] {
+  touch-action: manipulation;   /* removes 300ms tap delay on mobile */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Minimum 44×44px touch target (Apple HIG / WCAG 2.5.5) */
+button, a {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Prevent text inflation on landscape mobile */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Faster GPU-composited transitions on mobile */
+.will-change-transform {
+  will-change: transform;
+}
+
+/* ── INPUT ZOOM FIX (iOS zooms in on inputs < 16px font) ── */
+input, select, textarea {
+  font-size: 16px !important;
+}
+@media (min-width: 640px) {
+  input, select, textarea {
+    font-size: inherit !important;
+  }
+}
+
 /* ── SMOOTH IMAGE LOADING ── */
 img {
   image-rendering: auto;

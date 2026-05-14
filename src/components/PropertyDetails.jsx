@@ -3,7 +3,7 @@ import React from 'react';
 const STATS = [
   { value: '2 & 4', label: 'BHK Flats' },
   { value: '2324', label: 'Total Units' },
-  { value: '900', label: 'Sq Ft' },
+  { value: '900–1800', label: 'Sq Ft Range' },
   { value: '7', label: 'Floors' },
 ];
 
@@ -25,11 +25,11 @@ const PropertyDetails = () => {
             <span className="inline-block bg-orange-100 text-orange-600 px-4 py-1 rounded-full text-[10px] font-black tracking-widest uppercase mb-5 animate-bounce">
               Property Showcase
             </span>
-            <h2 className="text-4xl sm:text-6xl md:text-7xl font-black text-slate-900 leading-[0.9] tracking-tighter">
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-black text-slate-900 leading-[0.9] tracking-tighter">
               Arihant <span className="text-orange-500">Anchal</span>
               <br />
               <span className="text-slate-300">Changing lifestyle.</span>
-            </h2>
+            </h1>
           </div>
           <div className="lg:pb-4">
             <p className="text-slate-400 font-medium tracking-widest uppercase text-sm border-l-4 sm:border-l-0 sm:border-r-4 border-orange-500 pl-4 sm:pl-0 sm:pr-6 lg:text-right">
@@ -52,8 +52,8 @@ const PropertyDetails = () => {
               Arihant Anchal offers a{' '}
               <span className="text-slate-900 font-bold">Supreme Lifestyle</span> at an affordable price.
               This Stilt + 7 Storey development spans over{' '}
-              <span className="text-orange-600 font-bold">900 sq ft</span> of premium living space,
-              offering well-planned roads and 24/7 CCTV security for your peace of mind.
+              <span className="text-orange-600 font-bold">2 BHK (900 sq.ft)</span> &amp; <span className="text-orange-600 font-bold">4 BHK (1,800 sq.ft)</span> premium living spaces,
+              with well-planned roads and 24/7 CCTV security for your peace of mind.
             </p>
 
             {/* Stats row */}

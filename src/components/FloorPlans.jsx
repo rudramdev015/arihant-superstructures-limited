@@ -6,7 +6,7 @@ const UNITS = [
   {
     type: '2 BHK',
     badge: 'Executive Series',
-    area: '950 sq.ft',
+    area: '900 sq.ft',
     price: '₹41L',
     oldPrice: '₹45L',
     tag: 'Best Seller',
@@ -34,7 +34,7 @@ const UNITS = [
   {
     type: '4 BHK',
     badge: 'Luxury Series',
-    area: '1750 sq.ft',
+    area: '1800 sq.ft',
     price: '₹82L',
     oldPrice: '₹90L',
     tag: 'Ultra Luxury',

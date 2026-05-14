@@ -29,7 +29,7 @@ const LAYOUTS = {
 };
 
 const STATS = [
-  { icon: TreePine,    val: '900',   label: 'Sq Ft'        },
+  { icon: TreePine,    val: '900–1800', label: 'Sq Ft'     },
   { icon: ShieldCheck, val: 'Vastu', label: 'Compliant'    },
   { icon: Zap,         val: '24/7',  label: 'Power Backup' },
 ];
