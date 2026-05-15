@@ -1,18 +1,10 @@
-# Allow all crawlers
 User-agent: *
 Allow: /
 
-# Block build artifacts (never served in prod, but belt-and-suspenders)
-Disallow: /src/
-Disallow: /node_modules/
-
-# Google Image Bot — allow full access for image SEO
 User-agent: Googlebot-Image
 Allow: /
 
-# Google AdsBot
 User-agent: AdsBot-Google
 Allow: /
 
-# Sitemap — www version (canonical)
 Sitemap: https://www.arihantanchal.in/sitemap.xml
