@@ -9,10 +9,16 @@
   status  = 301
   force   = true
 
-# Google Search Console verification file — serve as-is, never rewrite
+# Google Search Console verification files — serve as-is, never rewrite
 [[redirects]]
   from  = "/google28a5fa94b18bdf18.html"
   to    = "/google28a5fa94b18bdf18.html"
+  status = 200
+  force  = true
+
+[[redirects]]
+  from  = "/googlee60d4c1edc201994.html"
+  to    = "/googlee60d4c1edc201994.html"
   status = 200
   force  = true
 
