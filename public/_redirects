@@ -5,5 +5,10 @@ https://arihantanchal.in/*  https://www.arihantanchal.in/:splat  301!
 /google28a5fa94b18bdf18.html  /google28a5fa94b18bdf18.html  200!
 /googlee60d4c1edc201994.html  /googlee60d4c1edc201994.html  200!
 
+# Static files — serve as-is (robots, sitemap, llms.txt, verification)
+/robots.txt    /robots.txt    200!
+/sitemap.xml   /sitemap.xml   200!
+/llms.txt      /llms.txt      200!
+
 # SPA fallback: all routes serve index.html
 /*  /index.html  200
