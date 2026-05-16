@@ -4,9 +4,9 @@ const PERKS = [
   { icon: '🚗', title: 'Free Pickup & Drop', desc: 'We come to your door — AC car, no charge.' },
   { icon: '🎁', title: 'Exclusive Gift', desc: 'Every visitor receives a premium welcome gift.' },
   { icon: '📐', title: 'Full Brochure Kit', desc: 'Floor plans, pricing & payment options — yours to keep.' },
-  { icon: '☕', title: 'VIP Lounge Tour', desc: 'Private guided walkthrough with chai & refreshments.' },
+  { icon: '☕', title: 'VIP Lounge Tour', desc: 'Private guided walkthrough with tea & refreshments.' },
   { icon: '🏡', title: 'Live Model Flat', desc: 'See the actual furnished flat before you decide.' },
-  { icon: '💰', title: 'Best Price Lock', desc: 'On-site visits qualify for launch-day pricing benefits.' },
+  { icon: '💰', title: 'Best Price Lock', desc: 'Lock today\'s price in writing — guaranteed no hike for 48 hours after your visit.' },
 ];
 
 
