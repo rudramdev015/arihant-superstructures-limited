@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 const FAQS = [
   {
     q: 'What is the price of a 2 BHK flat in Arihant Anchal Jodhpur?',
-    a: '2 BHK flats at Arihant Anchal Jodhpur are priced starting from ₹41 Lakhs (₹41,00,000) for 900 sq.ft carpet area — that is approximately ₹4,500 per sq.ft. This is the most affordable 2 BHK flat under ₹50 lakhs in Jodhpur with JDA & RERA approval. Home loans are available from SBI, HDFC, ICICI Bank, and Axis Bank. Call +91 90012 33545 for current availability and floor-wise pricing.',
+    a: '2 BHK flats at Arihant Anchal Jodhpur are priced starting from Rs.41 Lakhs (Rs.41,00,000) for 900 sq.ft carpet area — approximately Rs.4,500 per sq.ft. This is the most affordable 2 BHK flat under Rs.50 lakhs in Jodhpur with JDA & RERA approval. Home loans are available from SBI, HDFC, ICICI Bank, and Axis Bank. Call +91 90012 33545 for current availability and floor-wise pricing.',
   },
   {
     q: 'What is the price of a 4 BHK flat in Arihant Anchal Jodhpur?',
-    a: '4 BHK luxury flats at Arihant Anchal Jodhpur start from ₹82 Lakhs (₹82,00,000) for 1800 sq.ft carpet area — approximately ₹4,555 per sq.ft. The 4 BHK Luxury Series includes 4 bedrooms, 4 bathrooms, a grand living & dining hall, master suite with dressing room, and private terrace access. Home loans available from all major banks and NBFCs.',
+    a: '4 BHK luxury flats at Arihant Anchal Jodhpur start from Rs.82 Lakhs (Rs.82,00,000) — 1800 sq.ft super built-up area with 1216 sq.ft carpet area, approximately Rs.4,500 per sq.ft. The 4 BHK Luxury Series includes 4 bedrooms, 4 bathrooms, a grand living & dining hall, master suite with dressing room, and private terrace access. Home loans available from all major banks and NBFCs.',
   },
   {
     q: 'Is Arihant Anchal RERA approved?',
@@ -19,7 +19,7 @@ const FAQS = [
   },
   {
     q: 'Where is Arihant Anchal located in Jodhpur?',
-    a: 'Arihant Anchal is located on Jaisalmer Bypass Road, near Dali Bai Circle, Jodhpur, Rajasthan 342014. GPS coordinates: 26.2359°N, 73.0314°E. It is 8 km from AIIMS Jodhpur, 12 km from Jodhpur International Airport, 15 km from Jodhpur Railway Station, and 18 km from Jodhpur City Centre (Clock Tower). Situated on the fastest-growing real estate corridor in Jodhpur.',
+    a: 'Arihant Anchal is located on Jaisalmer Bypass Road, near Dali Bai Circle, Jodhpur, Rajasthan 342008. GPS coordinates: 26.2359°N, 73.0314°E. It is 8 km from AIIMS Jodhpur, 12 km from Jodhpur International Airport, 15 km from Jodhpur Railway Station, and 18 km from Jodhpur City Centre (Clock Tower). Situated on the fastest-growing real estate corridor in Jodhpur.',
   },
   {
     q: 'How to book a flat at Arihant Anchal?',

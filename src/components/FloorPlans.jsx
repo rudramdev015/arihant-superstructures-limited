@@ -34,7 +34,7 @@ const UNITS = [
   {
     type: '4 BHK',
     badge: 'Luxury Series',
-    area: '1800 sq.ft',
+    area: '1216 sq.ft carpet',
     price: '₹82L',
     oldPrice: '₹90L',
     tag: 'Ultra Luxury',
@@ -152,13 +152,13 @@ const FloorPlans = () => {
             </p>
           </div>
           <div className="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-6">
-            <h3 className="text-amber-400 font-black text-xs uppercase tracking-widest mb-3">4 BHK — ₹82 Lakhs · 1800 sq.ft</h3>
+            <h3 className="text-amber-400 font-black text-xs uppercase tracking-widest mb-3">4 BHK — Rs.82 Lakhs · 1800 sq.ft Super Built-Up</h3>
             <p className="text-zinc-400 text-sm leading-relaxed">
-              The <strong className="text-white">4 BHK Luxury Series</strong> spans 1800 sq.ft with 4 premium
-              bedrooms, 4 bathrooms, a grand living &amp; dining hall, master suite with private dressing room,
-              private terrace access, and luxury marble flooring. Panoramic views from upper floors. Ideal for
-              large families seeking ultra-luxury living in Jodhpur at ₹82 Lakhs — approximately ₹4,555/sq.ft
-              on Jaisalmer Bypass Road, near AIIMS Jodhpur.
+              The <strong className="text-white">4 BHK Luxury Series</strong> — 1800 sq.ft super built-up area
+              (1216 sq.ft carpet area) — with 4 premium bedrooms, 4 bathrooms, a grand living &amp; dining hall,
+              master suite with private dressing room, private terrace access, and luxury marble flooring.
+              Panoramic views from upper floors. Starting Rs.82 Lakhs (~Rs.4,500/sq.ft) on Jaisalmer Bypass Road,
+              near AIIMS Jodhpur.
             </p>
           </div>
         </div>

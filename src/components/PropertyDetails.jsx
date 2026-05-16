@@ -47,8 +47,8 @@ const PropertyDetails = () => {
             Arihant Anchal is a <strong className="text-slate-800">JDA &amp; RERA approved</strong> (RAJ/P/2017/322)
             gated residential township spread over <strong className="text-orange-600">18.5 acres</strong> with{' '}
             <strong className="text-slate-800">2324 premium residential units</strong>.
-            Choose from <strong className="text-orange-600">2 BHK flats (900 sq.ft) starting ₹41 Lakhs</strong> or{' '}
-            <strong className="text-orange-600">4 BHK luxury flats (1800 sq.ft) starting ₹82 Lakhs</strong> — the most affordable
+            Choose from <strong className="text-orange-600">2 BHK (900 sq.ft carpet) starting Rs.41 Lakhs</strong> or{' '}
+            <strong className="text-orange-600">4 BHK (1800 sq.ft super built-up · 1216 sq.ft carpet) starting Rs.82 Lakhs</strong> — the most affordable
             luxury homes near <strong className="text-slate-800">AIIMS Jodhpur &amp; Dali Bai Circle</strong>.
             Vastu compliant · 24/7 CCTV · Power backup · Home loans from SBI, HDFC, ICICI &amp; all major banks.
             <strong className="text-slate-800"> 500+ families</strong> already living here.
