@@ -70,28 +70,19 @@ const Navbar = () => {
           </div>
 
           {/* ── DESKTOP NAV LINKS — lg+ only ── */}
-          <ul className={`hidden lg:flex items-center gap-6 xl:gap-8 font-black text-[10px] xl:text-[11px] uppercase tracking-[0.2em] xl:tracking-[0.25em] transition-colors duration-300 ${isScrolled ? 'text-zinc-900' : 'text-white'}`}>
-            {NAV_LINKS.map((item) => (
+          <ul className={`hidden lg:flex items-center gap-6 xl:gap-8 transition-colors duration-300 ${isScrolled ? 'text-zinc-900' : 'text-white'}`}>
+            {[...NAV_LINKS, 'Contact'].map((item) => (
               <li key={item} className="relative group overflow-hidden">
                 <a
                   href={`#${item.toLowerCase()}`}
-                  className="block py-1 hover:text-orange-600 transition-colors duration-300 whitespace-nowrap"
+                  onClick={item === 'Contact' ? scrollToContact : undefined}
+                  className="block py-1 font-[900] text-[10px] xl:text-[11px] uppercase tracking-[0.2em] xl:tracking-[0.25em] whitespace-nowrap hover:text-orange-600 transition-colors duration-300 leading-none"
                 >
                   {item}
                 </a>
                 <span className="absolute bottom-0 left-0 w-full h-[2px] bg-orange-600 -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
               </li>
             ))}
-            {/* Contact as nav link on desktop */}
-            <li className="relative group overflow-hidden">
-              <button
-                onClick={scrollToContact}
-                className="block py-1 hover:text-orange-600 transition-colors duration-300 uppercase whitespace-nowrap"
-              >
-                Contact
-              </button>
-              <span className="absolute bottom-0 left-0 w-full h-[2px] bg-orange-600 -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
-            </li>
           </ul>
 
           {/* ── RIGHT SIDE — CTA buttons + hamburger ── */}
