@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Orange background square with rounded corners — matches Arihant brand -->
+  <rect width="100" height="100" rx="18" fill="#ea580c"/>
+
+  <!-- Left leg of A -->
+  <polygon points="10,90 28,90 47,18 40,18" fill="white"/>
+  <!-- Right leg of A -->
+  <polygon points="53,18 60,18 82,90 72,90" fill="white"/>
+  <!-- Crossbar of A -->
+  <rect x="24" y="57" width="52" height="11" rx="2" fill="white"/>
+
+  <!-- Vertical stem above A apex (the distinctive Arihant design element) -->
+  <rect x="46" y="8" width="8" height="12" fill="white"/>
+  <!-- Square dot at very top — the Arihant signature mark -->
+  <rect x="41" y="2" width="18" height="9" rx="2" fill="white"/>
+</svg>

@@ -7,10 +7,13 @@
     <!-- ══════════════════════════════════════════════════════════
          FAVICON & PWA
     ══════════════════════════════════════════════════════════ -->
-    <link rel="icon"             type="image/jpeg" href="/LOGO.jpeg" sizes="any" />
-    <link rel="icon"             type="image/png"  href="/99.png"    sizes="32x32" />
-    <link rel="apple-touch-icon"                   href="/LOGO.jpeg" />
-    <link rel="shortcut icon"    type="image/jpeg" href="/LOGO.jpeg" />
+    <!-- SVG favicon — best quality, works in Chrome/Edge/Firefox and Google Search -->
+    <link rel="icon"             type="image/svg+xml" href="/favicon.svg" />
+    <!-- PNG fallbacks for older browsers and Safari -->
+    <link rel="icon"             type="image/png"     href="/99.png" sizes="192x192" />
+    <link rel="icon"             type="image/png"     href="/99.png" sizes="32x32" />
+    <link rel="apple-touch-icon"                      href="/99.png" sizes="180x180" />
+    <link rel="shortcut icon"    type="image/svg+xml" href="/favicon.svg" />
     <link rel="manifest"         href="/manifest.json" />
     <meta name="theme-color" content="#ea580c" />
 
