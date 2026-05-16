@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 const arihantLogo = '/LOGO.jpeg';
 
-const NAV_LINKS = ['Home', 'About', 'Projects', 'Testimonials'];
+const NAV_LINKS = ['Home', 'About', 'Projects', 'Testimonials', 'FAQ'];
 
 const Navbar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);

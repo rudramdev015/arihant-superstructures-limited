@@ -83,8 +83,12 @@ const About = () => {
                 the home-buying experience by delivering sustainable, elegant, and modern living spaces.
               </p>
               <p className="not-italic text-sm text-slate-500 max-w-lg">
-                With over 20 years of experience, Mr. Chhajer has pioneered real estate in Navi Mumbai and Jodhpur,
-                ensuring transparency and quality in every project.
+                With over 30 years of real estate experience, Mr. Chhajer founded{' '}
+                <strong className="text-slate-400">Arihant Superstructures Ltd.</strong> in 1994 and has pioneered
+                residential development in Navi Mumbai and Jodhpur, delivering thousands of homes with full
+                RERA compliance, JDA approvals, and ISO certification. Under his leadership, Arihant Anchal
+                has grown into an 18.5-acre gated township with 2324 units and 500+ families — making it
+                the most trusted real estate brand in Jodhpur, Rajasthan.
               </p>
             </div>
 

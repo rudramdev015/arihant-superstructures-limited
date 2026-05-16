@@ -13,6 +13,7 @@ const ViralReelsSection = lazy(() => import('./components/ViralReelsSection'))
 const About             = lazy(() => import('./components/About'))
 const Projects          = lazy(() => import('./components/Projects'))
 const Testimonials      = lazy(() => import('./components/Testimonials'))
+const FAQSection        = lazy(() => import('./components/FAQSection'))
 const SiteVisit         = lazy(() => import('./components/SiteVisit'))
 const Contact           = lazy(() => import('./components/Contact'))
 const Footer            = lazy(() => import('./components/Footer'))
@@ -58,6 +59,10 @@ const App = () => {
 
       <Suspense fallback={<SectionFallback />}>
         <section id="testimonials"><Testimonials /></section>
+      </Suspense>
+
+      <Suspense fallback={<SectionFallback h="h-screen" />}>
+        <section id="faq"><FAQSection /></section>
       </Suspense>
 
       <Suspense fallback={<SectionFallback />}>

@@ -10,8 +10,9 @@
   "orientation": "portrait-primary",
   "lang": "en-IN",
   "icons": [
-    { "src": "/99.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
-    { "src": "/99.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    { "src": "/LOGO.jpeg", "sizes": "192x192", "type": "image/jpeg", "purpose": "any maskable" },
+    { "src": "/LOGO.jpeg", "sizes": "512x512", "type": "image/jpeg", "purpose": "any maskable" },
+    { "src": "/99.png",    "sizes": "192x192", "type": "image/png",  "purpose": "any" }
   ],
   "categories": ["business", "real-estate"],
   "prefer_related_applications": false

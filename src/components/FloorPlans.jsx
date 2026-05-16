@@ -138,6 +138,30 @@ const FloorPlans = () => {
             </span>
           ))}
         </div>
+
+        {/* SEO description */}
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-6">
+            <h3 className="text-orange-500 font-black text-xs uppercase tracking-widest mb-3">2 BHK — ₹41 Lakhs · 900 sq.ft</h3>
+            <p className="text-zinc-400 text-sm leading-relaxed">
+              The <strong className="text-white">2 BHK Executive Series</strong> at Arihant Anchal offers 900 sq.ft of
+              thoughtfully designed carpet area — the most affordable 2 BHK flat under ₹50 lakhs in Jodhpur.
+              Features include 2 master bedrooms, 2 full bathrooms, a modular kitchen, dual balconies with
+              natural cross-ventilation, and premium vitrified flooring. Vastu-compliant layout. Available on
+              Stilt + 7 floors with home loan support from SBI, HDFC, ICICI &amp; Axis Bank.
+            </p>
+          </div>
+          <div className="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-6">
+            <h3 className="text-amber-400 font-black text-xs uppercase tracking-widest mb-3">4 BHK — ₹82 Lakhs · 1800 sq.ft</h3>
+            <p className="text-zinc-400 text-sm leading-relaxed">
+              The <strong className="text-white">4 BHK Luxury Series</strong> spans 1800 sq.ft with 4 premium
+              bedrooms, 4 bathrooms, a grand living &amp; dining hall, master suite with private dressing room,
+              private terrace access, and luxury marble flooring. Panoramic views from upper floors. Ideal for
+              large families seeking ultra-luxury living in Jodhpur at ₹82 Lakhs — approximately ₹4,555/sq.ft
+              on Jaisalmer Bypass Road, near AIIMS Jodhpur.
+            </p>
+          </div>
+        </div>
       </div>
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
