@@ -35,7 +35,7 @@ const FAQS = [
   },
   {
     q: 'What amenities are available at Arihant Anchal?',
-    a: 'Arihant Anchal offers 14+ world-class amenities on its 18.5-acre campus: Fully equipped gymnasium, swimming pool, library & reading room, temple within the campus, club lounge & banquet hall, 24/7 CCTV surveillance security, covered stilt parking, children\'s play area, jogging track, sports court (basketball & badminton), landscaped garden & green areas, 100% 24/7 power backup for all units, rainwater harvesting system, and visitor parking.',
+    a: 'Arihant Anchal offers world-class amenities across its 18.5-acre gated campus — 1. Fully Equipped Gymnasium 2. Swimming Pool 3. Library & Reading Room 4. Temple (within campus) 5. Club Lounge & Banquet Hall 6. 24/7 CCTV Surveillance Security 7. Covered Stilt Parking 8. Children\'s Play Area 9. Jogging Track 10. Sports Court (Basketball & Badminton) 11. Landscaped Garden & Green Areas 12. 100% 24/7 Power Backup for all units 13. Rainwater Harvesting System 14. Visitor Parking. Every amenity is included in the flat price — no extra club charges.',
   },
   {
     q: 'How many total units and floors does Arihant Anchal have?',
