@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const FAQS = [
   {
     q: 'What is the price of a 2 BHK flat in Arihant Anchal Jodhpur?',
-    a: '2 BHK flats at Arihant Anchal Jodhpur are priced starting from Rs.41 Lakhs (Rs.41,00,000) for 900 sq.ft carpet area — approximately Rs.4,500 per sq.ft. This is the most affordable 2 BHK flat under Rs.50 lakhs in Jodhpur with JDA & RERA approval. Home loans are available from SBI, HDFC, ICICI Bank, and Axis Bank. Call +91 90012 33545 for current availability and floor-wise pricing.',
+    a: '2 BHK flats at Arihant Anchal Jodhpur are priced starting from Rs.41 Lakhs (Rs.41,00,000) — 900 sq.ft super built-up area (900 sq.ft carpet area), approximately Rs.4,500 per sq.ft. This is the most affordable 2 BHK flat under Rs.50 lakhs in Jodhpur with JDA & RERA approval. Home loans are available from SBI, HDFC, ICICI Bank, and Axis Bank. Call +91 90012 33545 for current availability and floor-wise pricing.',
   },
   {
     q: 'What is the price of a 4 BHK flat in Arihant Anchal Jodhpur?',
@@ -11,7 +11,7 @@ const FAQS = [
   },
   {
     q: 'Is Arihant Anchal RERA approved?',
-    a: 'Yes. Arihant Anchal is fully RERA registered with Registration Number RAJ/P/2017/322 under the Rajasthan RERA authority. It is also JDA (Jodhpur Development Authority) approved and ISO certified. You can verify RERA details on the official Rajasthan RERA website. This ensures 100% legal, transparent, and safe investment.',
+    a: 'Yes. Arihant Anchal is fully RERA registered with Registration Number RAJ/P/2017/322 under the Rajasthan RERA authority. It is also JDA (Jodhpur Development Authority) approved and ISO certified. This ensures 100% legal, transparent, and safe investment.',
   },
   {
     q: 'Is Arihant Anchal ready to move in?',
@@ -23,11 +23,11 @@ const FAQS = [
   },
   {
     q: 'How to book a flat at Arihant Anchal?',
-    a: 'Booking a flat at Arihant Anchal is simple: (1) Call or WhatsApp +91 90012 33545 to express your interest. (2) We arrange a FREE AC car pickup from your home for a no-obligation site visit. (3) Choose your preferred flat, floor, and configuration. (4) Complete documentation with our team\'s help. (5) Apply for home loan — approval in as little as 7 days from SBI, HDFC, ICICI, Axis Bank, or Bank of Baroda.',
+    a: 'Booking a flat at Arihant Anchal is simple: (1) Call or WhatsApp +91 90012 33545 to express your interest. (2) We arrange a FREE AC car pickup from your home for a no-obligation site visit. (3) Choose your preferred flat, floor, and configuration. (4) Complete documentation with our team\'s help. (5) Apply for home loan — approval in 7-10 days from SBI, HDFC, ICICI, Axis Bank, or Bank of Baroda.',
   },
   {
     q: 'Is home loan available for Arihant Anchal Jodhpur?',
-    a: 'Yes. Home loans are approved for Arihant Anchal from all major banks including SBI (State Bank of India), HDFC Bank, ICICI Bank, Axis Bank, Bank of Baroda, and all major NBFCs. Loan approval typically takes 7 days. Our dedicated loan assistance team helps you with documentation and ensures the best interest rates. Both salaried and self-employed buyers can apply.',
+    a: 'Yes. Home loans are approved for Arihant Anchal from all major banks including SBI (State Bank of India), HDFC Bank, ICICI Bank, Axis Bank, Bank of Baroda, and all major NBFCs. Loan approval typically takes 7-10 days. Our dedicated loan assistance team helps you with documentation and ensures the best interest rates. Both salaried and self-employed buyers can apply.',
   },
   {
     q: 'Can NRI buy a flat at Arihant Anchal Jodhpur?',
@@ -35,7 +35,7 @@ const FAQS = [
   },
   {
     q: 'What amenities are available at Arihant Anchal?',
-    a: 'Arihant Anchal offers world-class amenities across its 18.5-acre gated campus — 1. Fully Equipped Gymnasium 2. Swimming Pool 3. Library & Reading Room 4. Temple (within campus) 5. Club Lounge & Banquet Hall 6. 24/7 CCTV Surveillance Security 7. Covered Stilt Parking 8. Children\'s Play Area 9. Jogging Track 10. Sports Court (Basketball & Badminton) 11. Landscaped Garden & Green Areas 12. 100% 24/7 Power Backup for all units 13. Rainwater Harvesting System 14. Visitor Parking. Every amenity is included in the flat price — no extra club charges.',
+    a: 'Arihant Anchal offers world-class amenities across its 18.5-acre gated campus — 1. Fully Equipped Gymnasium 2. Swimming Pool 3. Library & Reading Room 4. Temple (within campus) 5. Club Lounge & Banquet Hall 6. 24/7 CCTV Surveillance Security 7. Covered Stilt Parking 8. Children\'s Play Area / Kids Play Area 9. Jogging Track 10. Sports Court (Basketball & Badminton) 11. Box Cricket Ground 12. Football Play Area 13. Landscaped Garden & Green Areas 14. 100% 24/7 Power Backup for all units 15. Rainwater Harvesting System 16. Visitor Parking 17. Disco Room 18. Musical Instrument Room 19. Movie Theatre 20. Cafeteria 21. WiFi Room 22. Yoga Room 23. Business Lounge 24. Gaming Zone. Every amenity is included in the flat price — no extra club charges.',
   },
   {
     q: 'How many total units and floors does Arihant Anchal have?',
@@ -43,7 +43,7 @@ const FAQS = [
   },
   {
     q: 'Who is the developer of Arihant Anchal?',
-    a: 'Arihant Anchal is developed by Arihant Superstructures Ltd., founded in 1994 and led by Chairman & Managing Director Mr. Ashok Chhajer. The company has 30+ years of real estate experience with projects in Jodhpur (Rajasthan) and Navi Mumbai (Maharashtra). Other projects include Arihant Adita, Arihant Ayati, and Sky Penthouses — all in Jodhpur. The company is ISO certified and has delivered thousands of homes.',
+    a: 'Arihant Anchal is developed by Arihant Superstructures Ltd., founded in 1994 and led by Chairman & Managing Director Mr. Ashok Chhajer. The company has 30+ years of real estate experience with projects in Jodhpur (Rajasthan) and Navi Mumbai (Maharashtra). Other projects include Arihant Adita and Arihant Ayati — both in Jodhpur. The company is ISO certified and has delivered thousands of homes.',
   },
   {
     q: 'How far is Arihant Anchal from AIIMS Jodhpur?',

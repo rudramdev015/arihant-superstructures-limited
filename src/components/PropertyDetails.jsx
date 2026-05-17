@@ -9,9 +9,17 @@ const STATS = [
 
 const AMENITIES = [
   { title: 'Gym', icon: '🏋️' },
+  { title: 'Swimming Pool', icon: '🏊' },
   { title: 'Library', icon: '📖' },
   { title: 'Temple', icon: '🛕' },
   { title: 'Lounge', icon: '🛋️' },
+  { title: 'Box Cricket', icon: '🏏' },
+  { title: 'Movie Theatre', icon: '🎬' },
+  { title: 'Yoga Room', icon: '🧘' },
+  { title: 'Gaming Zone', icon: '🎮' },
+  { title: 'Cafeteria', icon: '☕' },
+  { title: 'Business Lounge', icon: '💼' },
+  { title: 'Kids Play Area', icon: '🎠' },
 ];
 
 const PropertyDetails = () => {

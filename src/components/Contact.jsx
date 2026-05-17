@@ -6,7 +6,6 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzdTrSJFFd1GwNVlJZRy
 const INTEREST_OPTIONS = [
   'Arihant Anchal (2 BHK Premium)',
   'Arihant Anchal (4 BHK Luxury)',
-  'Sky Penthouse',
 ];
 
 const BUDGET_OPTIONS = [

@@ -15,7 +15,6 @@ const LINKS = {
     { label: 'Arihant Anchal', href: '#home' },
     { label: 'Arihant Adita', href: '#' },
     { label: 'Arihant Ayati', href: '#' },
-    { label: 'Sky Penthouses', href: '#floorplans' },
   ],
 };
 
