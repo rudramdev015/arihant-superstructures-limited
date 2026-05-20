@@ -37,6 +37,27 @@ import G30 from '../assets/images/OAOSOOA11.jpeg';
 import G31 from '../assets/images/OOOA.jpeg';
 import G32 from '../assets/images/OOOAA1.jpeg';
 
+/* ── PUBLIC FOLDER — new property & marketing images ── */
+const G33 = '/pp1.jpeg';
+const G34 = '/pp2.jpeg';
+const G35 = '/pp3.jpeg';
+const G36 = '/pp4.jpeg';
+const G37 = '/pp5.jpeg';
+const G38 = '/llm (1).jpeg';
+const G39 = '/llm (2).jpeg';
+const G40 = '/llm (3).jpeg';
+const G41 = '/llm (4).jpeg';
+const G42 = '/llm (5).jpeg';
+const G43 = '/llm (6).jpeg';
+const G44 = '/llm (7).jpeg';
+const G45 = '/llm (8).jpeg';
+const G46 = '/llm (9).jpeg';
+const G47 = '/llm (10).jpeg';
+const G48 = '/llm (11).jpeg';
+const G49 = '/llm (12).jpeg';
+const G50 = '/llm (13).jpeg';
+const G51 = '/llm (14).jpeg';
+
 /* spans for the bento hero grid (first 9) */
 const BENTO = [
   { span: 'col-span-2 row-span-2' },
@@ -51,14 +72,20 @@ const BENTO = [
 ];
 
 const ALL_IMAGES = [
-  G1, G2, G3, G4, G5, G6, G7, G8, G9,
-  G10, G11, G12, G13, G14, G15, G16,
+  /* Hero bento — first 9 (includes new building photo as #1) */
+  G33, G1, G2, G3, G4, G5, G6, G7, G8,
+  /* Main gallery */
+  G9, G10, G11, G12, G13, G14, G15, G16,
   G17, G18, G19, G20, G21, G22, G23, G24, G25, G26,
   G27, G28, G29, G30, G31, G32,
+  /* New property & marketing images */
+  G34, G35, G36, G37,
+  G38, G39, G40, G41, G42, G43, G44,
+  G45, G46, G47, G48, G49, G50, G51,
 ];
 
 const LABELS = [
-  'Grand Facade', 'Master Suite', 'Living Lounge', 'Premium Lobby',
+  'Arihant Anchal — Jodhpur', 'Grand Facade', 'Master Suite', 'Living Lounge', 'Premium Lobby',
   'Lifestyle Hub', 'Evening Elevation', 'Rooftop View', 'Zen Garden',
   'Signature Corridor', 'Open Terrace', 'Anchal Life', 'Sky Deck',
   'Club Lounge', 'Fitness Zone', 'Pool View', 'Sunset Balcony',
@@ -67,6 +94,12 @@ const LABELS = [
   'City View', 'Entry Foyer',
   'Luxury Interior', 'Modern Design', 'Premium Space',
   'Elite Living', 'Grand View', 'Signature Style',
+  'Arihant Anchal Tower', 'Premium View', 'Society Life', 'Grand Entry',
+  'Not Just Flats', '3 Things to Check', 'Location Advantage', 'Builder Trust',
+  'Luxury Lifestyle', 'Still Paying Rent?', 'A Home That Matches Your Status',
+  'Where Luxury Meets Location', 'Close to Schools', 'Close to Hospitals',
+  'Close to Highway', 'Close to Malls', 'Close to Restaurants',
+  'What Are You Waiting For?', 'Benefits of Gated Society',
 ];
 
 /* ── LAZY IMAGE with blur-up ── */

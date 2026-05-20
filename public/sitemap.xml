@@ -13,10 +13,35 @@
     <priority>1.0</priority>
 
     <image:image>
-      <image:loc>https://www.arihantanchal.in/header_img.png</image:loc>
-      <image:title>Arihant Anchal Jodhpur — 2 BHK &amp; 4 BHK Premium Residential Flats</image:title>
+      <image:loc>https://www.arihantanchal.in/pp1.jpeg</image:loc>
+      <image:title>Arihant Anchal Jodhpur — Aerial View of Premium Residential Township</image:title>
       <image:caption>Arihant Anchal — JDA &amp; RERA approved gated township on Jaisalmer Bypass Road, Jodhpur. 2 BHK (900 sqft) from Rs.41 Lakhs &amp; 4 BHK (1800 sqft) from Rs.82 Lakhs. 500+ families. Near Dali Bai Circle.</image:caption>
       <image:geo_location>Jaisalmer Bypass Road, Jodhpur, Rajasthan, India</image:geo_location>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://www.arihantanchal.in/pp2.jpeg</image:loc>
+      <image:title>Arihant Anchal Jodhpur — Not Just Flats, A Complete Luxury Lifestyle</image:title>
+      <image:caption>2 BHK &amp; 4 BHK luxury flats at Arihant Anchal Jodhpur. Gym, Pool, Yoga Room. Starting Rs.41 Lakhs.</image:caption>
+      <image:geo_location>Jaisalmer Bypass Road, Jodhpur, Rajasthan, India</image:geo_location>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://www.arihantanchal.in/pp3.jpeg</image:loc>
+      <image:title>Arihant Anchal — 3 Things to Check Before Buying a Flat in Jodhpur</image:title>
+      <image:caption>Location, Builder Trust, Amenities — Arihant Anchal checks all 3. JDA &amp; RERA approved. Call +91 90012 33545.</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://www.arihantanchal.in/pp4.jpeg</image:loc>
+      <image:title>Arihant Anchal Jodhpur — Luxury Lifestyle at Affordable Price</image:title>
+      <image:caption>Morning Gym, Evening Pool, Night Clubhouse — Arihant Anchal luxury living in Jodhpur.</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://www.arihantanchal.in/pp5.jpeg</image:loc>
+      <image:title>Arihant Anchal — Still Paying Rent? Own Your Home in Jodhpur</image:title>
+      <image:caption>Own your luxury flat in Jodhpur today. 2 BHK from Rs.41 Lakhs at Arihant Anchal. Call +91 90012 33545.</image:caption>
     </image:image>
 
     <image:image>
