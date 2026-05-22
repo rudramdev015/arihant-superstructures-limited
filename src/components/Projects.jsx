@@ -58,6 +58,23 @@ const G49 = '/llm (12).jpeg';
 const G50 = '/llm (13).jpeg';
 const G51 = '/llm (14).jpeg';
 
+/* ── KKJ AMENITY RENDERS — compressed 900px ── */
+const K1  = '/kkj1.jpeg';
+const K3  = '/kkj3.jpeg';
+const K5  = '/kkj5.jpeg';
+const K7  = '/kkj7.jpeg';
+const K10 = '/kkj10.jpeg';
+const K15 = '/kkj15.jpeg';
+const K20 = '/kkj20.jpeg';
+const K25 = '/kkj25.jpeg';
+const K30 = '/kkj30.jpeg';
+const K35 = '/kkj35.jpeg';
+const K40 = '/kkj40.jpeg';
+const K45 = '/kkj45.jpeg';
+const K50 = '/kkj50.jpeg';
+const K55 = '/kkj55.jpeg';
+const K61 = '/kkj61.jpeg';
+
 /* spans for the bento hero grid (first 9) */
 const BENTO = [
   { span: 'col-span-2 row-span-2' },
@@ -82,6 +99,8 @@ const ALL_IMAGES = [
   G34, G35, G36, G37,
   G38, G39, G40, G41, G42, G43, G44,
   G45, G46, G47, G48, G49, G50, G51,
+  /* KKJ Amenity interior renders */
+  K1, K7, K3, K45, K15, K5, K20, K25, K30, K35, K40, K10, K50, K55, K61,
 ];
 
 const LABELS = [

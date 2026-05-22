@@ -7,11 +7,12 @@ import PropertyDetails from './components/PropertyDetails'
 // These are NOT parsed or executed on initial load.
 // Each becomes its own JS chunk — browser downloads them in parallel
 // only when needed, cutting initial bundle size by ~60%.
-const FloorPlans        = lazy(() => import('./components/FloorPlans'))
-const PropertyShowcase  = lazy(() => import('./components/PropertyShowcase'))
-const ViralReelsSection = lazy(() => import('./components/ViralReelsSection'))
-const About             = lazy(() => import('./components/About'))
-const Projects          = lazy(() => import('./components/Projects'))
+const FloorPlans          = lazy(() => import('./components/FloorPlans'))
+const PropertyShowcase    = lazy(() => import('./components/PropertyShowcase'))
+const ViralReelsSection   = lazy(() => import('./components/ViralReelsSection'))
+const About               = lazy(() => import('./components/About'))
+const Projects            = lazy(() => import('./components/Projects'))
+const AmenitiesShowcase   = lazy(() => import('./components/AmenitiesShowcase'))
 const Testimonials      = lazy(() => import('./components/Testimonials'))
 const FAQSection        = lazy(() => import('./components/FAQSection'))
 const SiteVisit         = lazy(() => import('./components/SiteVisit'))
@@ -55,6 +56,10 @@ const App = () => {
 
       <Suspense fallback={<SectionFallback h="h-screen" />}>
         <section id="projects"><Projects /></section>
+      </Suspense>
+
+      <Suspense fallback={<SectionFallback h="h-screen" />}>
+        <AmenitiesShowcase />
       </Suspense>
 
       <Suspense fallback={<SectionFallback />}>

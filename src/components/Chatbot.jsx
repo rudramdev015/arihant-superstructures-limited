@@ -226,15 +226,15 @@ const Chatbot = () => {
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              initial={{ opacity: 0, scale: 0.88, y: 32 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.88, y: 32 }}
-              transition={{ type: "spring", stiffness: 340, damping: 30 }}
-              className="pointer-events-auto flex flex-col bg-white shadow-[0_24px_80px_rgba(0,0,0,0.22)] rounded-3xl overflow-hidden mb-4 border border-slate-200/60"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 40 }}
+              transition={{ type: "spring", stiffness: 380, damping: 32 }}
+              className="pointer-events-auto flex flex-col bg-white shadow-[0_24px_80px_rgba(0,0,0,0.28)] rounded-3xl overflow-hidden mb-4 border border-slate-200/60"
               style={{
-                width: 'min(calc(100vw - 24px), 420px)',
-                height: 'min(620px, calc(100dvh - 96px))',
-                maxHeight: 'calc(100dvh - 96px)',
+                width: 'min(calc(100vw - 16px), 400px)',
+                height: 'min(580px, calc(100svh - 88px))',
+                maxHeight: 'calc(100svh - 88px)',
               }}
             >
               {/* ── HEADER ── */}
@@ -285,7 +285,7 @@ const Chatbot = () => {
               </div>
 
               {/* ── MESSAGES ── */}
-              <div className="flex-1 overflow-y-auto px-3 py-3 space-y-3 bg-slate-50/70 overscroll-contain">
+              <div className="flex-1 overflow-y-auto px-3 py-3 space-y-3 bg-slate-50/70 overscroll-contain" style={{ WebkitOverflowScrolling: 'touch' }}>
                 {messages.map((msg, i) =>
                   msg.role === "bot"
                     ? <BotMessage key={i} text={msg.text} />
@@ -366,7 +366,7 @@ const Chatbot = () => {
             target="_blank"
             rel="noreferrer"
             className="flex items-center justify-center bg-[#25D366] rounded-2xl shadow-xl shadow-green-500/30 border-2 border-white"
-            style={{ width: 50, height: 50 }}
+            style={{ width: 52, height: 52 }}
             aria-label="WhatsApp"
           >
             <svg className="w-6 h-6 fill-white" viewBox="0 0 448 512">
@@ -380,7 +380,7 @@ const Chatbot = () => {
             whileTap={{ scale: 0.92 }}
             onClick={() => setIsOpen(!isOpen)}
             className="relative rounded-2xl shadow-2xl shadow-slate-900/40 flex items-center justify-center border-[3px] border-white bg-[#0f172a]"
-            style={{ width: 54, height: 54 }}
+            style={{ width: 56, height: 56 }}
             aria-label="Open chat"
           >
             <AnimatePresence mode="wait">
